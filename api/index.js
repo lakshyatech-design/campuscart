@@ -412,7 +412,8 @@ module.exports = async function handler(req, res) {
   }
 
   const parsedUrl = new URL(req.url, `https://${req.headers.host || 'campuscart.vercel.app'}`);
-  const pathname = parsedUrl.pathname;
+  let pathname = parsedUrl.pathname;
+  if (!pathname.startsWith("/api")) { pathname = "/api" + pathname; }
   const searchParams = parsedUrl.searchParams;
 
   try {
