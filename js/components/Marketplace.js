@@ -37,7 +37,7 @@ const Marketplace = {
         </div>
 
         <!-- Filter Header Bar -->
-        <div style="background: white; border: var(--border-hairline); border-radius: var(--radius-xl); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
           <div class="flex items-center gap-3">
             <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--ink-display);">
               ${state.activeCategory === 'All' ? 'Campus Marketplace' : state.activeCategory}
@@ -219,7 +219,7 @@ const Marketplace = {
 
     if (this.products.length === 0) {
       gridEl.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; background: white; border: 1.5px dashed rgba(15,23,42,0.1); border-radius: var(--radius-2xl);">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-lg);">
           <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--cobalt-light); color: var(--cobalt); display: flex; align-items: center; justify-content: center;">
             ${Icons.search("w-8 h-8")}
           </div>
