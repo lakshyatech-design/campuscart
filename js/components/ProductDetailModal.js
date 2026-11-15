@@ -20,6 +20,26 @@ const ProductDetailModal = {
         <div style="padding: 3rem 0; color: var(--color-text-muted);">
           <div style="display: inline-block; width: 36px; height: 36px; border: 3px solid var(--color-primary-border); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
           <p style="margin-top: 1rem; font-size: 0.9rem;">Loading product details...</p>
+
+          <!-- Sticky Mobile Action Bar -->
+          <div class="modal-sticky-bottom-bar">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--color-text-muted);">Campus Price</div>
+              <div style="font-size: 1.35rem; font-weight: 800; color: var(--color-navy); line-height: 1;">
+                ₹${p.price.toLocaleString('en-IN')}
+              </div>
+            </div>
+            ${isSeller ? `
+              <button class="btn btn-secondary btn-sm" onclick="ProductDetailModal.close(); state.setActiveView('seller-dashboard');">
+                Manage Item
+              </button>
+            ` : `
+              <button class="btn btn-primary btn-sm flex items-center gap-2" style="padding: 0.65rem 1.25rem; font-weight: 700;" onclick="ProductDetailModal.handleContactSeller()">
+                ${Icons.messageSquare("w-4 h-4")}
+                Chat with Seller
+              </button>
+            `}
+          </div>
         </div>
       </div>
     `;
@@ -59,6 +79,7 @@ const ProductDetailModal = {
 
     modalEl.innerHTML = `
       <div class="modal-content" style="max-width: 900px;">
+        <div class="modal-grab-bar"></div>
         <div class="modal-header">
           <div class="flex items-center gap-2">
             <span class="product-category-tag">${p.category}</span>
@@ -70,7 +91,7 @@ const ProductDetailModal = {
         </div>
 
         <div class="modal-body" style="padding: 1.75rem;">
-          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: start;">
+          <div class="product-detail-layout">
             <!-- Left: Image Gallery -->
             <div>
               <div style="position: relative; width: 100%; padding-top: 75%; background: #F8FAFC; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); margin-bottom: 0.85rem;">
