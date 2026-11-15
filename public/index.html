@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CampusCart – One Platform. Every Campus. | Multi-College Student Marketplace</title>
-  <meta name="description" content="CampusCart is India's premium student-to-student marketplace. Buy, sell, and negotiate textbooks, cycles, perfumes, electronics, and verified campus essentials.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230062FF'><circle cx='12' cy='12' r='10'/></svg>">
+  <title>GSV Direct – Gati Shakti Vishwavidyalaya Verified Student & Logistics Exchange</title>
+  <meta name="description" content="Official student-to-student marketplace for Gati Shakti Vishwavidyalaya (GSV Vadodara). Buy, sell, and negotiate textbooks, cycles, railway tickets, electronics, and verified hostel essentials.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230052cc'><rect x='4' y='3' width='16' height='15' rx='3'/><path d='m9 18-3 3'/><path d='m15 18 3 3'/></svg>">
   <link rel="stylesheet" href="/css/app.css">
+  <!-- Three.js 3D Engine for Interactive Locomotive & Multi-Modal Transit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
+
+  <!-- Real-Time Slide-In Toast Notification Stack -->
+  <div id="gsv-toast-stack" class="gsv-toast-container"></div>
 
   <!-- Toast Notification Hub -->
   <div id="toast-container"></div>
@@ -178,17 +183,17 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <div style="display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.75rem;">
-            <div class="brand-icon-wrapper" style="width: 32px; height: 32px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path></svg>
+          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem;">
+            <div style="width: 34px; height: 34px; background: #0052cc; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="m9 18-3 3"></path><path d="m15 18 3 3"></path></svg>
             </div>
-            <h3 style="margin: 0; color: white;">CampusCart</h3>
+            <h3 style="margin: 0; color: white; font-weight: 900; letter-spacing: -0.02em;">GSV Direct</h3>
           </div>
           <p>
-            India's verified multi-college student-to-student marketplace. Initially launching at Gati Shakti Vishwavidyalaya (GSV), Vadodara, Gujarat.
+            The dedicated, closed-loop student marketplace and logistics coordination engine for Gati Shakti Vishwavidyalaya (Vadodara). Connecting students across Lalbaug Campus and Pratap Nagar Railway Colony.
           </p>
           <div style="margin-top: 1rem; font-size: 0.8rem; color: #64748B;">
-            Tagline: <em>"One Platform. Every Campus."</em>
+            Official Tagline: <em>"High-Speed Campus Commerce. Zero Commission."</em>
           </div>
         </div>
 
@@ -274,6 +279,8 @@
   <script src="/js/state.js"></script>
 
   <!-- UI Components -->
+  <script src="/js/components/NotificationCenter.js"></script>
+  <script src="/js/gsv-3d-scene.js"></script>
   <script src="/js/components/Navbar.js"></script>
   <script src="/js/components/CollegeSelectorModal.js"></script>
   <script src="/js/components/HeroSection.js"></script>
@@ -372,6 +379,10 @@
         PopularCategories.render();
         Marketplace.render();
 
+        if (window.NotificationCenter) {
+          window.NotificationCenter.init();
+        }
+
         state.on('counts_changed', (counts) => {
           const badge = document.getElementById('mob-inbox-badge');
           if (badge) {
@@ -385,7 +396,7 @@
         });
 
         Interactions.init();
-        console.log('✅ CampusCart Master Rebuild initialized successfully!');
+        console.log('✅ GSV Direct Platform initialized with 3D Engine & Real-Time Notifications!');
       } catch (err) {
         console.error('Failed to bootstrap CampusCart:', err);
       }
