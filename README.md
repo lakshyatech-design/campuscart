@@ -1,126 +1,49 @@
-# CampusCart – A Premium Multi-College Student Marketplace
-> **"One Platform. Every Campus."**
+# GSV Direct — Gati Shakti Vishwavidyalaya Verified Student & Logistics Exchange
 
-Initially launching with **Gati Shakti Vishwavidyalaya (GSV), Vadodara, Gujarat**, built from day one as a pan-India multi-college marketplace platform.
-
----
-
-## 🌟 Key Product Highlights & Architecture
-
-1. **Design System & Aesthetics**
-   - **Linear + Airbnb + OLX** design synthesis: Deep Navy (`#0F172A`), Electric Blue (`#2563EB`), Emerald Green (`#10B981`), rounded-2xl cards, subtle frosted glass blur, micro-interactions, responsive mobile layout.
-   - Built with lightweight, zero-dependency SVG icon system and clean CSS variables.
-
-2. **Multi-College System from Day 1**
-   - GSV is the designated launch campus with verified student ID rules.
-   - Expandable across India with built-in hubs (IIT Bombay, BITS Pilani, NIT Trichy, Delhi University, IIM Ahmedabad).
-   - Dynamic **"Search College"**, **"Explore Other Campuses"** nationwide toggle, and **"Request to Add Your College"** workflow.
-   - Admin can add, edit, approve, or disable colleges dynamically without code changes.
-
-3. **Dual-Role Authentication**
-   - Single student account works as **both Buyer and Seller**.
-   - Fields: Full Name, College Name, Roll Number / Student ID, Mobile Number, College Email (`@gsv.ac.in`), Password.
-   - Built-in one-click demo login buttons for instant testing (Aarav [Seller], Priya [Buyer], Rohan [Student], Admin).
-
-4. **Internal Real-Time Messaging & Inbox (Most Important Feature)**
-   - WhatsApp / OLX-inspired in-app messaging engine.
-   - Instant real-time updates powered by **Server-Sent Events (SSE)** and broadcast event bus.
-   - Persistent messages in database, conversation roster with unread badges, product context header, and quick offer buttons.
-   - No phone number exposure or WhatsApp redirects by default.
-
-5. **Dynamic Categories & Regulatory Compliance**
-   - **Railway Tickets**: Dedicated fields (Journey Date, From Station, To Station, Train Name/Number, Class) + Clear Indian Railways passenger transfer compliance notice and agreement.
-   - **Perfumes**: Dynamic fields (Brand, Bottle Size, Remaining Level, Box/Batch code).
-   - **Textbooks, Cycles, Electronics, Hostel Essentials, Sports, Fashion, Accessories**.
-
-6. **Seller Dashboard & Management**
-   - Live metrics: Active listings, sold items, total views, inquiries.
-   - Add new products with multi-photo upload and instant preview.
-   - Edit listings, delete listings, mark as sold with one click.
-
-7. **Admin Control Center**
-   - Platform metrics overview (Users, Colleges, Active Listings, Sold Items, Conversations).
-   - College management & student expansion requests approval.
-   - Content moderation & reported listings review with one-click resolution.
-   - Registered student user management with suspension toggles.
-
-8. **Database & Supabase Integration**
-   - Built on Node.js v24 native SQLite engine (`node:sqlite`) for 100% out-of-the-box offline reliability.
-   - Includes production **`supabase_schema.sql`** with tables, foreign keys, triggers, and Row Level Security (RLS) policies for direct migration to Supabase PostgreSQL cloud.
+> **"High-Speed Campus Commerce. Zero Commission."**  
+> Official student-to-student marketplace and logistics exchange platform for **Gati Shakti Vishwavidyalaya (GSV)**, Vadodara, Gujarat.
 
 ---
 
-## 🚀 How to Run the Application
+## 🚆 Overview & Core Identity
 
-### 1. Start the Server
-Run the Node.js server inside the `campuscart` folder:
-```powershell
-cd C:\Users\dsuid\.gemini\antigravity\scratch\campuscart
-node server.js
-```
+GSV Direct is engineered exclusively for students across GSV's **Lalbaug Main Campus** and **Pratap Nagar Railway Colony**. Built with university domain authentication (`@gsv.ac.in`), on-campus handover hubs, and transparent student-to-student transit compliance.
 
-The server starts at **`http://localhost:3000`** and initializes the database with verified seed data for GSV.
+### 🌟 Key Features
 
-### 2. Open in Browser
-Visit **`http://localhost:3000`** in your browser.
+1. **Three.js 3D Multi-Modal Transit Engine:**
+   - Procedural aerodynamic high-speed locomotive with GSV Rail Cobalt (`#0052CC`) & Gold (`#F59E0B`) livery.
+   - Interactive camera angle switches (`Front 3/4`, `Profile`, `Cockpit`, `Auto-Orbit`), day/night lighting, and 320 km/h velocity boost.
+   - Infinite moving railway tracks with 3D velocity particle trails running at 60 FPS.
 
----
+2. **Real-Time Upload Notifications & Notification Center:**
+   - Server-Sent Events (SSE) stream (`/api/notifications/stream`) with automatic keep-alive heartbeats.
+   - Live slide-in toast popups with synthesized Web Audio harmonic chime alerts whenever an item is listed.
+   - Interactive Notification Center dropdown in top navigation with unread counter badge, item navigation, and "Mark all as read".
 
-## 🧪 Testing the Core Features
+3. **Curated GSV Campus Categories:**
+   - **Railway Tickets:** Confirmed berths strictly compliant with Indian Railway passenger transfer guidelines.
+   - **Cycles & Mobility:** Campus bicycles and locks for daily commute between Pratap Nagar and Lalbaug.
+   - **Books & Railway Engineering Prep:** B.S. Grewal Math, Satish Chandra Railway Engineering, GATE and UPSC IES guides.
+   - **Electronics & Lab Gear:** Approved Casio fx-991CW ClassWiz calculators, multimeters, and components.
+   - **Perfumes & Grooming:** Designer & decant bottles with batch code and fill-level transparency.
+   - **Hostel Essentials:** Kettles, heaters, storage bins, and study lamps.
 
-1. **Test College Switching:**
-   - Click the college badge in the navbar (defaults to *GSV Vadodara*).
-   - Switch to *IIT Bombay* or *BITS Pilani*, or click *"Request to Add Your College"*.
-   - Toggle *"Explore Listings From All Campuses"* to view cross-campus items.
-
-2. **Test Real-Time Chat (Buyer & Seller):**
-   - Click **Login** and select **"👤 Aarav (GSV Seller)"**. Check his listings in *"My Dashboard"*.
-   - In another browser tab or window, switch demo user to **"👩 Priya (GSV Buyer)"**.
-   - Browse the bicycle or textbooks, click **"Chat"** or **"Contact Seller"**.
-   - Send messages or quick offer chips (e.g., *"Can we meet at Central Canteen today at 5:30 PM?"*). Notice instantaneous message delivery in both tabs via the SSE stream!
-
-3. **Test Listing a New Product:**
-   - Click **"Sell an Item"**.
-   - Choose **"Railway Tickets"** or **"Perfumes"** to see dynamic conditional form fields appear automatically.
-   - Select photos or click the quick presets, enter price and campus pickup point, and click **"Publish to Marketplace"**.
-
-4. **Test Content Moderation & Admin:**
-   - Click on any product and choose *"Report suspicious or prohibited listing"*.
-   - Log in as **"🛡️ Admin Account"** (or switch to admin view) to inspect the report, resolve it, approve college requests, and view platform metrics.
+4. **Closed-Ring University Security:**
+   - Institutional domain gating (`.ac.in`, `.edu.in`).
+   - In-app encrypted negotiation messaging with zero personal phone number leaking.
+   - 100% direct student-to-student payments (UPI/Cash) with **₹0 Platform Commission**.
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Tech Stack & Deployment
 
-```
-campuscart/
-├── data/
-│   └── campuscart.db          # Persistent SQLite database
-├── public/
-│   ├── css/
-│   │   └── app.css            # Design system (OLX + Airbnb + Linear)
-│   ├── js/
-│   │   ├── icons.js           # Lightweight SVG icon library
-│   │   ├── api.js             # Client API & SSE stream handler
-│   │   ├── state.js           # Reactive global state manager
-│   │   └── components/
-│   │       ├── Navbar.js
-│   │       ├── CollegeSelectorModal.js
-│   │       ├── HeroSection.js
-│   │       ├── PopularCategories.js
-│   │       ├── Marketplace.js
-│   │       ├── ProductDetailModal.js
-│   │       ├── SellItemModal.js
-│   │       ├── ChatInbox.js
-│   │       ├── SellerDashboard.js
-│   │       ├── UserProfileModal.js
-│   │       ├── AuthModal.js
-│   │       ├── AdminDashboard.js
-│   │       └── ReportModal.js
-│   ├── uploads/               # Uploaded product photos
-│   └── index.html             # Main application entry point
-├── server.js                  # Node.js REST API + Realtime SSE server
-├── supabase_schema.sql        # Full Supabase PostgreSQL schema with RLS
-├── .env.example               # Environment configuration template
-└── README.md                  # Project documentation
-```
+* **Runtime:** Node.js (Standard HTTP + Serverless Architecture)
+* **Frontend:** Vanilla ES6 Modules + Three.js 3D Engine + Web Audio API + CSS3 Design Tokens
+* **Database:** Ultra-fast zero-dependency in-memory store + optional SQLite fallback
+* **Production Deployment:** Vercel Serverless Edge CDN
+* **Local Server:** `http://localhost:3000`
+
+---
+
+© 2026 GSV Direct • Gati Shakti Vishwavidyalaya, Vadodara, Gujarat 390004
