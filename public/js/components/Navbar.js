@@ -1,5 +1,7 @@
 /**
- * CampusCart - Navbar Component
+ * CampusCart - Master Rebuilt Navbar Component
+ * Linear & Apple Inspired Minimalist Architecture
+ * NO UNNECESSARY LAUNCH CAMPUS CLUTTER
  */
 const Navbar = {
   render() {
@@ -7,91 +9,95 @@ const Navbar = {
     if (!el) return;
 
     const user = state.currentUser;
-    const college = state.selectedCollege;
     const unreadMsgs = state.unreadMessagesCount;
 
     el.innerHTML = `
       <nav class="navbar">
         <div class="container navbar-inner">
-          <!-- Logo & Brand -->
-          <div class="flex items-center gap-4">
-            <a href="#" class="brand-logo" onclick="event.preventDefault(); state.setActiveView('marketplace');">
-              <div class="brand-icon-wrapper">
-                ${Icons.shoppingBag("w-6 h-6")}
-              </div>
-              <span>CampusCart</span>
-              <span class="brand-tagline-pill">Pan-India</span>
-            </a>
+          <!-- Left: Clean Geometric Brand Identity -->
+          <a href="#" class="brand-logo" onclick="event.preventDefault(); state.setActiveView('marketplace');">
+            <div class="brand-icon-wrapper">
+              ${Icons.shoppingBag("w-5 h-5")}
+            </div>
+            <span>CampusCart</span>
+          </a>
 
-            <!-- Selected College Badge Button -->
-            <button class="college-picker-btn" id="nav-college-btn" title="Click to change your university">
-              <span class="college-dot"></span>
-              <span class="truncate" style="max-width: 170px;">
-                ${college ? college.short_name : 'Select Campus'}
-              </span>
-              ${Icons.chevronDown("w-4 h-4 text-muted")}
-            </button>
-          </div>
-
-          <!-- Navigation Links -->
-          <ul class="nav-links">
+          <!-- Center: Reorganized Navigation Cluster -->
+          <ul class="nav-links-cluster">
             <li>
-              <a class="nav-link ${state.activeView === 'marketplace' ? 'active' : ''}" onclick="state.setActiveView('marketplace')">
+              <a class="nav-item-link ${state.activeView === 'marketplace' ? 'active' : ''}" onclick="state.setActiveView('marketplace')">
                 Explore
               </a>
             </li>
             <li>
-              <a class="nav-link" onclick="document.getElementById('categories-section').scrollIntoView({ behavior: 'smooth' })">
+              <a class="nav-item-link" onclick="document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth' })">
                 Categories
               </a>
             </li>
             <li>
-              <a class="nav-link ${state.activeView === 'inbox' ? 'active' : ''}" onclick="Navbar.handleInboxClick()">
+              <a class="nav-item-link" onclick="document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' })">
+                How It Works
+              </a>
+            </li>
+            <li>
+              <a class="nav-item-link" onclick="CollegeSelectorModal.open()">
+                Campuses
+              </a>
+            </li>
+            <li>
+              <a class="nav-item-link ${state.activeView === 'inbox' ? 'active' : ''}" onclick="Navbar.handleInboxClick()">
                 ${Icons.messageSquare("w-4 h-4")}
                 Inbox
-                ${unreadMsgs > 0 ? `<span class="nav-badge">${unreadMsgs}</span>` : ''}
+                ${unreadMsgs > 0 ? `<span class="nav-badge-pill">${unreadMsgs}</span>` : ''}
               </a>
             </li>
             ${user ? `
               <li>
-                <a class="nav-link ${state.activeView === 'seller-dashboard' ? 'active' : ''}" onclick="state.setActiveView('seller-dashboard')">
-                  My Dashboard
+                <a class="nav-item-link ${state.activeView === 'seller-dashboard' ? 'active' : ''}" onclick="state.setActiveView('seller-dashboard')">
+                  Dashboard
                 </a>
               </li>
             ` : ''}
             ${user && user.is_admin ? `
               <li>
-                <a class="nav-link ${state.activeView === 'admin' ? 'active' : ''}" onclick="state.setActiveView('admin')">
-                  Admin Panel
+                <a class="nav-item-link ${state.activeView === 'admin' ? 'active' : ''}" onclick="state.setActiveView('admin')">
+                  Admin
                 </a>
               </li>
             ` : ''}
           </ul>
 
-          <!-- Action Buttons -->
-          <div class="flex items-center gap-3">
-            <!-- Sell Item CTA -->
-            <button class="btn btn-sell" onclick="Navbar.handleSellClick()">
+          <!-- Right: Action & Profile Group -->
+          <div class="nav-actions-group">
+            <!-- Search Omnibar Trigger -->
+            <button class="nav-search-trigger" onclick="Navbar.triggerSearchFocus()" title="Press Cmd+K to search">
+              ${Icons.search("w-4 h-4")}
+              <span>Search listings...</span>
+              <kbd>⌘K</kbd>
+            </button>
+
+            <!-- Post an Item CTA -->
+            <button class="btn btn-primary btn-sm flex items-center gap-2" onclick="Navbar.handleSellClick()" style="padding: 0.45rem 0.95rem; font-weight: 700;">
               ${Icons.plusCircle("w-4 h-4")}
-              Sell an Item
+              <span>Sell</span>
             </button>
 
             <!-- User Auth / Profile Menu -->
             ${user ? `
               <div class="relative" style="position: relative;">
-                <button class="btn btn-secondary btn-sm flex items-center gap-2" id="nav-user-menu-btn" style="border-radius: var(--radius-full); padding: 0.35rem 0.75rem;">
-                  <img src="${user.avatar_url}" class="chat-avatar" style="width: 28px; height: 28px;" alt="Avatar" />
-                  <span style="font-weight: 600; max-width: 100px;" class="truncate">${user.full_name.split(' ')[0]}</span>
+                <button class="btn btn-secondary btn-sm flex items-center gap-2" id="nav-user-menu-btn" style="border-radius: var(--radius-full); padding: 0.3rem 0.75rem;">
+                  <img src="${user.avatar_url}" class="chat-avatar" style="width: 26px; height: 26px;" alt="Avatar" />
+                  <span style="font-weight: 700; max-width: 90px;" class="truncate">${user.full_name.split(' ')[0]}</span>
                   ${Icons.chevronDown("w-3 h-3 text-muted")}
                 </button>
-                <div class="dropdown-menu hidden" id="user-dropdown-menu" style="position: absolute; right: 0; top: 115%; width: 220px; background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); padding: 0.5rem; z-index: 100;">
-                  <div style="padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--color-border); margin-bottom: 0.35rem;">
-                    <div style="font-weight: 700; font-size: 0.9rem;">${user.full_name}</div>
-                    <div style="font-size: 0.75rem; color: var(--color-text-muted);">${user.email}</div>
-                    <div style="font-size: 0.7rem; font-weight: 600; color: var(--color-primary); margin-top: 2px;">${user.college_short_name || 'GSV Vadodara'}</div>
+                <div class="dropdown-menu hidden" id="user-dropdown-menu" style="position: absolute; right: 0; top: 120%; width: 220px; background: white; border: var(--border-hairline); border-radius: var(--radius-xl); box-shadow: var(--shadow-elevated); padding: 0.5rem; z-index: 100;">
+                  <div style="padding: 0.6rem 0.85rem; border-bottom: 1px solid rgba(15,23,42,0.08); margin-bottom: 0.35rem;">
+                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--ink-display);">${user.full_name}</div>
+                    <div style="font-size: 0.75rem; color: var(--ink-muted);">${user.email}</div>
+                    <div style="font-size: 0.72rem; font-weight: 700; color: var(--cobalt); margin-top: 3px;">${user.college_short_name || 'GSV Vadodara'}</div>
                   </div>
                   <button class="btn btn-ghost w-full justify-start text-sm" style="width: 100%; text-align: left;" onclick="UserProfileModal.open(); Navbar.closeUserMenu();">
-                    ${Icons.user("w-4 h-4")} My Profile & Listings
+                    ${Icons.user("w-4 h-4")} Profile & Listings
                   </button>
                   <button class="btn btn-ghost w-full justify-start text-sm" style="width: 100%; text-align: left;" onclick="state.setActiveView('seller-dashboard'); Navbar.closeUserMenu();">
                     ${Icons.shoppingBag("w-4 h-4")} Seller Dashboard
@@ -100,11 +106,11 @@ const Navbar = {
                     ${Icons.heart("w-4 h-4")} Saved Items
                   </button>
                   ${user.is_admin ? `
-                    <button class="btn btn-ghost w-full justify-start text-sm" style="width: 100%; text-align: left; color: #2563EB;" onclick="state.setActiveView('admin'); Navbar.closeUserMenu();">
+                    <button class="btn btn-ghost w-full justify-start text-sm" style="width: 100%; text-align: left; color: #0062FF;" onclick="state.setActiveView('admin'); Navbar.closeUserMenu();">
                       ${Icons.shieldCheck("w-4 h-4")} Admin Control Center
                     </button>
                   ` : ''}
-                  <div style="border-top: 1px solid var(--color-border); margin-top: 0.35rem; padding-top: 0.35rem;">
+                  <div style="border-top: 1px solid rgba(15,23,42,0.08); margin-top: 0.35rem; padding-top: 0.35rem;">
                     <button class="btn btn-ghost w-full justify-start text-sm" style="width: 100%; text-align: left; color: #F43F5E;" onclick="Navbar.handleLogout()">
                       ${Icons.logOut("w-4 h-4")} Sign Out
                     </button>
@@ -112,19 +118,14 @@ const Navbar = {
                 </div>
               </div>
             ` : `
-              <button class="btn btn-primary btn-sm" onclick="AuthModal.open('login')">
-                Login / Sign Up
+              <button class="btn btn-secondary btn-sm" onclick="AuthModal.open('login')">
+                Sign In
               </button>
             `}
           </div>
         </div>
       </nav>
     `;
-
-    // Attach listeners
-    document.getElementById('nav-college-btn')?.addEventListener('click', () => {
-      CollegeSelectorModal.open();
-    });
 
     const userMenuBtn = document.getElementById('nav-user-menu-btn');
     if (userMenuBtn) {
@@ -140,6 +141,15 @@ const Navbar = {
   closeUserMenu() {
     const menu = document.getElementById('user-dropdown-menu');
     if (menu) menu.classList.add('hidden');
+  },
+
+  triggerSearchFocus() {
+    const searchInput = document.getElementById('marketplace-search-input') || 
+                        document.getElementById('mobile-search-input');
+    if (searchInput) {
+      searchInput.focus();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   },
 
   handleMobileProfileClick() {
@@ -177,7 +187,6 @@ const Navbar = {
 
   openWishlistView() {
     state.setActiveView('marketplace');
-    // Trigger saved items filter or user profile
     UserProfileModal.open('wishlist');
   }
 };
