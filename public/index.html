@@ -6,7 +6,7 @@
   <title>GSV Direct – Gati Shakti Vishwavidyalaya Verified Student & Logistics Exchange</title>
   <meta name="description" content="Official student-to-student marketplace for Gati Shakti Vishwavidyalaya (GSV Vadodara). Buy, sell, and negotiate textbooks, cycles, railway tickets, electronics, and verified hostel essentials.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8a97e'><rect x='4' y='3' width='16' height='15' rx='3'/><path d='m9 18-3 3'/><path d='m15 18 3 3'/></svg>">
-  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/app.css?v=forge2026_v2">
 </head>
 <body>
 
@@ -271,26 +271,26 @@
   </nav>
 
   <!-- Core Scripts -->
-  <script src="./js/icons.js"></script>
-  <script src="./js/interactions.js"></script>
-  <script src="./js/api.js"></script>
-  <script src="./js/state.js"></script>
+  <script src="./js/icons.js?v=forge2026_v2"></script>
+  <script src="./js/interactions.js?v=forge2026_v2"></script>
+  <script src="./js/api.js?v=forge2026_v2"></script>
+  <script src="./js/state.js?v=forge2026_v2"></script>
 
   <!-- UI Components -->
-  <script src="./js/components/NotificationCenter.js"></script>
-  <script src="./js/components/Navbar.js"></script>
-  <script src="./js/components/CollegeSelectorModal.js"></script>
-  <script src="./js/components/HeroSection.js"></script>
-  <script src="./js/components/PopularCategories.js"></script>
-  <script src="./js/components/Marketplace.js"></script>
-  <script src="./js/components/ProductDetailModal.js"></script>
-  <script src="./js/components/SellItemModal.js"></script>
-  <script src="./js/components/ChatInbox.js"></script>
-  <script src="./js/components/SellerDashboard.js"></script>
-  <script src="./js/components/UserProfileModal.js"></script>
-  <script src="./js/components/AuthModal.js"></script>
-  <script src="./js/components/AdminDashboard.js"></script>
-  <script src="./js/components/ReportModal.js"></script>
+  <script src="./js/components/NotificationCenter.js?v=forge2026_v2"></script>
+  <script src="./js/components/Navbar.js?v=forge2026_v2"></script>
+  <script src="./js/components/CollegeSelectorModal.js?v=forge2026_v2"></script>
+  <script src="./js/components/HeroSection.js?v=forge2026_v2"></script>
+  <script src="./js/components/PopularCategories.js?v=forge2026_v2"></script>
+  <script src="./js/components/Marketplace.js?v=forge2026_v2"></script>
+  <script src="./js/components/ProductDetailModal.js?v=forge2026_v2"></script>
+  <script src="./js/components/SellItemModal.js?v=forge2026_v2"></script>
+  <script src="./js/components/ChatInbox.js?v=forge2026_v2"></script>
+  <script src="./js/components/SellerDashboard.js?v=forge2026_v2"></script>
+  <script src="./js/components/UserProfileModal.js?v=forge2026_v2"></script>
+  <script src="./js/components/AuthModal.js?v=forge2026_v2"></script>
+  <script src="./js/components/AdminDashboard.js?v=forge2026_v2"></script>
+  <script src="./js/components/ReportModal.js?v=forge2026_v2"></script>
 
   <!-- App Bootstrap -->
   <script>
@@ -360,43 +360,60 @@
     });
 
     async function initCampusCart() {
+      // 1. Immediately render UI components so page is never blank
       try {
-        const collegesRes = await API.getColleges();
-        state.setColleges(collegesRes.colleges || []);
-
-        try {
-          const meRes = await API.getMe();
-          if (meRes.user) {
-            state.setCurrentUser(meRes.user);
-          }
-        } catch (e) {}
-
         Navbar.render();
         HeroSection.render();
         PopularCategories.render();
         Marketplace.render();
+      } catch (e) {
+        console.error('Initial mount error:', e);
+      }
 
+      // 2. Load colleges
+      try {
+        const collegesRes = await API.getColleges();
+        if (collegesRes && collegesRes.colleges) {
+          state.setColleges(collegesRes.colleges);
+          Navbar.render();
+        }
+      } catch (e) {
+        console.warn('Colleges fallback active:', e);
+      }
+
+      // 3. Load user session
+      try {
+        const meRes = await API.getMe();
+        if (meRes && meRes.user) {
+          state.setCurrentUser(meRes.user);
+          Navbar.render();
+        }
+      } catch (e) {}
+
+      // 4. Initialize Notification Center
+      try {
         if (window.NotificationCenter) {
           window.NotificationCenter.init();
         }
+      } catch (e) {}
 
-        state.on('counts_changed', (counts) => {
-          const badge = document.getElementById('mob-inbox-badge');
-          if (badge) {
-            if (counts.messages > 0) {
-              badge.textContent = counts.messages > 9 ? '9+' : counts.messages;
-              badge.classList.remove('hidden');
-            } else {
-              badge.classList.add('hidden');
-            }
+      state.on('counts_changed', (counts) => {
+        const badge = document.getElementById('mob-inbox-badge');
+        if (badge) {
+          if (counts.messages > 0) {
+            badge.textContent = counts.messages > 9 ? '9+' : counts.messages;
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
           }
-        });
+        }
+      });
 
+      try {
         Interactions.init();
-        console.log('✅ GSV Direct Platform initialized with 3D Engine & Real-Time Notifications!');
-      } catch (err) {
-        console.error('Failed to bootstrap CampusCart:', err);
-      }
+      } catch (e) {}
+
+      console.log('✅ GSV Direct Platform initialized with Forge Automotive Aesthetic & Instant Zero-Downtime Rendering!');
     }
 
     window.addEventListener('DOMContentLoaded', initCampusCart);
