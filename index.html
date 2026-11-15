@@ -192,25 +192,31 @@
   </footer>
 
   <!-- Mobile Bottom Navigation Bar -->
-  <nav class="mobile-nav-bar">
-    <div class="mobile-nav-item" onclick="state.setActiveView('marketplace')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+    <!-- Mobile Bottom Navigation Bar (Elevated Dock) -->
+  <nav class="mobile-nav-bar" id="mobile-nav-bar">
+    <div class="mobile-nav-item active" id="mob-nav-marketplace" onclick="state.setActiveView('marketplace')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
       <span>Explore</span>
     </div>
-    <div class="mobile-nav-item" onclick="CollegeSelectorModal.open()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path></svg>
+    <div class="mobile-nav-item" id="mob-nav-campus" onclick="CollegeSelectorModal.open()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
       <span>Campus</span>
     </div>
-    <div class="mobile-nav-item" onclick="Navbar.handleSellClick()" style="color: #D97706;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-      <span>Sell</span>
+    <div class="mobile-sell-btn-wrapper" onclick="Navbar.handleSellClick()" title="List a Product">
+      <div class="mobile-sell-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </div>
+      <span class="mobile-sell-label">Sell</span>
     </div>
-    <div class="mobile-nav-item" onclick="Navbar.handleInboxClick()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <div class="mobile-nav-item" id="mob-nav-inbox" onclick="Navbar.handleInboxClick()">
+      <div style="position: relative;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span class="mobile-badge hidden" id="mob-inbox-badge"></span>
+      </div>
       <span>Inbox</span>
     </div>
-    <div class="mobile-nav-item" onclick="UserProfileModal.open()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <div class="mobile-nav-item" id="mob-nav-profile" onclick="Navbar.handleMobileProfileClick()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       <span>Profile</span>
     </div>
   </nav>
@@ -259,7 +265,15 @@
     }
 
     // View Switching Router
+    
+    function updateMobileDock(view) {
+      document.querySelectorAll('.mobile-nav-item').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('mob-nav-' + (view === 'seller-dashboard' ? 'profile' : view));
+      if (target) target.classList.add('active');
+    }
+
     state.on('view_changed', (view) => {
+      updateMobileDock(view);
       document.getElementById('view-marketplace').style.display = view === 'marketplace' ? 'block' : 'none';
       document.getElementById('view-inbox').style.display = view === 'inbox' ? 'block' : 'none';
       document.getElementById('view-seller-dashboard').style.display = view === 'seller-dashboard' ? 'block' : 'none';
@@ -320,6 +334,19 @@
         HeroSection.render();
         PopularCategories.render();
         Marketplace.render();
+
+        // Sync unread messages badge on mobile dock
+        state.on('counts_changed', (counts) => {
+          const badge = document.getElementById('mob-inbox-badge');
+          if (badge) {
+            if (counts.messages > 0) {
+              badge.textContent = counts.messages > 9 ? '9+' : counts.messages;
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          }
+        });
 
         console.log('✅ CampusCart initialized successfully on GSV Launch Campus!');
       } catch (err) {
