@@ -99,33 +99,33 @@ const AdminDashboard = {
       const s = this.stats || {};
       mount.innerHTML = `
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Total Registered Students</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--color-navy); margin-top: 0.25rem;">${s.totalUsers || 0}</div>
           </div>
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Active College Campuses</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary); margin-top: 0.25rem;">${s.activeColleges || 0} / ${s.totalColleges || 0}</div>
           </div>
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Active Marketplace Listings</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--color-accent-emerald); margin-top: 0.25rem;">${s.activeProducts || 0}</div>
           </div>
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Sold Items</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #D97706; margin-top: 0.25rem;">${s.soldProducts || 0}</div>
           </div>
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Pending Moderation Reports</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #EF4444; margin-top: 0.25rem;">${s.pendingReports || 0}</div>
           </div>
-          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
+          <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem;">
             <div style="font-size: 0.82rem; color: var(--color-text-muted);">Pending College Requests</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary); margin-top: 0.25rem;">${s.pendingCollegeRequests || 0}</div>
           </div>
         </div>
 
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Platform Health & Operations</h3>
           <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6;">
             CampusCart is running with real-time SSE event bus streaming, multi-campus routing, and verified student ID checks. Gati Shakti Vishwavidyalaya (GSV) is designated as the primary launch university, with support for expansion to hundreds of campuses across India.
@@ -139,13 +139,13 @@ const AdminDashboard = {
           <div>
             <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Student Expansion Requests</h3>
             ${this.collegeRequests.length === 0 ? `
-              <div style="padding: 2rem; background: white; border: 1px dashed var(--color-border); border-radius: var(--radius-md); text-align: center; color: var(--color-text-muted);">
+              <div style="padding: 2rem; background: var(--surface); border: 1px dashed var(--color-border); border-radius: var(--radius-md); text-align: center; color: var(--color-text-muted);">
                 No pending college expansion requests.
               </div>
             ` : `
               <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                 ${this.collegeRequests.map(r => `
-                  <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem;">
+                  <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.35rem;">
                       <strong style="color: var(--color-navy); font-size: 0.95rem;">${r.college_name}</strong>
                       <span style="font-size: 0.72rem; padding: 0.15rem 0.4rem; border-radius: var(--radius-full); background: ${r.status === 'approved' ? '#DCFCE7' : '#FEF3C7'}; color: ${r.status === 'approved' ? '#166534' : '#92400E'};">
@@ -171,7 +171,7 @@ const AdminDashboard = {
             <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Active & Configured Campuses</h3>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
               ${state.colleges.map(c => `
-                <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
                   <div>
                     <div style="font-weight: 700; font-size: 0.95rem; color: var(--color-navy); display: flex; align-items: center; gap: 0.5rem;">
                       ${c.name}
@@ -194,7 +194,7 @@ const AdminDashboard = {
       `;
     } else if (this.activeSection === 'reports') {
       mount.innerHTML = `
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Community Moderation & Reported Content</h3>
           ${this.reports.length === 0 ? `
             <p style="color: var(--color-text-muted); font-size: 0.9rem;">No reported listings or users. Marketplace is clean!</p>
@@ -235,7 +235,7 @@ const AdminDashboard = {
       `;
     } else if (this.activeSection === 'users') {
       mount.innerHTML = `
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Registered Student Users</h3>
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
@@ -278,7 +278,7 @@ const AdminDashboard = {
     } else if (this.activeSection === 'supabase') {
       const cfg = this.supabaseConfig || {};
       mount.innerHTML = `
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <div>
               <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-navy);">Supabase Cloud Integration Architecture</h3>
