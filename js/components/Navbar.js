@@ -106,7 +106,7 @@ const Navbar = {
             </div>
 
             <!-- List Item CTA -->
-            <button class="btn btn-primary btn-sm" onclick="Navbar.handleSellClick()" style="padding: 0.45rem 1rem;">
+            <button class="btn btn-primary btn-sm nav-list-item-btn" onclick="Navbar.handleSellClick()" style="padding: 0.45rem 1rem;">
               + List Item
             </button>
 
