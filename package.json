@@ -2,8 +2,21 @@
   "name": "campuscart",
   "version": "1.0.0",
   "description": "CampusCart – Premium Multi-College Student Marketplace",
+  "main": "server.js",
   "scripts": {
-    "build": "echo 'Frontend ready for Vercel CDN'"
+    "start": "node server.js"
   },
-  "license": "MIT"
+  "keywords": [
+    "marketplace",
+    "campus",
+    "students",
+    "college",
+    "gsv",
+    "ecommerce"
+  ],
+  "author": "CampusCart Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
