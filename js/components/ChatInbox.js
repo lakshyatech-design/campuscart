@@ -46,7 +46,7 @@ const ChatInbox = {
         </div>
 
         <!-- Main Chat App Frame -->
-        <div class="inbox-container">
+        <div class="inbox-container" id="inbox-container">
           <!-- Left: Conversation Roster -->
           <aside class="inbox-sidebar" id="inbox-sidebar">
             <div class="inbox-search-header">
@@ -175,6 +175,8 @@ const ChatInbox = {
     conv.unread_count = 0; // Optimistic mark as read
     this.renderConversationList();
 
+    const container = document.getElementById('inbox-container');
+    if (container) container.classList.add('chat-active');
     const mainArea = document.getElementById('chat-main-area');
     if (!mainArea) return;
 
@@ -184,7 +186,10 @@ const ChatInbox = {
     mainArea.innerHTML = `
       <!-- Top Product Information Bar -->
       <div class="chat-product-header">
-        <div class="chat-product-brief">
+        <div class="chat-product-brief" style="display: flex; align-items: center; gap: 0.65rem;">
+          <button class="chat-back-btn" onclick="ChatInbox.backToList()" title="Back to conversations">
+            ${Icons.arrowRight("w-4 h-4") ? '<span style="font-size: 1.1rem; font-weight: bold; line-height: 1;">←</span>' : '←'}
+          </button>
           <img src="${prodImg}" class="chat-prod-thumb" alt="${conv.product_title}" />
           <div>
             <div style="font-weight: 700; font-size: 0.95rem; color: var(--color-navy); display: flex; align-items: center; gap: 0.5rem;">
