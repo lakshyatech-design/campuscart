@@ -243,7 +243,18 @@ const Marketplace = {
 
     gridEl.innerHTML = this.products.map(p => {
       const isFav = state.wishlistIds.has(p.id);
-      const firstImg = p.images && p.images[0] ? p.images[0] : 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600';
+      let firstImg = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600';
+      if (Array.isArray(p.images) && p.images.length > 0) {
+        firstImg = p.images[0];
+      } else if (typeof p.images === 'string') {
+        try {
+          const parsed = JSON.parse(p.images);
+          if (Array.isArray(parsed) && parsed.length > 0) firstImg = parsed[0];
+          else if (p.images.startsWith('http')) firstImg = p.images;
+        } catch (e) {
+          if (p.images.startsWith('http')) firstImg = p.images;
+        }
+      }
       const isSpecialTicket = p.category === 'Railway Tickets';
 
       return `
