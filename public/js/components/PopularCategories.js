@@ -1,5 +1,5 @@
 /**
- * CampusCart - Popular Categories Section
+ * CampusCart - Master Rebuilt Popular Categories Section
  */
 const PopularCategories = {
   render() {
@@ -7,14 +7,14 @@ const PopularCategories = {
     if (!el) return;
 
     el.innerHTML = `
-      <section id="categories-section" class="container" style="padding-top: 3.5rem; padding-bottom: 1.5rem;">
-        <div class="section-header">
+      <section id="categories-section" class="container category-section-master">
+        <div class="section-editorial-heading">
           <div>
-            <h2 class="section-title">Explore Categories</h2>
-            <p class="section-subtitle">Everything students need, curated for campus life in India</p>
+            <div class="editorial-kicker-label">CURATED CAMPUS COMMERCE</div>
+            <h2 class="editorial-title-large">Browse by Department & Life Need</h2>
           </div>
-          <button class="btn btn-outline btn-sm" onclick="PopularCategories.selectCategory('All')">
-            Reset to All
+          <button class="btn btn-secondary btn-sm" onclick="PopularCategories.selectCategory('All')">
+            Reset to All Categories
           </button>
         </div>
 
