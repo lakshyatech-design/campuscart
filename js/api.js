@@ -267,3 +267,14 @@ const API = {
     return eventSource;
   }
 };
+
+// Aliases for cross-compatibility
+API.auth = {
+  login: API.login.bind(API),
+  register: API.register.bind(API),
+  switchDemo: API.switchDemoUser.bind(API),
+  me: API.getMe.bind(API),
+  logout: API.logout.bind(API)
+};
+window.API = API;
+window.api = API;
