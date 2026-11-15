@@ -15,7 +15,7 @@ const ChatInbox = {
     if (!state.currentUser) {
       el.innerHTML = `
         <div class="container" style="padding: 4rem 1rem; text-align: center;">
-          <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: #EFF6FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-primary);">
+          <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: var(--accent-glow); border: 1px solid var(--border-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent);">
             ${Icons.messageSquare("w-8 h-8")}
           </div>
           <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.5rem;">Student Inbox & Campus Chat</h2>
@@ -372,7 +372,7 @@ const ChatInbox = {
 
     mainArea.innerHTML = `
       <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem; color: var(--color-text-muted);">
-        <div style="width: 72px; height: 72px; border-radius: 50%; background: #EFF6FF; color: var(--color-primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+        <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--accent-glow); border: 1px solid var(--border-accent); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
           ${Icons.messageSquare("w-8 h-8")}
         </div>
         <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.35rem;">Select a Conversation</h3>
