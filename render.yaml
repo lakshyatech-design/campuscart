@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: campuscart
+    env: node
+    plan: free
+    buildCommand: "echo 'No build step required'"
+    startCommand: "node server.js"
+    envVars:
+      - key: PORT
+        value: 10000
