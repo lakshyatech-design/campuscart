@@ -55,15 +55,15 @@ const CollegeSelectorModal = {
           </div>
 
           <!-- Explore Other Colleges Toggle Switch -->
-          <div style="background: #F8FAFC; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div style="background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
             <div>
-              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-navy);">Explore Listings From All Campuses</div>
-              <div style="font-size: 0.78rem; color: var(--color-text-muted);">Browse verified items across India or toggle off to view your campus only</div>
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">Explore Listings From All Campuses</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Browse verified items across India or toggle off to view your campus only</div>
             </div>
             <label style="position: relative; display: inline-block; width: 44px; height: 24px; cursor: pointer;">
               <input type="checkbox" id="explore-all-colleges-toggle" ${state.exploreAllColleges ? 'checked' : ''} style="opacity: 0; width: 0; height: 0;">
-              <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: ${state.exploreAllColleges ? '#2563EB' : '#CBD5E1'}; transition: .3s; border-radius: 24px;"></span>
-              <span style="position: absolute; height: 18px; width: 18px; left: ${state.exploreAllColleges ? '22px' : '3px'}; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%;"></span>
+              <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: ${state.exploreAllColleges ? 'var(--accent)' : 'var(--surface)'}; border: 1px solid var(--border); transition: .3s; border-radius: 24px;"></span>
+              <span style="position: absolute; height: 18px; width: 18px; left: ${state.exploreAllColleges ? '22px' : '3px'}; bottom: 3px; background-color: ${state.exploreAllColleges ? '#000' : 'var(--text-muted)'}; transition: .3s; border-radius: 50%;"></span>
             </label>
           </div>
 
@@ -72,47 +72,47 @@ const CollegeSelectorModal = {
             ${filteredColleges.map(c => `
               <div 
                 class="college-select-card" 
-                style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.15rem; border: 2px solid ${c.id === currentCollegeId ? '#2563EB' : 'var(--color-border)'}; background: ${c.id === currentCollegeId ? '#EFF6FF' : '#FFFFFF'}; border-radius: var(--radius-lg); cursor: pointer; transition: all var(--transition-fast);"
+                style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.15rem; border: 1px solid ${c.id === currentCollegeId ? 'var(--accent)' : 'var(--border)'}; background: ${c.id === currentCollegeId ? 'var(--accent-glow)' : 'var(--surface-raised)'}; border-radius: var(--radius-lg); cursor: pointer; transition: all var(--transition-fast);"
                 onclick="CollegeSelectorModal.select('${c.id}')"
               >
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                  <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: ${c.id === 'gsv-vadodara' ? 'linear-gradient(135deg, #2563EB, #06B6D4)' : '#F1F5F9'}; color: ${c.id === 'gsv-vadodara' ? '#FFF' : '#334155'}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">
+                  <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: ${c.id === 'gsv-vadodara' ? 'var(--accent)' : 'var(--surface)'}; color: ${c.id === 'gsv-vadodara' ? '#000' : 'var(--text-secondary)'}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">
                     ${c.short_name.substring(0, 3).toUpperCase()}
                   </div>
                   <div>
-                    <div style="font-weight: 700; font-size: 0.96rem; color: var(--color-navy); display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="font-weight: 700; font-size: 0.96rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
                       ${c.name}
-                      ${c.badge ? `<span style="font-size: 0.68rem; font-weight: 700; background: ${c.id === 'gsv-vadodara' ? '#DCFCE7' : '#F1F5F9'}; color: ${c.id === 'gsv-vadodara' ? '#166534' : '#475569'}; padding: 0.15rem 0.5rem; border-radius: var(--radius-full);">${c.badge}</span>` : ''}
+                      ${c.badge ? `<span style="font-size: 0.68rem; font-weight: 700; background: var(--accent-glow); color: var(--accent); border: 1px solid var(--border-accent); padding: 0.15rem 0.5rem; border-radius: var(--radius-full);">${c.badge}</span>` : ''}
                     </div>
-                    <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 2px;">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
                       ${c.city}, ${c.state} • ${c.domain}
                     </div>
                   </div>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <span style="font-size: 0.78rem; font-weight: 600; color: ${c.is_active ? 'var(--color-accent-emerald)' : 'var(--color-text-muted)'};">
+                  <span style="font-size: 0.78rem; font-weight: 600; color: ${c.is_active ? 'var(--success)' : 'var(--text-muted)'};">
                     ${c.is_active ? '● Active' : '○ Hub Setup'}
                   </span>
                   ${c.id === currentCollegeId ? `
-                    <span style="color: var(--color-primary);">${Icons.checkCircle("w-5 h-5")}</span>
+                    <span style="color: var(--accent);">${Icons.checkCircle("w-5 h-5")}</span>
                   ` : ''}
                 </div>
               </div>
             `).join('')}
 
             ${filteredColleges.length === 0 ? `
-              <div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+              <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
                 <p>No universities found matching "${this.searchTerm}".</p>
               </div>
             ` : ''}
           </div>
 
           <!-- College Not Listed Action Banner -->
-          <div style="margin-top: 1.5rem; padding: 1.25rem; background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%); border: 1px dashed var(--color-primary-border); border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="margin-top: 1.5rem; padding: 1.25rem; background: var(--surface-raised); border: 1px dashed var(--border-accent); border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <div style="font-weight: 700; font-size: 0.9rem; color: var(--color-navy);">Is your college not listed yet?</div>
-              <div style="font-size: 0.78rem; color: var(--color-text-muted);">We launch new campuses within 24 hours of student verification.</div>
+              <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary);">Is your college not listed yet?</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">We launch new campuses within 24 hours of student verification.</div>
             </div>
             <button class="btn btn-primary btn-sm" onclick="CollegeSelectorModal.openRequestModal()">
               ${Icons.plusCircle("w-4 h-4")}
