@@ -11,6 +11,9 @@ const EventEmitter = require('node:events');
 const realtimeBus = new EventEmitter();
 realtimeBus.setMaxListeners(100);
 
+// Connected SSE clients for real-time notification streaming
+const sseClients = new Map();
+
 function hashPassword(password) {
   return crypto.createHash('sha256').update(password + 'campuscart_salt_2026').digest('hex');
 }
@@ -363,7 +366,39 @@ const DB = {
 
   wishlist: [],
   college_requests: [],
-  reports: []
+  reports: [],
+  notifications: [
+    {
+      id: 'notif-1',
+      type: 'upload',
+      title: 'New GSV Listing Live',
+      message: 'Aarav Sharma listed "Hero Sprint Pro 26T 21-Speed Gear Bicycle + Lock" in Hostel Cycle Parking, GSV (₹3,600)',
+      productId: 'prod-3',
+      productTitle: 'Hero Sprint Pro 26T 21-Speed Gear Bicycle + Lock',
+      productPrice: 3600,
+      category: 'Cycles',
+      campus_location: 'Hostel Cycle Parking, GSV',
+      seller_name: 'Aarav Sharma',
+      seller_avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80',
+      is_read: 0,
+      created_at: new Date(Date.now() - 1800000).toISOString()
+    },
+    {
+      id: 'notif-2',
+      type: 'upload',
+      title: 'New GSV Listing Live',
+      message: 'Priya Patel listed "Higher Engineering Mathematics (B.S. Grewal 44th Edition)" in Central Library, GSV (₹550)',
+      productId: 'prod-4',
+      productTitle: 'Higher Engineering Mathematics (B.S. Grewal 44th Edition)',
+      productPrice: 550,
+      category: 'Books & Study Materials',
+      campus_location: 'Central Library, GSV',
+      seller_name: 'Priya Patel',
+      seller_avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80',
+      is_read: 0,
+      created_at: new Date(Date.now() - 5400000).toISOString()
+    }
+  ]
 };
 
 // JSON response helper
@@ -657,7 +692,44 @@ module.exports = async function handler(req, res) {
       };
 
       DB.products.unshift(newProd);
-      return sendJSON(res, 201, { message: 'Product listed successfully!', productId: newProd.id });
+
+      // Create persistent Real-Time Upload Notification
+      const newNotif = {
+        id: 'notif-' + crypto.randomUUID().substring(0, 8),
+        type: 'upload',
+        title: 'New GSV Listing Live',
+        message: `${user.full_name} listed "${newProd.title}" in ${newProd.campus_location} (₹${newProd.price})`,
+        productId: newProd.id,
+        productTitle: newProd.title,
+        productPrice: newProd.price,
+        category: newProd.category,
+        campus_location: newProd.campus_location,
+        seller_name: user.full_name,
+        seller_avatar: user.avatar_url,
+        seller_id: user.id,
+        is_read: 0,
+        created_at: new Date().toISOString()
+      };
+      DB.notifications.unshift(newNotif);
+
+      // Broadcast immediately to all connected SSE browser clients
+      const ssePayload = JSON.stringify({
+        type: 'NEW_UPLOAD',
+        notification: newNotif
+      });
+      for (const [clientId, clientRes] of sseClients.entries()) {
+        try {
+          clientRes.write(`data: ${ssePayload}\n\n`);
+        } catch (e) {
+          sseClients.delete(clientId);
+        }
+      }
+
+      return sendJSON(res, 201, {
+        message: 'Product listed successfully and broadcast to campus!',
+        productId: newProd.id,
+        notification: newNotif
+      });
     }
 
     // 5. Conversations & Real-Time Chat
@@ -794,9 +866,55 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // 7. Notifications
+    // 7. Notifications & Real-Time SSE Stream
+    if (pathname === '/api/notifications/stream' && req.method === 'GET') {
+      res.writeHead(200, {
+        'Content-Type': 'text/event-stream; charset=utf-8',
+        'Cache-Control': 'no-cache, no-transform',
+        'Connection': 'keep-alive',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.write(': connected\n\n');
+
+      const clientId = crypto.randomUUID();
+      sseClients.set(clientId, res);
+
+      const heartbeat = setInterval(() => {
+        try {
+          res.write(': heartbeat\n\n');
+        } catch (e) {
+          clearInterval(heartbeat);
+          sseClients.delete(clientId);
+        }
+      }, 25000);
+
+      req.on('close', () => {
+        clearInterval(heartbeat);
+        sseClients.delete(clientId);
+      });
+      return;
+    }
+
     if (pathname === '/api/notifications' && req.method === 'GET') {
-      return sendJSON(res, 200, { notifications: [], unreadCount: 0 });
+      const unreadCount = DB.notifications.filter(n => !n.is_read).length;
+      return sendJSON(res, 200, {
+        notifications: DB.notifications,
+        unreadCount
+      });
+    }
+
+    if (pathname.startsWith('/api/notifications/') && pathname.endsWith('/read') && req.method === 'POST') {
+      const parts = pathname.split('/');
+      const notifId = parts[3];
+      const notif = DB.notifications.find(n => n.id === notifId);
+      if (notif) notif.is_read = 1;
+      const unreadCount = DB.notifications.filter(n => !n.is_read).length;
+      return sendJSON(res, 200, { success: true, unreadCount });
+    }
+
+    if (pathname === '/api/notifications/read-all' && req.method === 'POST') {
+      DB.notifications.forEach(n => { n.is_read = 1; });
+      return sendJSON(res, 200, { success: true, unreadCount: 0 });
     }
 
     // 8. Admin
