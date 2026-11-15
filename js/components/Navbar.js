@@ -142,6 +142,14 @@ const Navbar = {
     if (menu) menu.classList.add('hidden');
   },
 
+  handleMobileProfileClick() {
+    if (!state.currentUser) {
+      AuthModal.open('login');
+    } else {
+      UserProfileModal.open();
+    }
+  },
+
   handleInboxClick() {
     if (!state.currentUser) {
       showToast('Please login to access your internal inbox', 'info');
