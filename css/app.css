@@ -2249,6 +2249,8 @@ textarea.input-field {
   .modal-card { max-height: 85vh; }
 
   .gsv-notif-dropdown { width: calc(100vw - 2rem); right: -1rem; }
+
+  .nav-list-item-btn { display: none !important; }
 }
 
 /* ═══════════════════════════════════════
