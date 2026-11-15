@@ -411,10 +411,13 @@ module.exports = async function handler(req, res) {
     return res.end();
   }
 
-  const parsedUrl = new URL(req.url, `https://${req.headers.host || 'campuscart.vercel.app'}`);
-  let pathname = parsedUrl.pathname;
-  if (!pathname.startsWith("/api")) { pathname = "/api" + pathname; }
+    const parsedUrl = new URL(req.url, `https://${req.headers.host || 'campuscart.vercel.app'}`);
   const searchParams = parsedUrl.searchParams;
+  let rawPath = searchParams.get('api_path') || req.headers['x-matched-path'] || parsedUrl.pathname;
+  if (rawPath.startsWith('/api/')) rawPath = rawPath.substring(5);
+  else if (rawPath.startsWith('/api')) rawPath = rawPath.substring(4);
+  else if (rawPath.startsWith('/')) rawPath = rawPath.substring(1);
+  const pathname = '/api/' + rawPath;
 
   try {
     // 1. Health
@@ -834,7 +837,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Default 404
-    return sendJSON(res, 404, { error: 'API route not found', pathname, url: req.url });
+    return sendJSON(res, 404, { error: 'API route not found: ' + pathname });
 
   } catch (err) {
     console.error('Serverless Error:', err);
