@@ -24,8 +24,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-aarav',
     seller_name: 'Aarav Sharma',
     campus_location: 'Hostel Block B, Room 214',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800']),
-    dynamic_attributes: JSON.stringify({ journey_date: '2026-11-28', from_station: 'Vadodara Jn (BRC)', to_station: 'New Delhi (NDLS)', train_name_number: '12951 / Rajdhani Express', ticket_type: '3AC' }),
+    images: ['https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800'],
+    dynamic_attributes: { journey_date: '2026-11-28', from_station: 'Vadodara Jn (BRC)', to_station: 'New Delhi (NDLS)', train_name_number: '12951 / Rajdhani Express', ticket_type: '3AC' },
     created_at: new Date(Date.now() - 3600000).toISOString(),
     views_count: 48
   },
@@ -40,8 +40,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-priya',
     seller_name: 'Priya Patel',
     campus_location: 'Girls Hostel 1, Wing A',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800']),
-    dynamic_attributes: JSON.stringify({ brand: 'Rasasi', concentration: 'EDP', remaining_volume: '85 ml' }),
+    images: ['https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800'],
+    dynamic_attributes: { brand: 'Rasasi', concentration: 'EDP', remaining_volume: '85 ml' },
     created_at: new Date(Date.now() - 7200000).toISOString(),
     views_count: 32
   },
@@ -56,8 +56,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-rohan',
     seller_name: 'Rohan Mehta',
     campus_location: 'Hostel 3 Cycle Stand',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800']),
-    dynamic_attributes: JSON.stringify({ wheel_size: '26 Inch', gears: '21 Speed Shimano', frame: 'Alloy Steel' }),
+    images: ['https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800'],
+    dynamic_attributes: { wheel_size: '26 Inch', gears: '21 Speed Shimano', frame: 'Alloy Steel' },
     created_at: new Date(Date.now() - 14400000).toISOString(),
     views_count: 67
   },
@@ -72,8 +72,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-aarav',
     seller_name: 'Aarav Sharma',
     campus_location: 'Library Reading Hall',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800']),
-    dynamic_attributes: JSON.stringify({ author: 'B.S. Grewal', edition: '44th Edition', semester: 'Sem 1 & 2' }),
+    images: ['https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800'],
+    dynamic_attributes: { author: 'B.S. Grewal', edition: '44th Edition', semester: 'Sem 1 & 2' },
     created_at: new Date(Date.now() - 28800000).toISOString(),
     views_count: 24
   },
@@ -88,8 +88,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-priya',
     seller_name: 'Priya Patel',
     campus_location: 'Girls Hostel 1',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=800']),
-    dynamic_attributes: JSON.stringify({ capacity: '1.5 Litres', power: '1800W', material: 'Stainless Steel' }),
+    images: ['https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=800'],
+    dynamic_attributes: { capacity: '1.5 Litres', power: '1800W', material: 'Stainless Steel' },
     created_at: new Date(Date.now() - 43200000).toISOString(),
     views_count: 19
   },
@@ -104,8 +104,8 @@ const MOCK_PRODUCTS = [
     seller_id: 'user-rohan',
     seller_name: 'Rohan Mehta',
     campus_location: 'Hostel Block C, Ground Floor',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800']),
-    dynamic_attributes: JSON.stringify({ model: 'Casio FX-991EX', display: 'High Resolution LCD', approved_exams: 'Yes' }),
+    images: ['https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800'],
+    dynamic_attributes: { model: 'Casio FX-991EX', display: 'High Resolution LCD', approved_exams: 'Yes' },
     created_at: new Date(Date.now() - 86400000).toISOString(),
     views_count: 51
   }
@@ -331,7 +331,7 @@ const API = {
     }
 
     let items = [...this.MOCK_PRODUCTS];
-    if (params.category && params.category !== 'all') {
+    if (params.category && params.category.toLowerCase() !== 'all') {
       items = items.filter(p => p.category.toLowerCase() === params.category.toLowerCase());
     }
     if (params.q) {
