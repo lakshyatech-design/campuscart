@@ -53,13 +53,13 @@ const UserProfileModal = {
 
         <div class="modal-body">
           <!-- Profile Header Card -->
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: #F8FAFC; border: 1px solid var(--color-border); border-radius: var(--radius-lg); margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
             <div style="display: flex; align-items: center; gap: 1.25rem;">
-              <img src="${user.avatar_url}" style="width: 72px; height: 72px; border-radius: 50%; border: 3px solid #FFFFFF; box-shadow: var(--shadow-sm);" alt="${user.full_name}" />
+              <img src="${user.avatar_url}" style="width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--accent); box-shadow: var(--shadow-sm);" alt="${user.full_name}" />
               <div>
-                <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--color-navy); display: flex; align-items: center; gap: 0.5rem;">
+                <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
                   ${user.full_name}
-                  <span style="font-size: 0.72rem; font-weight: 700; background: #DCFCE7; color: #166534; padding: 0.15rem 0.5rem; border-radius: var(--radius-full);">
+                  <span style="font-size: 0.72rem; font-weight: 700; background: var(--accent-glow); color: var(--accent); border: 1px solid var(--border-accent); padding: 0.15rem 0.5rem; border-radius: var(--radius-full);">
                     Verified Student
                   </span>
                 </h2>
