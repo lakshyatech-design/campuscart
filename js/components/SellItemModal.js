@@ -134,18 +134,18 @@ const SellItemModal = {
 
             <!-- DYNAMIC CATEGORY FIELDS -->
             ${isTicket ? `
-              <div style="background: #FFFBEB; border: 1px solid #FCD34D; border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
-                <div style="font-weight: 700; font-size: 0.92rem; color: #92400E; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem;">
+              <div style="background: var(--surface-raised); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">
                   ${Icons.train("w-4 h-4")}
                   Railway Ticket Specifics
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #92400E;">Journey Date *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Journey Date *</label>
                     <input type="date" id="dyn-journey-date" class="input-field input-plain" required />
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #92400E;">Ticket Class *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Ticket Class *</label>
                     <select id="dyn-ticket-type" class="input-field input-plain">
                       <option value="3AC (3rd AC Sleeper)">3AC (3rd AC Sleeper)</option>
                       <option value="2AC (2nd AC Sleeper)">2AC (2nd AC Sleeper)</option>
@@ -158,19 +158,19 @@ const SellItemModal = {
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #92400E;">From Station *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">From Station *</label>
                     <input type="text" id="dyn-from-station" class="input-field input-plain" placeholder="e.g. Vadodara Jn (BRC)" required />
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #92400E;">To Station *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">To Station *</label>
                     <input type="text" id="dyn-to-station" class="input-field input-plain" placeholder="e.g. New Delhi (NDLS)" required />
                   </div>
                 </div>
                 <div style="margin-bottom: 0.75rem;">
-                  <label style="font-size: 0.75rem; font-weight: 700; color: #92400E;">Train Name / Number *</label>
+                  <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Train Name / Number *</label>
                   <input type="text" id="dyn-train-name" class="input-field input-plain" placeholder="e.g. 12951 Mumbai-Delhi Rajdhani" required />
                 </div>
-                <div style="font-size: 0.76rem; color: #92400E; display: flex; align-items: flex-start; gap: 0.5rem; background: #FEF3C7; padding: 0.65rem; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.75rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 0.5rem; background: var(--bg-subtle); border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-sm);">
                   <input type="checkbox" id="dyn-compliance-check" required style="margin-top: 3px;" />
                   <label for="dyn-compliance-check">
                     I confirm that this listing complies with applicable Indian Railway rules (bonafide student transfer via written application to railway authorities). I will not engage in unauthorized scalping or prohibited resales.
@@ -180,28 +180,28 @@ const SellItemModal = {
             ` : ''}
 
             ${isPerfume ? `
-              <div style="background: #FAF5FF; border: 1px solid #E9D5FF; border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
-                <div style="font-weight: 700; font-size: 0.92rem; color: #6B21A8; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem;">
+              <div style="background: var(--surface-raised); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">
                   ${Icons.sparkles("w-4 h-4")}
                   Perfume & Decant Specifications
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #6B21A8;">Brand / House *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Brand / House *</label>
                     <input type="text" id="dyn-brand" class="input-field input-plain" placeholder="e.g. Rasasi, Dior, Lattafa, Zara" required />
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #6B21A8;">Original Bottle Size *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Original Bottle Size *</label>
                     <input type="text" id="dyn-size" class="input-field input-plain" placeholder="e.g. 100 ml, 50 ml, 10 ml Decant" required />
                   </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #6B21A8;">Remaining Quantity / Level *</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Remaining Quantity / Level *</label>
                     <input type="text" id="dyn-remaining" class="input-field input-plain" placeholder="e.g. 85 ml (85% full)" required />
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; font-weight: 700; color: #6B21A8;">Packaging</label>
+                    <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Packaging</label>
                     <select id="dyn-box" class="input-field input-plain">
                       <option value="Yes, original box with batch code">Original Box Included</option>
                       <option value="Tester box">Tester Box</option>
