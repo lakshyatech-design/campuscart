@@ -215,14 +215,24 @@ const SellItemModal = {
             <!-- Campus Meetup Location & Contact Preference -->
             <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem; margin-bottom: 1.25rem;">
               <div>
-                <label class="filter-label">Campus Handover Location *</label>
+                <label class="filter-label">GSV Campus Handover Location *</label>
                 <input 
                   type="text" 
                   id="sell-location" 
+                  list="gsv-locations-list"
                   class="input-field input-plain" 
-                  placeholder="e.g. Hostel Block B, Central Canteen, Admin Gate" 
+                  placeholder="e.g. Hostel Block B, Pratap Nagar Colony, Central Library" 
                   required 
                 />
+                <datalist id="gsv-locations-list">
+                  <option value="Hostel Block B, Room 214" />
+                  <option value="Hostel Cycle Parking, GSV Vadodara" />
+                  <option value="Pratap Nagar Railway Colony" />
+                  <option value="Lalbaug Main Academic Block" />
+                  <option value="Central Library, GSV Main Campus" />
+                  <option value="GSV Student Activity Centre (SAC)" />
+                  <option value="Central Canteen Foyer" />
+                </datalist>
               </div>
               <div>
                 <label class="filter-label">Contact Preference</label>
