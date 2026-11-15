@@ -41,9 +41,32 @@ const Marketplace = {
           </div>
         </div>
 
+        
+        <!-- Mobile Search & Filter Toolbar -->
+        <div class="mobile-filter-toolbar">
+          <div class="search-input-wrap" style="flex-grow: 1;">
+            ${Icons.search("w-4 h-4")}
+            <input 
+              type="text" 
+              class="input-field" 
+              id="mobile-search-input" 
+              placeholder="Search ${currentCollege ? currentCollege.short_name : 'campus'} listings..." 
+              value="${state.searchQuery}"
+              oninput="Marketplace.handleMobileSearch(this.value)"
+            />
+          </div>
+          <button class="mobile-filter-btn" onclick="Marketplace.openMobileFilter()">
+            ${Icons.filter("w-4 h-4 text-primary")}
+            <span>Filters</span>
+            ${(state.activeCategory !== 'All' || state.conditionFilter !== 'All' || state.priceRange.min > 0 || state.priceRange.max < 20000) ? `
+              <span class="mobile-filter-badge">●</span>
+            ` : ''}
+          </button>
+        </div>
+
         <div class="marketplace-layout">
           <!-- Sidebar Filters -->
-          <aside class="filter-card">
+          <aside class="filter-card filter-card-desktop">
             <div class="filter-header">
               <span class="filter-title">
                 ${Icons.filter("w-4 h-4 text-primary")}
