@@ -100,7 +100,7 @@ window.NotificationCenter = (function () {
 
   function handleIncomingNotification(notif) {
     // Avoid self-notification toast if current user was the seller
-    const currentUser = window.CampusState ? window.CampusState.getUser() : null;
+    const currentUser = (window.state && window.state.currentUser) || (window.CampusState ? window.CampusState.getUser() : null);
     const isSelf = currentUser && currentUser.id === notif.seller_id;
 
     // Prepend to memory list
