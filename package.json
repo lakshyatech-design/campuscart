@@ -1,0 +1,22 @@
+{
+  "name": "campuscart",
+  "version": "1.0.0",
+  "description": "CampusCart – Premium Multi-College Student Marketplace",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "marketplace",
+    "campus",
+    "students",
+    "college",
+    "gsv",
+    "ecommerce"
+  ],
+  "author": "CampusCart Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
