@@ -2402,3 +2402,28 @@ button, input, select, textarea {
     width: auto;
   }
 }
+
+
+/* Mobile drawer and generic hidden utility */
+.hidden {
+  display: none !important;
+}
+
+.mobile-nav-drawer {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .mobile-nav-drawer:not(.hidden) {
+    display: block;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 998;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+}
