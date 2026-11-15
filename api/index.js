@@ -449,6 +449,9 @@ module.exports = async function handler(req, res) {
     const parsedUrl = new URL(req.url, `https://${req.headers.host || 'campuscart.vercel.app'}`);
   const searchParams = parsedUrl.searchParams;
   let rawPath = searchParams.get('api_path') || req.headers['x-matched-path'] || parsedUrl.pathname;
+  if (rawPath === 'index.js' || rawPath === '/index.js' || rawPath === '/api/index.js') {
+    rawPath = 'colleges';
+  }
   if (rawPath.startsWith('/api/')) rawPath = rawPath.substring(5);
   else if (rawPath.startsWith('/api')) rawPath = rawPath.substring(4);
   else if (rawPath.startsWith('/')) rawPath = rawPath.substring(1);
