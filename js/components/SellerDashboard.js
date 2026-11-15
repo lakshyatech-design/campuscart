@@ -55,7 +55,7 @@ const SellerDashboard = {
         </div>
 
         <!-- Listings Management Tabs -->
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+        <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: var(--shadow-sm);">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">
             <div class="flex items-center gap-2">
               <button class="btn btn-sm ${this.activeTab === 'active' ? 'btn-primary' : 'btn-ghost'}" onclick="SellerDashboard.switchTab('active')">
@@ -103,25 +103,25 @@ const SellerDashboard = {
     const totalViews = this.myProducts.reduce((sum, p) => sum + (p.views_count || 0), 0);
 
     statsMount.innerHTML = `
-      <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+      <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem;">Active Listings</div>
         <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--color-primary);">${activeCount}</div>
         <div style="font-size: 0.72rem; color: var(--color-accent-emerald); font-weight: 600; margin-top: 0.2rem;">● Visible to buyers</div>
       </div>
 
-      <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+      <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem;">Sold Items</div>
         <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--color-navy);">${soldCount}</div>
         <div style="font-size: 0.72rem; color: var(--color-text-muted); margin-top: 0.2rem;">Successful campus deals</div>
       </div>
 
-      <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+      <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem;">Total Views</div>
         <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #D97706;">${totalViews}</div>
         <div style="font-size: 0.72rem; color: var(--color-text-muted); margin-top: 0.2rem;">Student impressions</div>
       </div>
 
-      <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
+      <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-sm);">
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem;">Inquiries</div>
         <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--color-accent-emerald);">
           ${state.unreadMessagesCount > 0 ? state.unreadMessagesCount + ' New' : 'Active'}
