@@ -834,7 +834,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Default 404
-    return sendJSON(res, 404, { error: 'API route not found' });
+    return sendJSON(res, 404, { error: 'API route not found', pathname, url: req.url });
 
   } catch (err) {
     console.error('Serverless Error:', err);
