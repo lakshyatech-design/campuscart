@@ -248,7 +248,8 @@ const Marketplace = {
       const isSpecialTicket = p.category === 'Railway Tickets';
 
       return `
-        <div class="product-card">
+        <div class="product-card tilt-card">
+          <div class="specular-glare"></div>
           <!-- Thumbnail & Badges -->
           <div class="product-image-container" onclick="ProductDetailModal.open('${p.id}')" style="cursor: pointer;">
             <img src="${firstImg}" alt="${p.title}" class="product-img" loading="lazy" />
@@ -265,7 +266,7 @@ const Marketplace = {
           <!-- Product Details -->
           <div class="product-details">
             <div class="product-price-row">
-              <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="product-price tabular-nums">₹${p.price.toLocaleString('en-IN')}</span>
               <span class="product-category-tag">${p.category}</span>
             </div>
 
