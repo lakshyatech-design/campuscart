@@ -1,5 +1,5 @@
 /**
- * CampusCart - Buyer Experience & Marketplace Feed
+ * CampusCart - Master Rebuilt Marketplace Feed
  */
 const Marketplace = {
   products: [],
@@ -13,34 +13,6 @@ const Marketplace = {
 
     el.innerHTML = `
       <section id="marketplace-section" class="container" style="padding-top: 1rem; padding-bottom: 5rem;">
-        <!-- Filter Header Bar -->
-        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
-          <div class="flex items-center gap-3">
-            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--color-navy);">
-              ${state.activeCategory === 'All' ? 'Campus Marketplace' : state.activeCategory}
-            </h2>
-            <span class="product-category-tag" style="font-size: 0.8rem;">
-              ${state.exploreAllColleges ? 'All Campuses (India)' : (currentCollege ? currentCollege.short_name : 'GSV Vadodara')}
-            </span>
-          </div>
-
-          <!-- Sort dropdown & Quick Count -->
-          <div class="flex items-center gap-4">
-            <span style="font-size: 0.85rem; color: var(--color-text-muted);" id="product-count-label">
-              Loading listings...
-            </span>
-            <div class="flex items-center gap-2">
-              <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted);">Sort by:</span>
-              <select class="input-field input-plain" id="marketplace-sort-select" style="width: auto; padding: 0.45rem 1.75rem 0.45rem 0.75rem; border-radius: var(--radius-md);" onchange="Marketplace.handleSortChange(this.value)">
-                <option value="latest" ${state.sortBy === 'latest' ? 'selected' : ''}>Recently Added</option>
-                <option value="price_asc" ${state.sortBy === 'price_asc' ? 'selected' : ''}>Price: Low to High</option>
-                <option value="price_desc" ${state.sortBy === 'price_desc' ? 'selected' : ''}>Price: High to Low</option>
-                <option value="popular" ${state.sortBy === 'popular' ? 'selected' : ''}>Most Popular</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
         
         <!-- Mobile Search & Filter Toolbar -->
         <div class="mobile-filter-toolbar">
@@ -50,7 +22,7 @@ const Marketplace = {
               type="text" 
               class="input-field" 
               id="mobile-search-input" 
-              placeholder="Search ${currentCollege ? currentCollege.short_name : 'campus'} listings..." 
+              placeholder="Search campus listings..." 
               value="${state.searchQuery}"
               oninput="Marketplace.handleMobileSearch(this.value)"
             />
@@ -64,6 +36,34 @@ const Marketplace = {
           </button>
         </div>
 
+        <!-- Filter Header Bar -->
+        <div style="background: white; border: var(--border-hairline); border-radius: var(--radius-xl); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+          <div class="flex items-center gap-3">
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--ink-display);">
+              ${state.activeCategory === 'All' ? 'Campus Marketplace' : state.activeCategory}
+            </h2>
+            <span class="product-category-tag" style="font-size: 0.8rem;">
+              ${state.exploreAllColleges ? 'All Campuses (India)' : (currentCollege ? currentCollege.short_name : 'GSV Vadodara')}
+            </span>
+          </div>
+
+          <!-- Sort dropdown & Quick Count -->
+          <div class="flex items-center gap-4">
+            <span style="font-size: 0.85rem; color: var(--ink-muted);" id="product-count-label">
+              Loading listings...
+            </span>
+            <div class="flex items-center gap-2">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--ink-secondary);">Sort by:</span>
+              <select class="input-field input-plain" id="marketplace-sort-select" style="width: auto; padding: 0.45rem 1.75rem 0.45rem 0.75rem; border-radius: var(--radius-md);" onchange="Marketplace.handleSortChange(this.value)">
+                <option value="latest" ${state.sortBy === 'latest' ? 'selected' : ''}>Recently Added</option>
+                <option value="price_asc" ${state.sortBy === 'price_asc' ? 'selected' : ''}>Price: Low to High</option>
+                <option value="price_desc" ${state.sortBy === 'price_desc' ? 'selected' : ''}>Price: High to Low</option>
+                <option value="popular" ${state.sortBy === 'popular' ? 'selected' : ''}>Most Popular</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         <div class="marketplace-layout">
           <!-- Sidebar Filters -->
           <aside class="filter-card filter-card-desktop">
@@ -72,7 +72,7 @@ const Marketplace = {
                 ${Icons.filter("w-4 h-4 text-primary")}
                 Filters
               </span>
-              <button class="btn btn-ghost btn-sm" onclick="Marketplace.resetFilters()" style="color: var(--color-primary); font-size: 0.78rem;">
+              <button class="btn btn-ghost btn-sm" onclick="Marketplace.resetFilters()" style="color: var(--cobalt); font-size: 0.78rem;">
                 Reset All
               </button>
             </div>
@@ -120,7 +120,7 @@ const Marketplace = {
               <label class="filter-label">Condition</label>
               <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                 ${['All', 'Brand New', 'Like New', 'Good', 'Fair'].map(cond => `
-                  <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--color-navy); cursor: pointer;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--ink-primary); cursor: pointer;">
                     <input type="radio" name="filter-condition" value="${cond}" ${state.conditionFilter === cond ? 'checked' : ''} onchange="Marketplace.handleConditionChange('${cond}')" />
                     <span>${cond === 'All' ? 'Any Condition' : cond}</span>
                   </label>
@@ -129,11 +129,11 @@ const Marketplace = {
             </div>
 
             <!-- Campus Filter Notice -->
-            <div style="margin-top: 1.5rem; padding: 0.85rem; background: #F8FAFC; border-radius: var(--radius-md); font-size: 0.78rem; color: var(--color-text-muted);">
-              <div style="font-weight: 700; color: var(--color-navy); margin-bottom: 0.2rem;">Showing Campus:</div>
-              <div>${state.exploreAllColleges ? 'All Campuses' : (currentCollege ? currentCollege.name : 'GSV Vadodara')}</div>
-              <a href="#" onclick="event.preventDefault(); CollegeSelectorModal.open();" style="color: var(--color-primary); font-weight: 600; display: inline-block; margin-top: 0.35rem;">
-                Change Campus →
+            <div style="margin-top: 1.5rem; padding: 0.85rem; background: var(--surface-inset); border-radius: var(--radius-md); font-size: 0.78rem; color: var(--ink-secondary);">
+              <div style="font-weight: 700; color: var(--ink-display); margin-bottom: 0.2rem;">Showing Campus:</div>
+              <div>${state.exploreAllColleges ? 'All Campuses (India)' : (currentCollege ? currentCollege.name : 'GSV Vadodara')}</div>
+              <a href="#" onclick="event.preventDefault(); CollegeSelectorModal.open();" style="color: var(--cobalt); font-weight: 700; display: inline-block; margin-top: 0.35rem;">
+                Switch Campus →
               </a>
             </div>
           </aside>
@@ -148,7 +148,6 @@ const Marketplace = {
       </section>
     `;
 
-    // Search input listener
     const searchInput = document.getElementById('marketplace-search-input');
     if (searchInput) {
       let debounceTimeout;
@@ -199,7 +198,7 @@ const Marketplace = {
       if (gridEl) {
         gridEl.innerHTML = `
           <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
-            <p style="color: var(--color-accent-rose); font-weight: 600;">Failed to load marketplace listings.</p>
+            <p style="color: var(--rose); font-weight: 600;">Failed to load marketplace listings.</p>
             <button class="btn btn-secondary btn-sm" style="margin-top: 1rem;" onclick="Marketplace.loadProducts()">Try Again</button>
           </div>
         `;
@@ -220,13 +219,13 @@ const Marketplace = {
 
     if (this.products.length === 0) {
       gridEl.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; background: white; border: 1px dashed var(--color-border); border-radius: var(--radius-xl);">
-          <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: #EFF6FF; color: var(--color-primary); display: flex; align-items: center; justify-content: center;">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; background: white; border: 1.5px dashed rgba(15,23,42,0.1); border-radius: var(--radius-2xl);">
+          <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--cobalt-light); color: var(--cobalt); display: flex; align-items: center; justify-content: center;">
             ${Icons.search("w-8 h-8")}
           </div>
-          <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.4rem;">No student listings found</h3>
-          <p style="font-size: 0.9rem; color: var(--color-text-muted); max-width: 420px; margin: 0 auto 1.5rem;">
-            Try adjusting your search keywords, clear category filters, or toggle "Explore All Campuses" to see items across other universities.
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--ink-display); margin-bottom: 0.4rem;">No student listings found</h3>
+          <p style="font-size: 0.9rem; color: var(--ink-secondary); max-width: 420px; margin: 0 auto 1.5rem;">
+            Try adjusting your search keywords, clear category filters, or explore all campus hubs.
           </p>
           <div class="flex justify-center gap-3">
             <button class="btn btn-secondary btn-sm" onclick="Marketplace.resetFilters()">
@@ -248,10 +247,11 @@ const Marketplace = {
       const isSpecialTicket = p.category === 'Railway Tickets';
 
       return `
-        <div class="product-card tilt-card">
+        <div class="product-card tilt-card" onclick="ProductDetailModal.open('${p.id}')" style="cursor: pointer;">
           <div class="specular-glare"></div>
-          <!-- Thumbnail & Badges -->
-          <div class="product-image-container" onclick="ProductDetailModal.open('${p.id}')" style="cursor: pointer;">
+          
+          <!-- Image Viewport -->
+          <div class="product-image-container">
             <img src="${firstImg}" alt="${p.title}" class="product-img" loading="lazy" />
             <span class="product-badge-condition">${p.condition}</span>
             <button 
@@ -270,35 +270,35 @@ const Marketplace = {
               <span class="product-category-tag">${p.category}</span>
             </div>
 
-            <h3 class="product-title" onclick="ProductDetailModal.open('${p.id}')" style="cursor: pointer;">
+            <h3 class="product-title">
               ${p.title}
             </h3>
 
-            <!-- Dynamic Category Specific Preview -->
+            <!-- Railway Ticket Pass Route -->
             ${isSpecialTicket && p.dynamic_attributes ? `
               <div style="font-size: 0.74rem; background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; padding: 0.25rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;">
                 ${Icons.train("w-3 h-3")}
-                <span>${p.dynamic_attributes.from_station || 'Vadodara'} → ${p.dynamic_attributes.to_station || 'Destination'}</span>
+                <span>${p.dynamic_attributes.from_station || 'Vadodara'} ➔ ${p.dynamic_attributes.to_station || 'Destination'}</span>
               </div>
             ` : ''}
 
-            <!-- Seller & Campus Meta -->
+            <!-- Seller & Campus Location -->
             <div class="product-meta-row">
               <div class="product-college-badge" title="${p.college_name}">
                 ${Icons.mapPin("w-3 h-3 text-muted")}
                 <span>${p.college_short_name}</span>
               </div>
-              <span style="font-size: 0.75rem; color: var(--color-text-muted);">
+              <span style="font-size: 0.74rem; color: var(--ink-muted);">
                 ${p.campus_location || 'Campus'}
               </span>
             </div>
 
             <!-- Action buttons -->
             <div class="product-actions">
-              <button class="btn btn-secondary btn-sm" onclick="ProductDetailModal.open('${p.id}')">
-                View Details
+              <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); ProductDetailModal.open('${p.id}')">
+                Details
               </button>
-              <button class="btn btn-primary btn-sm" onclick="Marketplace.handleContactSeller('${p.id}', '${p.seller_id}')">
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); Marketplace.handleContactSeller('${p.id}', '${p.seller_id}')">
                 ${Icons.messageSquare("w-3 h-3")}
                 Chat
               </button>
@@ -307,6 +307,93 @@ const Marketplace = {
         </div>
       `;
     }).join('');
+
+    if (window.Interactions && Interactions.init3DTilt) {
+      Interactions.init3DTilt();
+    }
+  },
+
+  handleMobileSearch(val) {
+    state.setSearchQuery(val.trim());
+    clearTimeout(this._searchTimer);
+    this._searchTimer = setTimeout(() => this.loadProducts(), 300);
+  },
+
+  openMobileFilter() {
+    let sheet = document.getElementById('mobile-filter-modal');
+    if (!sheet) {
+      sheet = document.createElement('div');
+      sheet.id = 'mobile-filter-modal';
+      sheet.className = 'modal-overlay';
+      document.body.appendChild(sheet);
+    }
+    sheet.innerHTML = `
+      <div class="modal-content" style="max-width: 480px;">
+        <div class="modal-grab-bar"></div>
+        <div class="modal-header">
+          <h3 class="modal-title flex items-center gap-2">
+            ${Icons.filter("w-5 h-5 text-primary")} Filter Listings
+          </h3>
+          <button class="modal-close-btn" onclick="Marketplace.closeMobileFilter()">
+            ${Icons.x("w-5 h-5")}
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="filter-group">
+            <label class="filter-label">Category</label>
+            <select class="input-field input-plain" id="mob-filter-cat" onchange="state.setActiveCategory(this.value); Marketplace.loadProducts();">
+              <option value="All" ${state.activeCategory === 'All' ? 'selected' : ''}>All Categories</option>
+              ${CATEGORIES.map(c => `<option value="${c.id}" ${state.activeCategory === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label">Price Range (₹)</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <input type="number" id="mob-filter-min" class="input-field input-plain" placeholder="Min ₹" value="${state.priceRange.min || ''}" />
+              <input type="number" id="mob-filter-max" class="input-field input-plain" placeholder="Max ₹" value="${state.priceRange.max < 20000 ? state.priceRange.max : ''}" />
+            </div>
+            <div style="display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.25rem 0;">
+              <button class="quick-chip" onclick="document.getElementById('mob-filter-max').value = '500';">Under ₹500</button>
+              <button class="quick-chip" onclick="document.getElementById('mob-filter-min').value = '500'; document.getElementById('mob-filter-max').value = '2000';">₹500 - ₹2k</button>
+              <button class="quick-chip" onclick="document.getElementById('mob-filter-min').value = '2000'; document.getElementById('mob-filter-max').value = '10000';">₹2k - ₹10k</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label">Condition</label>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              ${['All', 'Brand New', 'Like New', 'Good', 'Fair'].map(cond => `
+                <button class="quick-chip ${state.conditionFilter === cond ? 'active' : ''}" style="${state.conditionFilter === cond ? 'background: var(--cobalt); color: white; border-color: var(--cobalt);' : ''}" onclick="state.setConditionFilter('${cond}'); Marketplace.loadProducts(); Marketplace.openMobileFilter();">
+                  ${cond}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+            <button class="btn btn-secondary w-full" onclick="Marketplace.resetFilters(); Marketplace.closeMobileFilter();">
+              Reset
+            </button>
+            <button class="btn btn-primary w-full" onclick="
+              const min = Number(document.getElementById('mob-filter-min').value) || 0;
+              const max = Number(document.getElementById('mob-filter-max').value) || 20000;
+              state.setPriceRange(min, max);
+              Marketplace.loadProducts();
+              Marketplace.closeMobileFilter();
+            ">
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    sheet.classList.add('open');
+  },
+
+  closeMobileFilter() {
+    const sheet = document.getElementById('mobile-filter-modal');
+    if (sheet) sheet.classList.remove('open');
   },
 
   async toggleWishlist(productId) {
@@ -326,26 +413,27 @@ const Marketplace = {
     }
   },
 
-  async handleContactSeller(productId, sellerId) {
+  handleContactSeller(productId, sellerId) {
     if (!state.currentUser) {
-      showToast('Please sign in to contact the seller directly', 'info');
+      showToast('Please sign in to message this student seller', 'info');
       AuthModal.open('login');
       return;
     }
 
     if (state.currentUser.id === sellerId) {
-      showToast('You are the seller of this product!', 'info');
+      showToast('This is your own listing! You can manage it from Seller Dashboard.', 'info');
+      state.setActiveView('seller-dashboard');
       return;
     }
 
-    try {
-      const res = await API.startConversation(productId);
-      state.activeConversationId = res.conversation.id;
-      state.setActiveView('inbox');
-      showToast('Conversation ready in your inbox', 'success');
-    } catch (err) {
-      showToast(err.message, 'error');
-    }
+    API.startConversation(productId)
+      .then(res => {
+        state.activeConversationId = res.conversation.id;
+        state.setActiveView('inbox');
+      })
+      .catch(err => {
+        showToast(err.message, 'error');
+      });
   },
 
   handleSortChange(val) {
@@ -353,21 +441,20 @@ const Marketplace = {
     this.loadProducts();
   },
 
-  handleCategoryChange(cat) {
-    state.setActiveCategory(cat);
+  handleCategoryChange(val) {
+    state.setActiveCategory(val);
     PopularCategories.render();
     this.loadProducts();
   },
 
-  handleConditionChange(cond) {
-    state.setConditionFilter(cond);
+  handleConditionChange(val) {
+    state.setConditionFilter(val);
     this.loadProducts();
   },
 
   applyPriceFilter() {
-    const min = parseInt(document.getElementById('filter-min-price').value || '0', 10);
-    const maxVal = document.getElementById('filter-max-price').value;
-    const max = maxVal ? parseInt(maxVal, 10) : 20000;
+    const min = Number(document.getElementById('filter-min-price').value) || 0;
+    const max = Number(document.getElementById('filter-max-price').value) || 20000;
     state.setPriceRange(min, max);
     this.loadProducts();
   },
@@ -378,7 +465,15 @@ const Marketplace = {
     state.setPriceRange(0, 20000);
     state.setConditionFilter('All');
     state.setSortBy('latest');
-    this.render();
+
+    const searchInput = document.getElementById('marketplace-search-input');
+    if (searchInput) searchInput.value = '';
+    const minInput = document.getElementById('filter-min-price');
+    if (minInput) minInput.value = '';
+    const maxInput = document.getElementById('filter-max-price');
+    if (maxInput) maxInput.value = '';
+
     PopularCategories.render();
+    this.render();
   }
 };
