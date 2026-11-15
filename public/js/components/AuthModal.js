@@ -50,8 +50,8 @@ const AuthModal = {
 
         <div class="modal-body">
           <!-- One-Click Instant Demo Login Switcher (For Evaluators) -->
-          <div style="background: #EFF6FF; border: 1px solid var(--color-primary-border); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem;">
-            <div style="font-size: 0.76rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem;">
+          <div style="background: var(--surface-raised); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem;">
+            <div style="font-size: 0.74rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">
               ⚡ Quick One-Click Demo Accounts (Test Buyer / Seller Chat)
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
@@ -64,7 +64,7 @@ const AuthModal = {
               <button class="btn btn-secondary btn-sm" style="font-size: 0.74rem; padding: 0.35rem 0.5rem;" onclick="AuthModal.loginDemo('user-rohan')">
                 🎓 Rohan (Student)
               </button>
-              <button class="btn btn-secondary btn-sm" style="font-size: 0.74rem; padding: 0.35rem 0.5rem; color: #2563EB;" onclick="AuthModal.loginDemo('user-admin')">
+              <button class="btn btn-secondary btn-sm" style="font-size: 0.74rem; padding: 0.35rem 0.5rem; color: var(--accent);" onclick="AuthModal.loginDemo('user-admin')">
                 🛡️ Admin Account
               </button>
             </div>
