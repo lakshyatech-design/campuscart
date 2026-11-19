@@ -112,8 +112,8 @@ const Navbar = {
 
             <!-- User Auth / Profile -->
             ${user ? `
-              <div class="relative" style="position: relative;">
-                <button class="btn btn-secondary btn-sm" id="nav-user-menu-btn" style="border-radius: var(--radius-full); padding: 0.3rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+              <div class="relative nav-user-menu-desktop" style="position: relative;">
+                <button class="btn btn-secondary btn-sm nav-user-menu-btn" id="nav-user-menu-btn" style="border-radius: var(--radius-full); padding: 0.3rem 0.75rem; align-items: center; gap: 0.4rem;">
                   <img src="${user.avatar_url}" class="chat-avatar" style="width: 24px; height: 24px; border-radius: 50%;" alt="Avatar" />
                   <span style="font-weight: 700; max-width: 80px;" class="truncate">${user.full_name.split(' ')[0]}</span>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -137,7 +137,7 @@ const Navbar = {
                 </div>
               </div>
             ` : `
-              <div class="flex items-center gap-2">
+              <div class="nav-auth-desktop flex items-center gap-2">
                 <button class="btn btn-secondary btn-sm" onclick="AuthModal.open('login')">
                   Sign In
                 </button>
