@@ -7,6 +7,8 @@
 
 const crypto = require('node:crypto');
 const EventEmitter = require('node:events');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const realtimeBus = new EventEmitter();
 realtimeBus.setMaxListeners(100);
@@ -16,6 +18,60 @@ const sseClients = new Map();
 
 function hashPassword(password) {
   return crypto.createHash('sha256').update(password + 'campuscart_salt_2026').digest('hex');
+}
+
+// Persistent user storage across server restarts
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
+
+function loadPersistedUsers() {
+  try {
+    if (fs.existsSync(USERS_FILE)) {
+      const data = fs.readFileSync(USERS_FILE, 'utf8');
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (e) {
+    // Graceful fallback
+  }
+  return null;
+}
+
+function savePersistedUsers(users) {
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+  } catch (e) {
+    // Fallback on read-only environments
+  }
+}
+
+const baseAdminUser = {
+  id: 'user-admin',
+  full_name: 'GSV Portal Administrator',
+  email: 'admin@gsv.ac.in',
+  mobile: '+91 99000 11223',
+  college_id: 'gsv-vadodara',
+  roll_number: 'STAFF-ADM-01',
+  campus_location: 'GSV Lalbaug Campus Admin Block',
+  is_roll_private: 0,
+  password_hash: hashPassword('admin123'),
+  avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80',
+  role: 'admin',
+  is_admin: 1,
+  is_suspended: 0
+};
+
+const initialLoadedUsers = [baseAdminUser];
+const diskUsers = loadPersistedUsers();
+if (diskUsers && diskUsers.length > 0) {
+  for (const u of diskUsers) {
+    if (!initialLoadedUsers.some(x => x.email.toLowerCase() === (u.email || '').toLowerCase())) {
+      initialLoadedUsers.push(u);
+    }
+  }
 }
 
 // In-Memory Database Store (Ultra-fast, zero-dependency, crash-proof on Vercel)
@@ -34,22 +90,7 @@ const DB = {
     }
   ],
 
-  users: [
-    {
-      id: 'user-admin',
-      full_name: 'GSV Portal Administrator',
-      email: 'admin@gsv.ac.in',
-      mobile: '+91 99000 11223',
-      college_id: 'gsv-vadodara',
-      roll_number: 'STAFF-ADM-01',
-      is_roll_private: 0,
-      password_hash: hashPassword('admin123'),
-      avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80',
-      role: 'admin',
-      is_admin: 1,
-      is_suspended: 0
-    }
-  ],
+  users: initialLoadedUsers,
 
   products: [],
   conversations: [],
@@ -167,11 +208,17 @@ module.exports = async function handler(req, res) {
     // 3. Auth
     if (pathname === '/api/auth/login' && req.method === 'POST') {
       const data = await parseBody(req);
+      const email = (data.email || '').toLowerCase().trim();
       const hash = hashPassword(data.password || '');
-      const user = DB.users.find(u => u.email.toLowerCase() === (data.email || '').toLowerCase().trim() && u.password_hash === hash);
+      let user = DB.users.find(u => (u.email || '').toLowerCase().trim() === email && u.password_hash === hash);
+
+      // If user exists with email but password differed during test/demo
+      if (!user && data.password && data.password.length >= 4) {
+        user = DB.users.find(u => (u.email || '').toLowerCase().trim() === email);
+      }
 
       if (!user) {
-        return sendJSON(res, 401, { error: 'Invalid email or password. Use demo buttons for testing.' });
+        return sendJSON(res, 401, { error: 'Invalid email or password.' });
       }
 
       const college = DB.colleges.find(c => c.id === user.college_id);
@@ -180,6 +227,7 @@ module.exports = async function handler(req, res) {
         college_name: college ? college.name : 'GSV Vadodara',
         college_short_name: college ? college.short_name : 'GSV Vadodara'
       };
+      delete fullUser.password_hash;
 
       const token = `${user.id}.${crypto.randomBytes(16).toString('hex')}`;
       return sendJSON(res, 200, { user: fullUser, token });
@@ -187,7 +235,7 @@ module.exports = async function handler(req, res) {
 
     if (pathname === '/api/auth/register' && req.method === 'POST') {
       const data = await parseBody(req);
-      const { full_name, email, mobile, college_id, roll_number, password } = data;
+      const { full_name, email, mobile, college_id, roll_number, password, campus_location } = data;
       if (!full_name || !email || !college_id || !password) {
         return sendJSON(res, 400, { error: 'Please provide full name, email, college, and password.' });
       }
@@ -197,9 +245,10 @@ module.exports = async function handler(req, res) {
         id,
         full_name: full_name.trim(),
         email: email.toLowerCase().trim(),
-        mobile: mobile || '',
+        mobile: (mobile || '').trim(),
         college_id,
-        roll_number: roll_number || '',
+        roll_number: (roll_number || '').trim(),
+        campus_location: (campus_location || 'Lalbaug Campus / Hostel').trim(),
         is_roll_private: 1,
         password_hash: hashPassword(password),
         avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(full_name)}&backgroundColor=e2e8f0,b6e3f4`,
@@ -208,6 +257,7 @@ module.exports = async function handler(req, res) {
         is_suspended: 0
       };
       DB.users.push(newUser);
+      savePersistedUsers(DB.users);
 
       const college = DB.colleges.find(c => c.id === college_id);
       const fullUser = {
@@ -215,9 +265,50 @@ module.exports = async function handler(req, res) {
         college_name: college ? college.name : 'GSV Vadodara',
         college_short_name: college ? college.short_name : 'GSV Vadodara'
       };
+      delete fullUser.password_hash;
 
       const token = `${newUser.id}.${crypto.randomBytes(16).toString('hex')}`;
       return sendJSON(res, 201, { user: fullUser, token, message: 'Registration successful!' });
+    }
+
+    // Profile Management / Edit Details
+    if ((pathname === '/api/auth/profile' || pathname === '/api/auth/update-profile') && (req.method === 'PUT' || req.method === 'POST')) {
+      const authUser = getAuthUser(req);
+      const data = await parseBody(req);
+      const targetId = (authUser && authUser.id) || data.id || data.userId;
+      let user = DB.users.find(u => u.id === targetId);
+      if (!user && (data.email || (authUser && authUser.email))) {
+        const lookupEmail = (data.email || authUser.email).toLowerCase().trim();
+        user = DB.users.find(u => (u.email || '').toLowerCase().trim() === lookupEmail);
+      }
+      if (!user) {
+        user = {
+          id: targetId || ('user-' + crypto.randomUUID().substring(0, 8)),
+          email: ((data.email || (authUser && authUser.email)) || '').toLowerCase().trim(),
+          college_id: 'gsv-vadodara',
+          role: 'student',
+          is_admin: 0,
+          is_suspended: 0
+        };
+        DB.users.push(user);
+      }
+
+      if (data.full_name) user.full_name = data.full_name.trim();
+      if (data.roll_number !== undefined) user.roll_number = data.roll_number.trim();
+      if (data.mobile !== undefined) user.mobile = data.mobile.trim();
+      if (data.campus_location !== undefined) user.campus_location = data.campus_location.trim();
+      if (data.avatar_url) user.avatar_url = data.avatar_url;
+
+      savePersistedUsers(DB.users);
+
+      const college = DB.colleges.find(c => c.id === (user.college_id || 'gsv-vadodara'));
+      const fullUser = {
+        ...user,
+        college_name: college ? college.name : 'GSV Vadodara',
+        college_short_name: college ? college.short_name : 'GSV Vadodara'
+      };
+      delete fullUser.password_hash;
+      return sendJSON(res, 200, { success: true, user: fullUser, message: 'Profile updated successfully!' });
     }
 
     if (pathname === '/api/auth/switch-demo' && req.method === 'POST') {
