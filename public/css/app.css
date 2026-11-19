@@ -167,8 +167,12 @@ input, select, textarea { font: inherit; color: inherit; }
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1rem 0;
-  background: transparent;
+  padding: 0.75rem 0;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
   transition: background var(--duration) var(--ease), padding var(--duration) var(--ease);
 }
 
