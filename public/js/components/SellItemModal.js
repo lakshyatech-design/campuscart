@@ -416,3 +416,5 @@ const SellItemModal = {
     }
   }
 };
+
+window.SellItemModal = SellItemModal;
