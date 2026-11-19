@@ -151,7 +151,7 @@ const AuthModal = {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </div>
             <h3 class="modal-title">
-              ${this.mode === 'login' ? 'GSV Student Sign In' : (this.mode === 'register' ? 'Register GSV Account' : 'Reset Student Password')}
+              ${this.mode === 'login' ? 'Student Sign In' : (this.mode === 'register' ? 'Register GSV Account' : 'Reset Student Password')}
             </h3>
           </div>
           <button class="modal-close-btn" id="auth-modal-close-btn" onclick="window.AuthModal.close()" title="Close">
@@ -160,31 +160,22 @@ const AuthModal = {
         </div>
 
         <div class="modal-body">
-          <div style="background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
-            <div style="font-size: 0.8rem; color: var(--text-muted);">
-              Exclusive Campus: <strong style="color: var(--text-primary);">GSV Vadodara</strong>
-            </div>
-            <span style="font-size: 0.7rem; font-weight: 700; background: var(--accent-glow); color: var(--accent); padding: 0.15rem 0.5rem; border-radius: var(--radius-full);">
-              @gsv.ac.in Only
-            </span>
-          </div>
-
           ${this.mode === 'login' ? `
             <!-- Login Form -->
             <form onsubmit="event.preventDefault(); AuthModal.handleLogin();">
               <div style="margin-bottom: 1rem;">
                 <label class="filter-label">GSV Student Email</label>
-                <input type="email" id="auth-email" required class="input-field input-plain" placeholder="student.name@gsv.ac.in" />
+                <input type="email" id="auth-email" required class="input-field input-plain" placeholder="" />
               </div>
               <div style="margin-bottom: 1.25rem;">
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem;">
                   <label class="filter-label" style="margin-bottom: 0;">Password</label>
                   <a href="#" onclick="event.preventDefault(); AuthModal.switchMode('forgot');" style="font-size: 0.76rem; color: var(--accent);">Forgot password?</a>
                 </div>
-                <input type="password" id="auth-password" required class="input-field input-plain" placeholder="Enter student password" />
+                <input type="password" id="auth-password" required class="input-field input-plain" placeholder="" />
               </div>
               <button type="submit" class="btn btn-primary w-full" style="width: 100%;" id="auth-login-btn">
-                Sign In to GSV Direct
+                Student Sign In
               </button>
               <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--text-muted);">
                 New student at GSV? 
