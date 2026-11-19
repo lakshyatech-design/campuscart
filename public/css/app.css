@@ -192,6 +192,11 @@ body[data-view="admin"] .navbar {
 /* ══════════════════════════════════════════════════════════════════════════
    PERMANENT VIEW CLEARANCE RULES (GUARANTEED NO OVERLAPPING ON ANY PAGE/VIEW)
    ══════════════════════════════════════════════════════════════════════════ */
+#app-content {
+  position: relative;
+  width: 100%;
+}
+
 #view-inbox,
 #view-seller-dashboard,
 #view-admin,
@@ -204,12 +209,17 @@ body[data-view="admin"] .navbar {
   z-index: 1;
 }
 
+.inbox-page-header {
+  padding-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 768px) {
   #view-inbox,
   #view-seller-dashboard,
   #view-admin,
   .app-subview {
-    padding-top: calc(64px + 1.25rem) !important; /* ~84px mobile clearance below navbar */
+    padding-top: calc(64px + 1.5rem) !important; /* ~88px mobile clearance below navbar */
     padding-bottom: calc(60px + 2.5rem) !important; /* ~100px mobile clearance above bottom dock */
   }
 }
