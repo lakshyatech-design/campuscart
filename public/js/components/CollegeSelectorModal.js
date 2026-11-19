@@ -254,3 +254,5 @@ const CollegeSelectorModal = {
     }
   }
 };
+
+window.CollegeSelectorModal = CollegeSelectorModal;
