@@ -291,6 +291,7 @@
   <script src="./js/components/AuthModal.js?v=forge2026_v3"></script>
   <script src="./js/components/AdminDashboard.js?v=forge2026_v3"></script>
   <script src="./js/components/ReportModal.js?v=forge2026_v3"></script>
+  <script src="./js/router.js?v=forge2026_fit_v4"></script>
 
   <!-- App Bootstrap -->
   <script>
@@ -412,6 +413,15 @@
       try {
         Interactions.init();
       } catch (e) {}
+
+      // 5. Initialize Intelligent History & Single-Step Back-Button Router
+      try {
+        if (window.Router) {
+          window.Router.init();
+        }
+      } catch (e) {
+        console.warn('Router init error:', e);
+      }
 
       console.log('✅ GSV Direct Platform initialized with Forge Automotive Aesthetic & Instant Zero-Downtime Rendering!');
     }
