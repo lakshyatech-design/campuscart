@@ -311,3 +311,5 @@ const Navbar = {
     }
   }
 };
+
+window.Navbar = Navbar;
