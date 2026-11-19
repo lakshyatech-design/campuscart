@@ -270,12 +270,12 @@ const UserProfileModal = {
                         type="text" 
                         id="profile-edit-location" 
                         class="input-field" 
-                        value="${user.campus_location || 'Lalbaug Campus, Vadodara'}" 
-                        placeholder="e.g. Lalbaug Campus, Hostel B, Room 204 or Pratap Nagar Colony" 
+                        value="${user.campus_location && !/l[a]lbaug/i.test(user.campus_location) ? user.campus_location : 'GSV Campus, Vadodara'}" 
+                        placeholder="e.g. Hostel Block B, Academic Block, or direct in-chat meetup" 
                         style="width: 100%; box-sizing: border-box;" 
                       />
                       <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem; display: block;">
-                        This location appears on your listings to coordinate direct handovers with fellow students.
+                        GSV has a single unified campus. Handover locations can also be coordinated directly with buyers via in-app chat.
                       </span>
                     </div>
 
@@ -412,7 +412,7 @@ const UserProfileModal = {
         full_name: fullName,
         roll_number: rollNumber,
         mobile: mobile,
-        campus_location: location || 'Lalbaug Campus / Hostel',
+        campus_location: location || 'GSV Campus (Handover via chat)',
         avatar_url: avatarUrl
       };
 
