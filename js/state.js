@@ -3,12 +3,7 @@
  */
 class StateManager {
   constructor() {
-    try {
-      const savedUser = localStorage.getItem('campuscart_user');
-      this.currentUser = savedUser ? JSON.parse(savedUser) : null;
-    } catch (e) {
-      this.currentUser = null;
-    }
+    this.currentUser = this._restoreSession();
     this.selectedCollege = null; // Will default to GSV
     this.colleges = [];
     this.exploreAllColleges = false;
@@ -24,6 +19,50 @@ class StateManager {
     this.activeConversationId = null;
 
     this.listeners = new Map();
+  }
+
+  _restoreSession() {
+    let user = null;
+    try {
+      const savedUser = localStorage.getItem('campuscart_user');
+      if (savedUser) {
+        user = JSON.parse(savedUser);
+      }
+    } catch (e) {}
+
+    if (!user || !user.email) {
+      try {
+        const lastActive = localStorage.getItem('campuscart_last_active_user');
+        if (lastActive) {
+          user = JSON.parse(lastActive);
+        }
+      } catch (e) {}
+    }
+
+    if (!user || !user.email) {
+      try {
+        const regStr = localStorage.getItem('campuscart_registered_users');
+        if (regStr) {
+          const list = JSON.parse(regStr);
+          if (Array.isArray(list) && list.length > 0) {
+            user = list[list.length - 1];
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (user && user.email) {
+      try {
+        localStorage.setItem('campuscart_user', JSON.stringify(user));
+        localStorage.setItem('campuscart_last_active_user', JSON.stringify(user));
+        if (!localStorage.getItem('campuscart_token')) {
+          localStorage.setItem('campuscart_token', `${user.id || 'user-' + Date.now()}.mock_session`);
+        }
+      } catch (e) {}
+      return user;
+    }
+
+    return null;
   }
 
   on(event, callback) {
@@ -50,11 +89,13 @@ class StateManager {
     try {
       if (user) {
         localStorage.setItem('campuscart_user', JSON.stringify(user));
+        localStorage.setItem('campuscart_last_active_user', JSON.stringify(user));
         if (!localStorage.getItem('campuscart_token')) {
           localStorage.setItem('campuscart_token', `${user.id || 'usr'}.mock_session`);
         }
       } else {
         localStorage.removeItem('campuscart_user');
+        localStorage.removeItem('campuscart_last_active_user');
         localStorage.removeItem('campuscart_token');
       }
     } catch (e) {}
@@ -76,6 +117,7 @@ class StateManager {
     try {
       localStorage.removeItem('campuscart_token');
       localStorage.removeItem('campuscart_user');
+      localStorage.removeItem('campuscart_last_active_user');
       sessionStorage.clear();
     } catch (e) {}
     this.setCurrentUser(null);
