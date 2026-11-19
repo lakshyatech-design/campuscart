@@ -1,126 +1,125 @@
 /**
- * GSV Direct — Hero Section (Apple Visionary 2026 Edition)
- * Featuring 4K Drone Aerial Telemetry of Gati Shakti Vishwavidyalaya
- * 
- * Design:
- * - Apple Keynote presentation theater layout
- * - Precision-machined Apple Pro Display Hardware Frame for Drone Flyover
- * - Pure obsidian headlines with SF Pro typography
- * - Floating Frosted Glass Telemetry HUD
- * - Seamless Ambient 60 FPS Drone Canvas in Apple Blue & Silver
- * - Automatic IntersectionObserver optimization
+ * GSV Direct — Flagship Hero Section (Apple.com 2026 Keynote Edition)
+ * Inspired by apple.com flagship product reveals (iPhone 16 Pro / Apple Vision Pro)
+ * 100% Titanium Light Canvas • Interactive Studio Display Drone Telemetry • Zero External Iframe Dependencies
  */
 
 const HeroSection = {
-  droneVideos: [
-    {
-      id: 'WBp23sW33yQ',
-      title: 'GSV Vadodara • 4K Campus Aerial',
-      start: 5
-    },
-    {
-      id: 'O9JHRjcw1kE',
-      title: 'GSV Heritage Grounds • Drone Tour',
-      start: 10
-    },
-    {
-      id: 'GMKSPZPyGHY',
-      title: 'GSV Vadodara • Campus Flyover',
-      start: 3
-    }
+  activeViewAngle: 0,
+  viewAngles: [
+    { name: 'Academic Block 1 & 2', alt: '44.3m', speed: '28 km/h', lat: '22.2882° N', lon: '73.1974° E', status: 'Optimal Handover Conditions' },
+    { name: 'Central Library Lawn', alt: '36.8m', speed: '19 km/h', lat: '22.2891° N', lon: '73.1982° E', status: 'Active Study Zone • 18 Handover Points' },
+    { name: 'Hostel Quad & Canteen', alt: '52.1m', speed: '24 km/h', lat: '22.2875° N', lon: '73.1965° E', status: 'High Traffic Student Zone' },
+    { name: 'Main Campus Boulevard', alt: '30.5m', speed: '15 km/h', lat: '22.2898° N', lon: '73.1990° E', status: 'Bicycle Exchange Zone Active' }
   ],
-  currentVideoIdx: 0,
-  isPlaying: true,
   animFrameId: null,
-  observer: null,
 
   render() {
     const el = document.getElementById('hero-mount');
     if (!el) return;
 
-    const currentVideo = this.droneVideos[this.currentVideoIdx];
+    const angle = this.viewAngles[this.activeViewAngle];
 
     el.innerHTML = `
-      <section class="hero-section" id="hero-section">
-        <!-- Foreground Hero Content (Apple Keynote Style) -->
-        <div class="hero-content">
-          <div class="hero-kicker">
-            <span class="kicker-dot"></span>
-            <span>GSV Direct • Next-Gen Campus Commerce</span>
+      <section class="apple-hero-container" id="apple-hero-section">
+        <!-- Floating Ambient Background Lighting -->
+        <div class="apple-hero-ambient-glow"></div>
+
+        <!-- Apple Keynote Centerpiece Header -->
+        <div class="apple-hero-header">
+          <div class="apple-eyebrow-pill">
+            <span class="apple-eyebrow-dot"></span>
+            <span>GSV Direct • Apple Visionary 2026 Experience</span>
           </div>
 
-          <h1 class="hero-headline">
+          <h1 class="apple-hero-title">
             Campus Commerce.<br>
-            <em>Engineered Forward.</em>
+            <span class="apple-hero-title-accent">Engineered for GSV.</span>
           </h1>
 
-          <p class="hero-sub">
+          <p class="apple-hero-subtitle">
             The university marketplace engineered with precision. 
             100% verified student credentials, direct peer-to-peer exchange, and zero commission.
           </p>
 
-          <div class="hero-cta-row">
-            <button class="btn btn-primary btn-lg" onclick="HeroSection.handleExploreClick()">
-              Explore Marketplace
+          <div class="apple-hero-actions">
+            <button class="apple-btn-primary" onclick="HeroSection.handleExploreClick()">
+              Explore Exchange
             </button>
-            <button class="btn btn-secondary btn-lg" onclick="HeroSection.handleSellClick()">
+            <button class="apple-btn-secondary" onclick="HeroSection.handleSellClick()">
               + List an Item
             </button>
           </div>
 
-          <div class="hero-metrics">
-            <div class="hero-metric">
-              <div class="hero-metric-value">2,450+</div>
-              <div class="hero-metric-label">Verified Students</div>
+          <!-- Apple 3-Metric Glass Capsule -->
+          <div class="apple-metrics-capsule">
+            <div class="apple-metric-item">
+              <span class="apple-metric-num">2,450+</span>
+              <span class="apple-metric-txt">Verified Students</span>
             </div>
-            <div class="hero-metric-divider"></div>
-            <div class="hero-metric">
-              <div class="hero-metric-value">Direct Meetup</div>
-              <div class="hero-metric-label">In-Chat Handover</div>
+            <div class="apple-metric-sep"></div>
+            <div class="apple-metric-item">
+              <span class="apple-metric-num">Direct Meetup</span>
+              <span class="apple-metric-txt">In-Chat Handover</span>
             </div>
-            <div class="hero-metric-divider"></div>
-            <div class="hero-metric">
-              <div class="hero-metric-value">₹0</div>
-              <div class="hero-metric-label">Commission Fee</div>
+            <div class="apple-metric-sep"></div>
+            <div class="apple-metric-item">
+              <span class="apple-metric-num">₹0</span>
+              <span class="apple-metric-txt">Platform Fee</span>
             </div>
           </div>
         </div>
 
-        <!-- Apple Pro Theater Hardware Frame (GSV 4K Drone View) -->
-        <div class="hero-theater-container">
-          <div class="hero-theater-hardware-bezel">
-            <!-- Camera / Sensor Notch Dot -->
-            <div class="theater-camera-dot"></div>
+        <!-- Apple Studio Display Hardware Showcase (GSV 4K Drone Radar Theater) -->
+        <div class="apple-display-theater">
+          <div class="apple-display-bezel">
+            <!-- macOS Window Controls (Traffic Lights) -->
+            <div class="apple-window-bar">
+              <div class="apple-traffic-lights">
+                <span class="apple-traffic-dot dot-red"></span>
+                <span class="apple-traffic-dot dot-yellow"></span>
+                <span class="apple-traffic-dot dot-green"></span>
+              </div>
+              <div class="apple-window-title">
+                <span class="apple-live-indicator"></span>
+                GSV Drone Telemetry • Vadodara Campus Flyover
+              </div>
+              <div class="apple-window-actions">
+                <span class="apple-badge-4k">4K 60FPS</span>
+              </div>
+            </div>
 
-            <!-- Drone Video Viewport -->
-            <div class="hero-theater-screen">
-              <canvas id="hero-drone-canvas"></canvas>
+            <!-- Canvas Viewport -->
+            <div class="apple-screen-viewport">
+              <canvas id="apple-drone-radar-canvas"></canvas>
 
-              <iframe 
-                id="gsv-drone-video" 
-                src="https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&start=${currentVideo.start}&enablejsapi=1" 
-                allow="autoplay; encrypted-media" 
-                title="Gati Shakti Vishwavidyalaya Campus Drone View"
-                loading="lazy"
-              ></iframe>
-
-              <!-- Fallback Poster when iframe is offline / sandboxed -->
-              <div class="hero-theater-fallback-poster"></div>
-
-              <!-- Floating Apple Frosted Glass Drone HUD Badge -->
-              <div class="hero-drone-hud">
-                <div class="drone-hud-live-tag">
-                  <span class="drone-pulse-dot"></span>
-                  <span>LIVE 4K</span>
+              <!-- Futuristic HUD Telemetry Overlay -->
+              <div class="apple-hud-overlay">
+                <div class="apple-hud-top">
+                  <div class="apple-hud-data-block">
+                    <span class="hud-label">CAMPUS NODE</span>
+                    <span class="hud-value" id="hud-angle-name">${angle.name}</span>
+                  </div>
+                  <div class="apple-hud-data-block">
+                    <span class="hud-label">ALTITUDE</span>
+                    <span class="hud-value" id="hud-alt">${angle.alt}</span>
+                  </div>
+                  <div class="apple-hud-data-block">
+                    <span class="hud-label">VELOCITY</span>
+                    <span class="hud-value" id="hud-speed">${angle.speed}</span>
+                  </div>
                 </div>
-                <div class="drone-hud-title" id="drone-hud-title">${currentVideo.title}</div>
-                <div class="drone-hud-controls">
-                  <button class="drone-btn" id="drone-toggle-btn" onclick="HeroSection.toggleVideoPlay()" title="Toggle Video Playback">
-                    <span id="drone-play-icon">${this.isPlaying ? '⏸' : '▶'}</span>
-                  </button>
-                  <button class="drone-btn" id="drone-cam-btn" onclick="HeroSection.cycleCameraView()" title="Switch Drone Angle">
-                    🔄 Switch Cam
-                  </button>
+
+                <div class="apple-hud-bottom">
+                  <div class="apple-hud-coords">
+                    <span id="hud-coords">${angle.lat} • ${angle.lon}</span>
+                    <span class="hud-status" id="hud-status">${angle.status}</span>
+                  </div>
+                  <div class="apple-hud-switcher">
+                    <button class="apple-hud-switch-btn" onclick="HeroSection.cycleCameraView()">
+                      🔄 Switch Camera Angle
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -129,185 +128,197 @@ const HeroSection = {
       </section>
     `;
 
-    // Initialize Drone Canvas & Video Transition
     setTimeout(() => {
-      this.initDroneCanvas();
-      this.setupObserver();
-    }, 100);
+      this.initRadarCanvas();
+    }, 50);
   },
 
   cycleCameraView() {
-    this.currentVideoIdx = (this.currentVideoIdx + 1) % this.droneVideos.length;
-    const currentVideo = this.droneVideos[this.currentVideoIdx];
-    const iframe = document.getElementById('gsv-drone-video');
-    const titleEl = document.getElementById('drone-hud-title');
-    if (titleEl) titleEl.textContent = currentVideo.title;
+    this.activeViewAngle = (this.activeViewAngle + 1) % this.viewAngles.length;
+    const angle = this.viewAngles[this.activeViewAngle];
 
-    if (iframe) {
-      iframe.src = `https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&start=${currentVideo.start}&enablejsapi=1`;
-    }
+    const nameEl = document.getElementById('hud-angle-name');
+    const altEl = document.getElementById('hud-alt');
+    const speedEl = document.getElementById('hud-speed');
+    const coordsEl = document.getElementById('hud-coords');
+    const statusEl = document.getElementById('hud-status');
+
+    if (nameEl) nameEl.textContent = angle.name;
+    if (altEl) altEl.textContent = angle.alt;
+    if (speedEl) speedEl.textContent = angle.speed;
+    if (coordsEl) coordsEl.textContent = `${angle.lat} • ${angle.lon}`;
+    if (statusEl) statusEl.textContent = angle.status;
   },
 
-  toggleVideoPlay() {
-    this.isPlaying = !this.isPlaying;
-    const iframe = document.getElementById('gsv-drone-video');
-    const icon = document.getElementById('drone-play-icon');
-    if (icon) icon.textContent = this.isPlaying ? '⏸' : '▶';
-
-    if (iframe && iframe.contentWindow) {
-      try {
-        iframe.contentWindow.postMessage(
-          JSON.stringify({
-            event: 'command',
-            func: this.isPlaying ? 'playVideo' : 'pauseVideo'
-          }),
-          '*'
-        );
-      } catch (e) {
-        console.warn('Could not postMessage to drone iframe:', e);
-      }
-    }
-  },
-
-  initDroneCanvas() {
-    const canvas = document.getElementById('hero-drone-canvas');
+  initRadarCanvas() {
+    const canvas = document.getElementById('apple-drone-radar-canvas');
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width = canvas.width = canvas.offsetWidth;
-    let height = canvas.height = canvas.offsetHeight;
+    let width = canvas.width = canvas.parentElement.clientWidth || 900;
+    let height = canvas.height = canvas.parentElement.clientHeight || 450;
 
     window.addEventListener('resize', () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      if (!canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.clientWidth || 900;
+      height = canvas.height = canvas.parentElement.clientHeight || 450;
     });
 
-    // Particle nodes representing aerial campus survey points
-    const particles = Array.from({ length: 32 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.45,
-      vy: (Math.random() - 0.5) * 0.35,
-      radius: Math.random() * 2 + 1,
-      alpha: Math.random() * 0.4 + 0.15
-    }));
+    // Campus flight simulation nodes
+    const nodes = [
+      { name: 'Admin Complex', x: 0.25, y: 0.35, pulse: 0 },
+      { name: 'Central Library', x: 0.5, y: 0.28, pulse: 1.2 },
+      { name: 'Academic Block 1', x: 0.35, y: 0.65, pulse: 2.4 },
+      { name: 'Academic Block 2', x: 0.65, y: 0.62, pulse: 0.8 },
+      { name: 'Hostel Quad', x: 0.78, y: 0.4, pulse: 1.8 },
+      { name: 'Sports Complex', x: 0.18, y: 0.75, pulse: 3.1 }
+    ];
 
-    let telemetryTick = 0;
+    let sweepAngle = 0;
+    let droneX = 0.5;
+    let droneY = 0.5;
+    let droneAngle = 0;
 
     const renderFrame = () => {
-      telemetryTick++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Subtle Drone Horizon Scan Line (Apple Blue Tint)
-      const horizonY = height * 0.55 + Math.sin(telemetryTick * 0.015) * 12;
-      ctx.beginPath();
-      ctx.moveTo(0, horizonY);
-      ctx.lineTo(width, horizonY);
-      ctx.strokeStyle = 'rgba(0, 113, 227, 0.15)';
+      // 1. Beautiful Apple Blueprint Grid
+      ctx.strokeStyle = 'rgba(0, 113, 227, 0.08)';
       ctx.lineWidth = 1;
-      ctx.setLineDash([4, 8]);
+      const gridSize = 40;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // 2. Concentric Radar Rings
+      const centerX = width * 0.5;
+      const centerY = height * 0.5;
+      const maxRadius = Math.max(width, height) * 0.45;
+
+      for (let r = 80; r < maxRadius; r += 70) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0, 113, 227, 0.12)';
+        ctx.stroke();
+      }
+
+      // 3. Radar Sweep Line
+      sweepAngle += 0.015;
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(sweepAngle);
+      const gradient = ctx.createLinearGradient(0, 0, maxRadius, 0);
+      gradient.addColorStop(0, 'rgba(0, 113, 227, 0.4)');
+      gradient.addColorStop(1, 'rgba(0, 113, 227, 0.0)');
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(maxRadius, 0);
+      ctx.stroke();
+      ctx.restore();
+
+      // 4. Campus Handover Hub Nodes
+      nodes.forEach((node, idx) => {
+        const nx = width * node.x;
+        const ny = height * node.y;
+        node.pulse += 0.03;
+
+        // Pulse wave
+        const pSize = 6 + Math.sin(node.pulse) * 4;
+        ctx.beginPath();
+        ctx.arc(nx, ny, pSize * 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 113, 227, 0.12)';
+        ctx.fill();
+
+        // Node center
+        ctx.beginPath();
+        ctx.arc(nx, ny, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#0071e3';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Node label
+        ctx.font = '500 11px -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif';
+        ctx.fillStyle = '#1d1d1f';
+        ctx.fillText(node.name, nx + 10, ny + 4);
+      });
+
+      // 5. Connecting Telemetry Flight Paths
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0, 113, 227, 0.25)';
+      ctx.setLineDash([4, 6]);
+      ctx.lineWidth = 1.5;
+      nodes.forEach((n, i) => {
+        const next = nodes[(i + 1) % nodes.length];
+        ctx.moveTo(width * n.x, height * n.y);
+        ctx.lineTo(width * next.x, height * next.y);
+      });
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // 2. Drone Targeting Reticle
-      const centerX = width * 0.5;
-      const centerY = height * 0.45;
-      ctx.strokeStyle = 'rgba(0, 113, 227, 0.22)';
-      ctx.lineWidth = 1.2;
+      // 6. Drone Icon Position (Smooth Figure-8 Flight)
+      droneAngle += 0.01;
+      droneX = 0.5 + Math.cos(droneAngle) * 0.22;
+      droneY = 0.5 + Math.sin(droneAngle * 2) * 0.15;
+      const dx = width * droneX;
+      const dy = height * droneY;
 
-      // Outer Target Reticle
+      ctx.save();
+      ctx.translate(dx, dy);
+      ctx.rotate(droneAngle + Math.PI / 2);
+
+      // Drone shadow
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 34, 0, Math.PI * 2);
+      ctx.ellipse(0, 12, 10, 5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+      ctx.fill();
+
+      // Drone body
+      ctx.fillStyle = '#0071e3';
+      ctx.beginPath();
+      ctx.arc(0, 0, 7, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Crosshairs
-      ctx.beginPath();
-      ctx.moveTo(centerX - 44, centerY);
-      ctx.lineTo(centerX - 10, centerY);
-      ctx.moveTo(centerX + 10, centerY);
-      ctx.lineTo(centerX + 44, centerY);
-      ctx.moveTo(centerX, centerY - 44);
-      ctx.lineTo(centerX, centerY - 10);
-      ctx.moveTo(centerX, centerY + 10);
-      ctx.lineTo(centerX, centerY + 44);
-      ctx.stroke();
-
-      // 3. Drone Telemetry Watermark Coordinates
-      ctx.font = '10px -apple-system, BlinkMacSystemFont, "SF Pro Text", monospace';
-      ctx.fillStyle = 'rgba(0, 113, 227, 0.6)';
-      ctx.fillText(`LAT 22.2882° N • LON 73.1974° E • ALT ${(45 + Math.sin(telemetryTick * 0.02) * 4).toFixed(1)}M`, 16, height - 16);
-      ctx.fillText(`GSV VADODARA HERITAGE SURVEY • 4K DRONE`, Math.max(16, width - 260), height - 16);
-
-      // 4. Floating Ambient Particles & Grid Connections
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 113, 227, ${p.alpha})`;
-        ctx.fill();
+      // Rotors
+      [-8, 8].forEach(rx => {
+        [-8, 8].forEach(ry => {
+          ctx.beginPath();
+          ctx.arc(rx, ry, 3.5, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(0, 113, 227, 0.7)';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        });
       });
 
-      // Connect nearby particles with delicate filament lines
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 85) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 * (1 - dist / 85)})`;
-            ctx.lineWidth = 0.75;
-            ctx.stroke();
-          }
-        }
-      }
+      ctx.restore();
 
-      this.animFrameId = requestAnimationFrame(renderFrame);
+      HeroSection.animFrameId = requestAnimationFrame(renderFrame);
     };
 
     renderFrame();
   },
 
-  setupObserver() {
-    const heroEl = document.getElementById('hero-section');
-    if (!heroEl || !window.IntersectionObserver) return;
-
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const iframe = document.getElementById('gsv-drone-video');
-        if (entry.isIntersecting) {
-          if (this.isPlaying && iframe && iframe.contentWindow) {
-            try {
-              iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
-            } catch (e) {}
-          }
-        } else {
-          if (iframe && iframe.contentWindow) {
-            try {
-              iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
-            } catch (e) {}
-          }
-        }
-      });
-    }, { threshold: 0.1 });
-
-    this.observer.observe(heroEl);
-  },
-
   handleExploreClick() {
-    const marketEl = document.getElementById('marketplace-section') || document.getElementById('categories-section');
-    if (marketEl) marketEl.scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById('marketplace-section') || document.getElementById('categories-section');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   },
 
   handleSellClick() {
