@@ -33,7 +33,7 @@ const Navbar = {
             </div>
             <div class="gsv-brand-text">
               <span class="gsv-brand-title">GSV Direct</span>
-              <span class="gsv-brand-sub">Gati Shakti Vishwavidyalaya</span>
+              <span class="gsv-brand-sub">Student Marketplace</span>
             </div>
           </a>
 
@@ -105,7 +105,7 @@ const Navbar = {
                 </div>
                 <div class="gsv-notif-list" id="gsv-notif-list"></div>
                 <div class="gsv-notif-footer">
-                  <span>Connected to GSV Vadodara Realtime Feed</span>
+                  <span>Connected to Realtime Activity Feed</span>
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@ const Navbar = {
                   <div style="padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border); margin-bottom: 0.35rem;">
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">${user.full_name}</div>
                     <div style="font-size: 0.72rem; color: var(--text-muted);">${user.email}</div>
-                    <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px;">${user.college_short_name || 'GSV Vadodara'}</div>
+                    <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px;">Verified Student</div>
                   </div>
                   <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start;" onclick="UserProfileModal.open(); Navbar.closeUserMenu();">
                     Profile & Settings
@@ -171,7 +171,7 @@ const Navbar = {
           <div class="mobile-nav-inner">
             <div class="mobile-nav-campus-badge">
               <span class="badge-dot"></span>
-              <span>Gati Shakti Vishwavidyalaya</span>
+              <span>Student Exchange</span>
             </div>
             <a class="mobile-nav-item ${state.activeView === 'marketplace' ? 'active' : ''}" onclick="state.setActiveView('marketplace'); Navbar.toggleMobileMenu();">
               Marketplace
