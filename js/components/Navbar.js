@@ -13,9 +13,14 @@ const Navbar = {
 
     const user = state.currentUser;
     const unreadMsgs = state.unreadMessagesCount;
+    const isSubPage = state.activeView && state.activeView !== 'marketplace';
+
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.setAttribute('data-view', state.activeView || 'marketplace');
+    }
 
     el.innerHTML = `
-      <nav class="navbar" id="main-navbar">
+      <nav class="navbar ${isSubPage ? 'navbar-solid scrolled' : ''}" id="main-navbar">
         <div class="container navbar-inner">
           <!-- Brand -->
           <a href="#" class="brand-logo" onclick="event.preventDefault(); state.setActiveView('marketplace');">
@@ -223,10 +228,13 @@ const Navbar = {
       window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-navbar');
         if (nav) {
-          if (window.scrollY > 60) {
+          const isSub = state.activeView && state.activeView !== 'marketplace';
+          if (isSub || window.scrollY > 40) {
             nav.classList.add('scrolled');
+            if (isSub) nav.classList.add('navbar-solid');
           } else {
             nav.classList.remove('scrolled');
+            nav.classList.remove('navbar-solid');
           }
         }
       }, { passive: true });
