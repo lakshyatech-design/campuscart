@@ -123,7 +123,10 @@ class StateManager {
 
   setActiveView(view) {
     this.activeView = view;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.setAttribute('data-view', view);
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
     this.emit('view_changed', view);
   }
 
