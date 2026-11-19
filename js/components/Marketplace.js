@@ -37,7 +37,7 @@ const Marketplace = {
         </div>
 
         <!-- Filter Header Bar -->
-        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div class="marketplace-filter-header-bar" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
           <div class="flex items-center gap-3">
             <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--ink-display);">
               ${state.activeCategory === 'All' ? 'Campus Marketplace' : state.activeCategory}
