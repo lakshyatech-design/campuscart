@@ -247,3 +247,5 @@ const AuthModal = {
     this.switchMode('login');
   }
 };
+
+window.AuthModal = AuthModal;
