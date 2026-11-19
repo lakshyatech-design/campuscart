@@ -56,82 +56,169 @@ const API = {
     }
   },
 
+  getRegisteredUsers() {
+    try {
+      const data = localStorage.getItem('campuscart_registered_users');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {}
+    return [];
+  },
+
+  saveRegisteredUser(user) {
+    if (!user || !user.email) return;
+    const users = this.getRegisteredUsers();
+    const idx = users.findIndex(u => (u.email || '').toLowerCase().trim() === (user.email || '').toLowerCase().trim());
+    if (idx >= 0) {
+      users[idx] = { ...users[idx], ...user };
+    } else {
+      users.push(user);
+    }
+    try {
+      localStorage.setItem('campuscart_registered_users', JSON.stringify(users));
+      localStorage.setItem('campuscart_user', JSON.stringify(user));
+    } catch (e) {}
+  },
+
   // Auth Endpoints
   async register(formData) {
+    const cleanEmail = (formData.email || '').toLowerCase().trim();
     try {
       const data = await this.request('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, email: cleanEmail })
       });
-      if (data.token) this.setToken(data.token);
-      if (data.user) {
-        localStorage.setItem('campuscart_user', JSON.stringify(data.user));
-      }
-      return data;
-    } catch (e) {
-      const mockUser = {
+      const realUser = data.user || {
         id: 'user-' + Date.now(),
-        full_name: formData.full_name || 'Verified Student',
-        email: formData.email,
+        full_name: (formData.full_name || '').trim(),
+        email: cleanEmail,
         college_id: formData.college_id || 'gsv-vadodara',
         college_name: 'Gati Shakti Vishwavidyalaya',
         college_short_name: 'GSV Vadodara',
-        roll_number: formData.roll_number || '2024-BTECH-001',
+        roll_number: (formData.roll_number || '').trim(),
+        mobile: (formData.mobile || '').trim(),
+        campus_location: formData.campus_location || 'Lalbaug Campus / Hostel',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120'
+        avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(formData.full_name || 'Student')}&backgroundColor=e2e8f0,b6e3f4`
+      };
+      this.saveRegisteredUser(realUser);
+      if (data.token) this.setToken(data.token);
+      else this.setToken(`${realUser.id}.mock_session`);
+      return { user: realUser, token: this.getToken(), message: 'Account ready!' };
+    } catch (e) {
+      const mockUser = {
+        id: 'user-' + Date.now(),
+        full_name: (formData.full_name || 'Verified Student').trim(),
+        email: cleanEmail,
+        college_id: formData.college_id || 'gsv-vadodara',
+        college_name: 'Gati Shakti Vishwavidyalaya',
+        college_short_name: 'GSV Vadodara',
+        roll_number: (formData.roll_number || '').trim(),
+        mobile: (formData.mobile || '').trim(),
+        campus_location: formData.campus_location || 'Lalbaug Campus / Hostel',
+        role: 'student',
+        is_admin: 0,
+        is_verified: 1,
+        avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(formData.full_name || 'Student')}&backgroundColor=e2e8f0,b6e3f4`
       };
       const token = `${mockUser.id}.mock_session`;
       this.setToken(token);
-      localStorage.setItem('campuscart_user', JSON.stringify(mockUser));
+      this.saveRegisteredUser(mockUser);
       return { user: mockUser, token, message: 'Account ready!' };
     }
   },
 
   async login(email, password) {
+    const cleanEmail = (email || '').toLowerCase().trim();
     try {
       const data = await this.request('/api/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email: cleanEmail, password })
       });
       if (data.token) this.setToken(data.token);
       if (data.user) {
-        localStorage.setItem('campuscart_user', JSON.stringify(data.user));
+        this.saveRegisteredUser(data.user);
       }
       return data;
     } catch (e) {
+      // 1. Check persistent registered users list first
+      const registeredList = this.getRegisteredUsers();
+      const matched = registeredList.find(u => (u.email || '').toLowerCase().trim() === cleanEmail);
+      if (matched) {
+        const token = `${matched.id || 'user-' + Date.now()}.mock_session`;
+        this.setToken(token);
+        localStorage.setItem('campuscart_user', JSON.stringify(matched));
+        return { user: matched, token };
+      }
+
+      // 2. Check active saved user
       const savedUserStr = localStorage.getItem('campuscart_user');
       if (savedUserStr) {
         try {
           const u = JSON.parse(savedUserStr);
-          if (u.email === email) {
-            const token = `${u.id}.mock_session`;
+          if ((u.email || '').toLowerCase().trim() === cleanEmail) {
+            const token = `${u.id || 'user-' + Date.now()}.mock_session`;
             this.setToken(token);
+            this.saveRegisteredUser(u);
             return { user: u, token };
           }
         } catch (err) {}
       }
-      const namePart = (email || '').split('@')[0].replace('.', ' ');
-      const formattedName = namePart ? (namePart.charAt(0).toUpperCase() + namePart.slice(1)) : 'GSV Student';
+
+      // 3. Fallback: extract real name from email, NEVER hardcode "GSV-STUDENT"
+      const namePart = (cleanEmail || '').split('@')[0].replace(/[._]/g, ' ');
+      const words = namePart.split(' ').filter(Boolean);
+      const formattedName = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || 'GSV Student';
+      
+      let derivedRoll = '';
+      const rollMatch = cleanEmail.match(/([a-zA-Z]+)(\d{2})/);
+      if (rollMatch) {
+        derivedRoll = `20${rollMatch[2]}-${rollMatch[1].toUpperCase()}-GSV`;
+      }
+
       const mockUser = {
         id: 'user-' + Date.now(),
         full_name: formattedName || 'GSV Student',
-        email: email,
+        email: cleanEmail,
         college_id: 'gsv-vadodara',
         college_name: 'Gati Shakti Vishwavidyalaya',
         college_short_name: 'GSV Vadodara',
-        roll_number: 'GSV-STUDENT',
+        roll_number: derivedRoll,
+        mobile: '',
+        campus_location: 'Lalbaug Campus / Hostel',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120'
+        avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(formattedName)}&backgroundColor=e2e8f0,b6e3f4`
       };
       const token = `${mockUser.id}.mock_session`;
       this.setToken(token);
-      localStorage.setItem('campuscart_user', JSON.stringify(mockUser));
+      this.saveRegisteredUser(mockUser);
       return { user: mockUser, token };
     }
+  },
+
+  async updateProfile(profileData) {
+    try {
+      const res = await this.request('/api/auth/profile', {
+        method: 'PUT',
+        body: JSON.stringify(profileData)
+      });
+      if (res && res.user) {
+        this.saveRegisteredUser(res.user);
+        return res;
+      }
+    } catch (e) {
+      console.warn('API profile update offline, saving locally:', e.message);
+    }
+    const current = (typeof state !== 'undefined' && state.currentUser) || JSON.parse(localStorage.getItem('campuscart_user') || '{}');
+    const merged = { ...current, ...profileData };
+    this.saveRegisteredUser(merged);
+    return { success: true, user: merged, message: 'Profile updated locally.' };
   },
 
   async getMe() {
@@ -146,8 +233,14 @@ const API = {
       try {
         const res = await this.request('/api/auth/me');
         if (res && res.user) {
-          localStorage.setItem('campuscart_user', JSON.stringify(res.user));
-          return res;
+          const merged = {
+            ...res.user,
+            roll_number: res.user.roll_number || (localUser && localUser.roll_number) || '',
+            mobile: res.user.mobile || (localUser && localUser.mobile) || '',
+            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'Lalbaug Campus / Hostel'
+          };
+          this.saveRegisteredUser(merged);
+          return { user: merged };
         }
       } catch (e) {}
     }
