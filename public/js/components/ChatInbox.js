@@ -476,8 +476,8 @@ const ChatInbox = {
         <button class="quick-chip" onclick="ChatInbox.sendQuickMessage('Would you consider ₹${Math.round(conv.product_price ? conv.product_price * 0.9 : 400)} for quick cash pickup?')">
           🤝 Offer ₹${Math.round(conv.product_price ? conv.product_price * 0.9 : 400)} cash
         </button>
-        <button class="quick-chip" onclick="ChatInbox.sendQuickMessage('Can we meet near Pratap Nagar Colony Gate B?')">
-          📍 Pratap Nagar Colony Gate B
+        <button class="quick-chip" onclick="ChatInbox.sendQuickMessage('Can we meet near the Campus Central Library?')">
+          📍 Campus Central Library
         </button>
         <button class="quick-chip" onclick="ChatInbox.sendQuickMessage('Can you please hold this item for me until tomorrow?')">
           ⏳ Hold until tomorrow
@@ -653,8 +653,8 @@ const ChatInbox = {
 
   promptMeetup() {
     const locations = [
-      'Lalbaug Central Canteen (Near Juice Bar)',
-      'Pratap Nagar Colony Main Gate B',
+      'GSV Central Canteen (Near Juice Bar)',
+      'Hostel Main Gate / Courtyard',
       'Central Library Entrance Desk',
       'Academic Block 1 Ground Floor Lobby'
     ];
