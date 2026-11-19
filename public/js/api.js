@@ -204,21 +204,31 @@ const API = {
   },
 
   async updateProfile(profileData) {
+    const current = (typeof state !== 'undefined' && state.currentUser) || JSON.parse(localStorage.getItem('campuscart_user') || '{}');
+    const enrichedPayload = {
+      id: current.id,
+      email: current.email,
+      ...profileData
+    };
     try {
       const res = await this.request('/api/auth/profile', {
         method: 'PUT',
-        body: JSON.stringify(profileData)
+        body: JSON.stringify(enrichedPayload)
       });
       if (res && res.user) {
-        this.saveRegisteredUser(res.user);
-        return res;
+        const merged = { ...current, ...enrichedPayload, ...res.user };
+        this.saveRegisteredUser(merged);
+        localStorage.setItem('campuscart_user', JSON.stringify(merged));
+        localStorage.setItem('campuscart_last_active_user', JSON.stringify(merged));
+        return { success: true, user: merged, message: 'Profile updated successfully!' };
       }
     } catch (e) {
       console.warn('API profile update offline, saving locally:', e.message);
     }
-    const current = (typeof state !== 'undefined' && state.currentUser) || JSON.parse(localStorage.getItem('campuscart_user') || '{}');
-    const merged = { ...current, ...profileData };
+    const merged = { ...current, ...enrichedPayload };
     this.saveRegisteredUser(merged);
+    localStorage.setItem('campuscart_user', JSON.stringify(merged));
+    localStorage.setItem('campuscart_last_active_user', JSON.stringify(merged));
     return { success: true, user: merged, message: 'Profile updated locally.' };
   },
 
@@ -244,12 +254,12 @@ const API = {
           const merged = {
             ...res.user,
             id: res.user.id || (localUser && localUser.id) || 'user-default',
-            full_name: (isServerGeneric && localUser && localUser.full_name) ? localUser.full_name : (res.user.full_name || (localUser && localUser.full_name) || 'GSV Student'),
+            full_name: (localUser && localUser.full_name && localUser.full_name !== 'Verified Student') ? localUser.full_name : (res.user.full_name || (localUser && localUser.full_name) || 'GSV Student'),
             email: (res.user.email && res.user.email !== 'student@gsv.ac.in') ? res.user.email : ((localUser && localUser.email) || res.user.email),
-            roll_number: (res.user.roll_number && res.user.roll_number !== '2024-BTECH-001' && res.user.roll_number !== 'GSV-STUDENT') ? res.user.roll_number : ((localUser && localUser.roll_number) || res.user.roll_number || ''),
-            mobile: res.user.mobile || (localUser && localUser.mobile) || '',
-            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'GSV Campus (Handover via in-app chat)',
-            avatar_url: res.user.avatar_url || (localUser && localUser.avatar_url) || ''
+            roll_number: (localUser && localUser.roll_number && localUser.roll_number !== 'GSV-STUDENT' && localUser.roll_number !== '2024-BTECH-001') ? localUser.roll_number : (res.user.roll_number || (localUser && localUser.roll_number) || ''),
+            mobile: (localUser && localUser.mobile) ? localUser.mobile : (res.user.mobile || ''),
+            campus_location: (localUser && localUser.campus_location) ? localUser.campus_location : (res.user.campus_location || 'GSV Campus (Handover via in-app chat)'),
+            avatar_url: (localUser && localUser.avatar_url) ? localUser.avatar_url : (res.user.avatar_url || '')
           };
           this.saveRegisteredUser(merged);
           localStorage.setItem('campuscart_user', JSON.stringify(merged));
