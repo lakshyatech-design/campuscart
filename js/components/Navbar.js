@@ -50,9 +50,9 @@ const Navbar = {
             ${user ? `
               <div class="apple-user-pill" onclick="UserProfileModal.open()">
                 <div class="apple-avatar-dot">
-                  ${user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  ${(user.name && typeof user.name === 'string') ? user.name.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U')}
                 </div>
-                <span class="apple-user-name">${user.name.split(' ')[0]}</span>
+                <span class="apple-user-name">${(user.name && typeof user.name === 'string' && user.name.trim()) ? user.name.trim().split(' ')[0] : (user.email ? user.email.split('@')[0] : 'Student')}</span>
                 <span class="apple-user-caret">▾</span>
               </div>
             ` : `
