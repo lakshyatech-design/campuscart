@@ -157,6 +157,20 @@ const Router = {
         }, '', window.location.pathname + window.location.search + hash);
       }
     };
+
+    const origSetActiveCategory = state.setActiveCategory.bind(state);
+    state.setActiveCategory = (category, fromPop = false) => {
+      const prevCategory = state.activeCategory;
+      origSetActiveCategory(category);
+
+      if (!fromPop && category !== prevCategory && category !== 'All') {
+        window.history.pushState({
+          type: 'category',
+          category: category,
+          view: state.activeView
+        }, '', window.location.pathname + window.location.search + `#category=${encodeURIComponent(category)}`);
+      }
+    };
   },
 
   _handlePopState(e) {
@@ -204,22 +218,31 @@ const Router = {
       return; // Handled!
     }
 
-    // 2. If view in history state differs from current view, switch view
+    // 2. If category in history state differs from current category, restore category
+    const targetCategory = (e.state && e.state.category) || 'All';
+    if (typeof state !== 'undefined' && state.activeCategory !== targetCategory) {
+      state.setActiveCategory(targetCategory, true /* fromPop */);
+      if (window.PopularCategories) window.PopularCategories.render();
+      if (window.Marketplace) window.Marketplace.loadProducts();
+      return; // Handled!
+    }
+
+    // 3. If view in history state differs from current view, switch view
     const targetView = (e.state && e.state.view) || 'marketplace';
     if (typeof state !== 'undefined' && state.activeView !== targetView) {
       state.setActiveView(targetView, true /* fromPop */);
       return; // Handled!
     }
 
-    // 3. If currently in a non-marketplace view (e.g. inbox, seller-dashboard), return to marketplace
+    // 4. If currently in a non-marketplace view (e.g. inbox, seller-dashboard), return to marketplace
     if (typeof state !== 'undefined' && state.activeView !== 'marketplace') {
       state.setActiveView('marketplace', true /* fromPop */);
       return; // Handled!
     }
 
-    // 4. If a category filter is active other than 'All', reset to All
+    // 5. If a category filter is active other than 'All', reset to All
     if (typeof state !== 'undefined' && state.activeCategory && state.activeCategory !== 'All') {
-      state.setActiveCategory('All');
+      state.setActiveCategory('All', true /* fromPop */);
       if (window.PopularCategories) window.PopularCategories.render();
       if (window.Marketplace) window.Marketplace.loadProducts();
       return; // Handled!
