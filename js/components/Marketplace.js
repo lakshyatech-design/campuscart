@@ -488,3 +488,5 @@ const Marketplace = {
     this.render();
   }
 };
+
+window.Marketplace = Marketplace;
