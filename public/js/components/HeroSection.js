@@ -13,7 +13,7 @@ const HeroSection = {
         <div class="hero-content">
           <div class="hero-kicker">
             <span class="kicker-dot"></span>
-            <span>Gati Shakti Vishwavidyalaya &bull; Verified Campus Exchange</span>
+            <span>Verified Campus Exchange</span>
           </div>
 
           <h1 class="hero-headline">
@@ -22,7 +22,7 @@ const HeroSection = {
           </h1>
 
           <p class="hero-sub">
-            The official student-to-student exchange for Gati Shakti Vishwavidyalaya, Vadodara. 
+            The official student-to-student marketplace for Gati Shakti Vishwavidyalaya. 
             Direct campus handovers, verified credentials, zero commission.
           </p>
 
@@ -38,7 +38,7 @@ const HeroSection = {
           <div class="hero-metrics">
             <div class="hero-metric">
               <div class="hero-metric-value">2,450+</div>
-              <div class="hero-metric-label">GSV Students</div>
+              <div class="hero-metric-label">Verified Students</div>
             </div>
             <div class="hero-metric-divider"></div>
             <div class="hero-metric">
