@@ -33,7 +33,7 @@ const SellerDashboard = {
               Welcome back, ${user.full_name}! 👋
             </h1>
             <p style="font-size: 0.88rem; color: var(--text-muted);">
-              Campus: <strong>${user.college_short_name || 'GSV Vadodara'}</strong> • Student ID: ${user.roll_number || 'Verified'}
+              Campus: <strong>${user.college_short_name || 'GSV Vadodara'}</strong> • Roll Number: ${user.roll_number || 'Verified'}
             </p>
           </div>
 
