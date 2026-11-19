@@ -25,7 +25,7 @@ const ReportModal = {
 
   close() {
     const modalEl = document.getElementById('report-modal');
-    if (modalEl) modalEl.classList.remove('open');
+    if (modalEl) modalEl.classList.remove('open'); modalEl.style.display = 'none';
   },
 
   render() {
