@@ -4,112 +4,10 @@
  */
 
 const MOCK_COLLEGES = [
-  { id: 'gsv-vadodara', name: 'Gati Shakti Vishwavidyalaya (GSV)', short_name: 'GSV Vadodara', city: 'Vadodara', state: 'Gujarat', domain: 'gsv.ac.in', is_active: 1, student_count: 2450, badge: 'Launch Campus' },
-  { id: 'iit-bombay', name: 'Indian Institute of Technology Bombay (IITB)', short_name: 'IIT Bombay', city: 'Mumbai', state: 'Maharashtra', domain: 'iitb.ac.in', is_active: 1, student_count: 11200, badge: 'Active Hub' },
-  { id: 'bits-pilani', name: 'Birla Institute of Technology and Science (BITS)', short_name: 'BITS Pilani', city: 'Pilani', state: 'Rajasthan', domain: 'pilani.bits-pilani.ac.in', is_active: 1, student_count: 5800, badge: 'Active Hub' },
-  { id: 'nit-trichy', name: 'National Institute of Technology Tiruchirappalli (NITT)', short_name: 'NIT Trichy', city: 'Tiruchirappalli', state: 'Tamil Nadu', domain: 'nitt.edu', is_active: 1, student_count: 6700, badge: 'Active Hub' },
-  { id: 'delhi-university', name: 'University of Delhi (DU)', short_name: 'Delhi University', city: 'New Delhi', state: 'Delhi', domain: 'du.ac.in', is_active: 0, student_count: 25000, badge: 'Coming Soon' },
-  { id: 'iim-ahmedabad', name: 'Indian Institute of Management Ahmedabad (IIMA)', short_name: 'IIM Ahmedabad', city: 'Ahmedabad', state: 'Gujarat', domain: 'iima.ac.in', is_active: 0, student_count: 1400, badge: 'Coming Soon' }
+  { id: 'gsv-vadodara', name: 'Gati Shakti Vishwavidyalaya (GSV)', short_name: 'GSV Vadodara', city: 'Vadodara', state: 'Gujarat', domain: 'gsv.ac.in', is_active: 1, student_count: 2450, badge: 'Exclusive Campus' }
 ];
 
-const MOCK_PRODUCTS = [
-  {
-    id: 'prod-1',
-    title: 'IRCTC Vadodara (BRC) to New Delhi (NDLS) 3AC Ticket',
-    category: 'Railway Tickets',
-    price: 1350,
-    description: 'Confirmed 3AC berth for Vadodara to New Delhi (Train 12951 Rajdhani Express). Strictly in accordance with Indian Railway passenger transfer and student concession guidelines.',
-    condition: 'Like New',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-aarav',
-    seller_name: 'Aarav Sharma',
-    campus_location: 'Hostel Block B, Room 214',
-    images: ['https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800'],
-    dynamic_attributes: { journey_date: '2026-11-28', from_station: 'Vadodara Jn (BRC)', to_station: 'New Delhi (NDLS)', train_name_number: '12951 / Rajdhani Express', ticket_type: '3AC' },
-    created_at: new Date(Date.now() - 3600000).toISOString(),
-    views_count: 48
-  },
-  {
-    id: 'prod-2',
-    title: 'Rasasi Hawas for Him Eau de Parfum (85ml / 100ml)',
-    category: 'Perfumes',
-    price: 2400,
-    description: 'Authentic Rasasi Hawas EDP bottle with original purple box and batch code. Fresh plum aquatic scent with 10+ hour longevity. Stored in climate-controlled hostel locker.',
-    condition: 'Like New',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-priya',
-    seller_name: 'Priya Patel',
-    campus_location: 'Girls Hostel 1, Wing A',
-    images: ['https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800'],
-    dynamic_attributes: { brand: 'Rasasi', concentration: 'EDP', remaining_volume: '85 ml' },
-    created_at: new Date(Date.now() - 7200000).toISOString(),
-    views_count: 32
-  },
-  {
-    id: 'prod-3',
-    title: 'Hero Sprint 26T Mountain Bicycle (Shimano 21-Speed)',
-    category: 'Cycles',
-    price: 3200,
-    description: 'Dual disc brakes, front suspension, smooth gear shifting. Perfect for daily commutes between GSV Academic Block and Vadodara Railway Station. Free wire lock included.',
-    condition: 'Good',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-rohan',
-    seller_name: 'Rohan Mehta',
-    campus_location: 'Hostel 3 Cycle Stand',
-    images: ['https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800'],
-    dynamic_attributes: { wheel_size: '26 Inch', gears: '21 Speed Shimano', frame: 'Alloy Steel' },
-    created_at: new Date(Date.now() - 14400000).toISOString(),
-    views_count: 67
-  },
-  {
-    id: 'prod-4',
-    title: 'Higher Engineering Mathematics by B.S. Grewal (44th Ed.)',
-    category: 'Textbooks',
-    price: 420,
-    description: 'Mandatory textbook for 1st & 2nd year B.Tech Engineering Mathematics at GSV. Clean pages, no torn sheets, important formulas highlighted.',
-    condition: 'Like New',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-aarav',
-    seller_name: 'Aarav Sharma',
-    campus_location: 'Library Reading Hall',
-    images: ['https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800'],
-    dynamic_attributes: { author: 'B.S. Grewal', edition: '44th Edition', semester: 'Sem 1 & 2' },
-    created_at: new Date(Date.now() - 28800000).toISOString(),
-    views_count: 24
-  },
-  {
-    id: 'prod-5',
-    title: 'Philips HD9306 1.5-Litre Electric Kettle (Stainless Steel)',
-    category: 'Hostel Essentials',
-    price: 750,
-    description: 'Food-grade stainless steel body, auto cut-off safety. Ideal for midnight tea, noodles, and boiling water in hostel rooms. Tested and fully operational.',
-    condition: 'Like New',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-priya',
-    seller_name: 'Priya Patel',
-    campus_location: 'Girls Hostel 1',
-    images: ['https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=800'],
-    dynamic_attributes: { capacity: '1.5 Litres', power: '1800W', material: 'Stainless Steel' },
-    created_at: new Date(Date.now() - 43200000).toISOString(),
-    views_count: 19
-  },
-  {
-    id: 'prod-6',
-    title: 'Casio FX-991EX ClassWiz Non-Programmable Scientific Calculator',
-    category: 'Electronics',
-    price: 950,
-    description: 'High-resolution display with 552 scientific functions, matrix calculations, and spreadsheet mode. Approved for GSV semester examinations.',
-    condition: 'Like New',
-    college_id: 'gsv-vadodara',
-    seller_id: 'user-rohan',
-    seller_name: 'Rohan Mehta',
-    campus_location: 'Hostel Block C, Ground Floor',
-    images: ['https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800'],
-    dynamic_attributes: { model: 'Casio FX-991EX', display: 'High Resolution LCD', approved_exams: 'Yes' },
-    created_at: new Date(Date.now() - 86400000).toISOString(),
-    views_count: 51
-  }
-];
+const MOCK_PRODUCTS = [];
 
 const API = {
   baseUrl: window.location.origin,
@@ -193,104 +91,67 @@ const API = {
       if (data.token) this.setToken(data.token);
       return data;
     } catch (e) {
-      const isAarav = email.includes('aarav') || email === 'aarav.sharma@gsv.ac.in';
-      const mockUser = isAarav ? {
-        id: 'user-aarav',
-        full_name: 'Aarav Sharma',
-        email: 'aarav.sharma@gsv.ac.in',
+      const savedUserStr = localStorage.getItem('campuscart_user');
+      if (savedUserStr) {
+        try {
+          const u = JSON.parse(savedUserStr);
+          if (u.email === email) {
+            const token = `${u.id}.mock_session`;
+            this.setToken(token);
+            return { user: u, token };
+          }
+        } catch (err) {}
+      }
+      const namePart = (email || '').split('@')[0].replace('.', ' ');
+      const formattedName = namePart ? (namePart.charAt(0).toUpperCase() + namePart.slice(1)) : 'GSV Student';
+      const mockUser = {
+        id: 'user-' + Date.now(),
+        full_name: formattedName || 'GSV Student',
+        email: email,
         college_id: 'gsv-vadodara',
         college_name: 'Gati Shakti Vishwavidyalaya',
         college_short_name: 'GSV Vadodara',
-        roll_number: 'GSV2023BTECH042',
+        roll_number: 'GSV-STUDENT',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200'
-      } : {
-        id: 'user-priya',
-        full_name: 'Priya Patel',
-        email: 'priya.patel@gsv.ac.in',
-        college_id: 'gsv-vadodara',
-        college_name: 'Gati Shakti Vishwavidyalaya',
-        college_short_name: 'GSV Vadodara',
-        roll_number: 'GSV2024MBA018',
-        role: 'student',
-        is_admin: 0,
-        is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200'
+        avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120'
       };
       const token = `${mockUser.id}.mock_session`;
       this.setToken(token);
+      localStorage.setItem('campuscart_user', JSON.stringify(mockUser));
       return { user: mockUser, token };
     }
   },
 
   async getMe() {
+    const token = this.getToken();
+    if (!token) return { user: null };
     try {
-      return await this.request('/api/auth/me');
-    } catch (e) {
-      return {
-        user: {
-          id: 'user-aarav',
-          full_name: 'Aarav Sharma',
-          email: 'aarav.sharma@gsv.ac.in',
-          mobile: '+91 98765 43210',
-          college_id: 'gsv-vadodara',
-          college_name: 'Gati Shakti Vishwavidyalaya',
-          college_short_name: 'GSV Vadodara',
-          roll_number: 'GSV2023BTECH042',
-          role: 'student',
-          is_admin: 0,
-          is_verified: 1,
-          avatar_url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200'
-        }
-      };
+      const res = await this.request('/api/auth/me');
+      if (res && res.user) return res;
+    } catch (e) {}
+    const saved = localStorage.getItem('campuscart_user');
+    if (saved) {
+      try {
+        return { user: JSON.parse(saved) };
+      } catch (err) {}
     }
+    return { user: null };
   },
 
   async switchDemoUser(userId) {
-    try {
-      const data = await this.request('/api/auth/switch-demo', {
-        method: 'POST',
-        body: JSON.stringify({ userId })
-      });
-      if (data.token) this.setToken(data.token);
-      return data;
-    } catch (e) {
-      const isPriya = userId === 'user-priya';
-      const user = isPriya ? {
-        id: 'user-priya',
-        full_name: 'Priya Patel',
-        email: 'priya.patel@gsv.ac.in',
-        college_id: 'gsv-vadodara',
-        college_name: 'Gati Shakti Vishwavidyalaya',
-        college_short_name: 'GSV Vadodara',
-        roll_number: 'GSV2024MBA018',
-        role: 'student',
-        is_admin: 0,
-        is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200'
-      } : {
-        id: 'user-aarav',
-        full_name: 'Aarav Sharma',
-        email: 'aarav.sharma@gsv.ac.in',
-        college_id: 'gsv-vadodara',
-        college_name: 'Gati Shakti Vishwavidyalaya',
-        college_short_name: 'GSV Vadodara',
-        roll_number: 'GSV2023BTECH042',
-        role: 'student',
-        is_admin: 0,
-        is_verified: 1,
-        avatar_url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200'
-      };
-      const token = `${user.id}.mock_session`;
-      this.setToken(token);
-      return { user, token };
-    }
+    return { user: null };
   },
 
   logout() {
     this.setToken(null);
+    try {
+      localStorage.removeItem('campuscart_token');
+      localStorage.removeItem('campuscart_user');
+      sessionStorage.clear();
+    } catch (e) {}
+    return { success: true };
   },
 
   // Colleges (Resilient Fallback)
@@ -305,14 +166,7 @@ const API = {
   },
 
   async requestNewCollege(data) {
-    try {
-      return await this.request('/api/colleges/request', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
-    } catch (e) {
-      return { message: 'College registration request logged for campus operations review.' };
-    }
+    return { message: 'CampusCart is exclusive to Gati Shakti Vishwavidyalaya (GSV Vadodara).' };
   },
 
   // Products (Resilient Fallback)
@@ -325,7 +179,7 @@ const API = {
         }
       });
       const data = await this.request(`/api/products?${query.toString()}`);
-      if (data && data.products && data.products.length > 0) return data;
+      if (data && Array.isArray(data.products)) return data;
     } catch (e) {
       console.info('Using built-in products catalog.');
     }
@@ -335,6 +189,11 @@ const API = {
       items = items.filter(p => p.category.toLowerCase() === params.category.toLowerCase());
     }
     if (params.q) {
+      const q = params.q.toLowerCase();
+      items = items.filter(p => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+    }
+    return { products: items, total: items.length };
+  },
       const q = params.q.toLowerCase();
       items = items.filter(p => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
     }
@@ -372,9 +231,10 @@ const API = {
 
       // Trigger real-time notification
       if (window.NotificationCenter) {
+        const sellerName = (window.state?.currentUser?.full_name) || 'GSV Student';
         window.NotificationCenter.notify({
           title: 'New Upload Received',
-          message: `Devendra Parmar uploaded "${data.title}" (₹${data.price})`,
+          message: `${sellerName} uploaded "${data.title}" (₹${data.price})`,
           type: 'upload',
           link: '#'
         });
