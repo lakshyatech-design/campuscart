@@ -23,7 +23,7 @@ const HeroSection = {
     },
     {
       id: 'GMKSPZPyGHY',
-      title: 'GSV Lalbaug Campus • Flyover',
+      title: 'GSV Vadodara • Campus Flyover',
       start: 3
     }
   ],
@@ -112,8 +112,8 @@ const HeroSection = {
             </div>
             <div class="hero-metric-divider"></div>
             <div class="hero-metric">
-              <div class="hero-metric-value">Lalbaug & PN</div>
-              <div class="hero-metric-label">Campus Hubs</div>
+              <div class="hero-metric-value">In-Chat Meetup</div>
+              <div class="hero-metric-label">Direct Handover</div>
             </div>
             <div class="hero-metric-divider"></div>
             <div class="hero-metric">
