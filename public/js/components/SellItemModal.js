@@ -197,11 +197,6 @@ const SellItemModal = {
                 </button>
               </div>
             </div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 0.4rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
-              <span>Format: <strong style="color: var(--accent);">DD/MM/YYYY</strong></span>
-              <span>•</span>
-              <span>Type numbers directly or click <strong style="color: var(--accent);">📅 Open Calendar</strong> to select from date picker</span>
-            </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
