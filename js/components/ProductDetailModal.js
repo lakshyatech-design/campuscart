@@ -5,6 +5,18 @@ const ProductDetailModal = {
   activeProduct: null,
   activeImageIndex: 0,
 
+  formatJourneyDate(d) {
+    if (!d) return 'N/A';
+    if (d.includes('/')) return d;
+    if (d.includes('-')) {
+      const parts = d.split('-');
+      if (parts.length === 3 && parts[0].length === 4) {
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+      }
+    }
+    return d;
+  },
+
   async open(productId) {
     let modalEl = document.getElementById('product-detail-modal');
     if (!modalEl) {
@@ -139,7 +151,7 @@ const ProductDetailModal = {
                     🚆 Railway Journey Details
                   </div>
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; font-size: 0.8rem; color: var(--text-secondary);">
-                    <div><strong>Journey Date:</strong> ${dyn.journey_date || 'N/A'}</div>
+                    <div><strong>Journey Date:</strong> ${this.formatJourneyDate(dyn.journey_date)}</div>
                     <div><strong>Class:</strong> ${dyn.ticket_type || '3AC'}</div>
                     <div><strong>From:</strong> ${dyn.from_station || 'Vadodara (BRC)'}</div>
                     <div><strong>To:</strong> ${dyn.to_station || 'Destination'}</div>
