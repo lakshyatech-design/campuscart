@@ -64,7 +64,7 @@ const ProductDetailModal = {
         <div class="modal-header">
           <div class="flex items-center gap-2">
             <span class="product-category-tag">${p.category}</span>
-            <span style="font-size: 0.78rem; color: var(--text-muted);">Posted by ${p.seller_name} (${p.college_short_name || 'GSV'})</span>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Posted by ${p.seller_name}</span>
           </div>
           <button class="modal-close-btn" onclick="ProductDetailModal.close()" title="Close">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -98,7 +98,7 @@ const ProductDetailModal = {
               <div style="background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; margin-top: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.78rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                  GSV Campus Protocol
+                  Campus Safety Protocol
                 </div>
                 <ul style="font-size: 0.76rem; color: var(--text-muted); list-style: disc; padding-left: 1.2rem; line-height: 1.5;">
                   <li>Meet in a designated area (Central Canteen or Hostel Gate).</li>
