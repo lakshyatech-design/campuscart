@@ -64,20 +64,27 @@ const API = {
         body: JSON.stringify(formData)
       });
       if (data.token) this.setToken(data.token);
+      if (data.user) {
+        localStorage.setItem('campuscart_user', JSON.stringify(data.user));
+      }
       return data;
     } catch (e) {
       const mockUser = {
         id: 'user-' + Date.now(),
-        full_name: formData.full_name || 'GSV Student',
+        full_name: formData.full_name || 'Verified Student',
         email: formData.email,
         college_id: formData.college_id || 'gsv-vadodara',
+        college_name: 'Gati Shakti Vishwavidyalaya',
+        college_short_name: 'GSV Vadodara',
         roll_number: formData.roll_number || '2024-BTECH-001',
         role: 'student',
         is_admin: 0,
-        is_verified: 1
+        is_verified: 1,
+        avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120'
       };
       const token = `${mockUser.id}.mock_session`;
       this.setToken(token);
+      localStorage.setItem('campuscart_user', JSON.stringify(mockUser));
       return { user: mockUser, token, message: 'Account ready!' };
     }
   },
@@ -89,6 +96,9 @@ const API = {
         body: JSON.stringify({ email, password })
       });
       if (data.token) this.setToken(data.token);
+      if (data.user) {
+        localStorage.setItem('campuscart_user', JSON.stringify(data.user));
+      }
       return data;
     } catch (e) {
       const savedUserStr = localStorage.getItem('campuscart_user');
@@ -125,17 +135,28 @@ const API = {
   },
 
   async getMe() {
-    const token = this.getToken();
-    if (!token) return { user: null };
-    try {
-      const res = await this.request('/api/auth/me');
-      if (res && res.user) return res;
-    } catch (e) {}
     const saved = localStorage.getItem('campuscart_user');
+    let localUser = null;
     if (saved) {
+      try { localUser = JSON.parse(saved); } catch (e) {}
+    }
+
+    const token = this.getToken();
+    if (token) {
       try {
-        return { user: JSON.parse(saved) };
-      } catch (err) {}
+        const res = await this.request('/api/auth/me');
+        if (res && res.user) {
+          localStorage.setItem('campuscart_user', JSON.stringify(res.user));
+          return res;
+        }
+      } catch (e) {}
+    }
+
+    if (localUser) {
+      if (!this.getToken()) {
+        this.setToken(`${localUser.id || 'usr'}.mock_session`);
+      }
+      return { user: localUser };
     }
     return { user: null };
   },
