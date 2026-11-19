@@ -105,3 +105,5 @@ const ReportModal = {
     }
   }
 };
+
+window.ReportModal = ReportModal;
