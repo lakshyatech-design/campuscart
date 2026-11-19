@@ -219,21 +219,21 @@ const Marketplace = {
 
     if (this.products.length === 0) {
       gridEl.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-lg);">
-          <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--cobalt-light); color: var(--cobalt); display: flex; align-items: center; justify-content: center;">
-            ${Icons.search("w-8 h-8")}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4.5rem 1.5rem; background: var(--surface-raised); border: 1px dashed var(--border-accent); border-radius: var(--radius-lg);">
+          <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-accent); color: var(--accent); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--ink-display); margin-bottom: 0.4rem;">No student listings found</h3>
-          <p style="font-size: 0.9rem; color: var(--ink-secondary); max-width: 420px; margin: 0 auto 1.5rem;">
-            Try adjusting your search keywords, clear category filters, or explore all campus hubs.
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">GSV Campus Exchange</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 1.75rem; line-height: 1.5;">
+            Exclusive to Gati Shakti Vishwavidyalaya students. No dummy listings active. List your textbooks, cycles, railway tickets, or hostel essentials now.
           </p>
-          <div class="flex justify-center gap-3">
+          <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
             <button class="btn btn-secondary btn-sm" onclick="Marketplace.resetFilters()">
               Clear Filters
             </button>
             <button class="btn btn-primary btn-sm" onclick="Navbar.handleSellClick()">
               ${Icons.plusCircle("w-4 h-4")}
-              Be the first to list here
+              List an Item on GSV Direct
             </button>
           </div>
         </div>
