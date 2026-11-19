@@ -49,6 +49,32 @@ class StateManager {
     this.emit('user_changed', user);
   }
 
+  async logout() {
+    try {
+      if (window.API && typeof window.API.logout === 'function') {
+        window.API.logout();
+      }
+    } catch (e) {
+      console.warn('API logout warning:', e);
+    }
+    try {
+      localStorage.removeItem('campuscart_token');
+      localStorage.removeItem('campuscart_user');
+      sessionStorage.clear();
+    } catch (e) {}
+    this.setCurrentUser(null);
+    this.setActiveView('marketplace');
+    if (window.showToast) {
+      window.showToast('Signed out successfully.', 'info');
+    }
+    if (window.Navbar && typeof window.Navbar.render === 'function') {
+      window.Navbar.render();
+    }
+    if (window.Marketplace && typeof window.Marketplace.loadProducts === 'function') {
+      window.Marketplace.loadProducts();
+    }
+  }
+
   setColleges(colleges) {
     this.colleges = colleges;
     // Default to GSV if no college chosen
