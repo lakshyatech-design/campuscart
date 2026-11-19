@@ -180,17 +180,17 @@
     </div>
 
     <!-- View: Real-Time Chat & Inbox -->
-    <div id="view-inbox" style="display: none;">
+    <div id="view-inbox" class="app-subview" style="display: none;">
       <div id="inbox-mount"></div>
     </div>
 
     <!-- View: Seller Dashboard -->
-    <div id="view-seller-dashboard" style="display: none;">
+    <div id="view-seller-dashboard" class="app-subview" style="display: none;">
       <div id="seller-dashboard-mount"></div>
     </div>
 
     <!-- View: Admin Panel -->
-    <div id="view-admin" style="display: none;">
+    <div id="view-admin" class="app-subview" style="display: none;">
       <div id="admin-mount"></div>
     </div>
   </main>
@@ -341,6 +341,7 @@
     }
 
     state.on('view_changed', (view) => {
+      document.body.setAttribute('data-view', view);
       updateMobileDock(view);
       document.getElementById('view-marketplace').style.display = view === 'marketplace' ? 'block' : 'none';
       document.getElementById('view-inbox').style.display = view === 'inbox' ? 'block' : 'none';
@@ -440,6 +441,13 @@
         }
       } catch (e) {
         console.warn('Router init error:', e);
+      }
+
+      // 6. Synchronize initial active view state
+      const initialView = state.activeView || 'marketplace';
+      document.body.setAttribute('data-view', initialView);
+      if (initialView !== 'marketplace') {
+        state.setActiveView(initialView);
       }
 
       console.log('✅ GSV Direct Platform initialized with Forge Automotive Aesthetic & Instant Zero-Downtime Rendering!');
