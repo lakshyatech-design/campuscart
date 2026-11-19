@@ -187,7 +187,7 @@ const AuthModal = {
             <form onsubmit="event.preventDefault(); AuthModal.handleRegister();">
               <div style="margin-bottom: 0.85rem;">
                 <label class="filter-label">Full Name *</label>
-                <input type="text" id="reg-name" required class="input-field input-plain" placeholder="Student Full Name" />
+                <input type="text" id="reg-name" required class="input-field input-plain" placeholder="" />
               </div>
 
               <div style="margin-bottom: 0.85rem;">
@@ -201,7 +201,7 @@ const AuthModal = {
 
               <div style="margin-bottom: 0.85rem;">
                 <label class="filter-label">Roll Number *</label>
-                <input type="text" id="reg-roll" required class="input-field input-plain" placeholder="e.g. 2024-BTECH-001" />
+                <input type="text" id="reg-roll" required class="input-field input-plain" placeholder="" />
               </div>
 
               <div style="margin-bottom: 0.85rem;">
@@ -218,26 +218,23 @@ const AuthModal = {
                       id="reg-mobile" 
                       required 
                       class="input-field input-plain" 
-                      placeholder="98765 43210" 
+                      placeholder="" 
                       pattern="[0-9\s\-]{6,15}"
                       title="Please enter your mobile phone number"
                       inputmode="numeric"
                     />
                   </div>
                 </div>
-                <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem; display: flex; align-items: center; gap: 0.25rem;">
-                  <span>Default: <strong style="color: var(--accent);">+91 (India 🇮🇳)</strong> • Select country code for international numbers</span>
-                </div>
               </div>
 
               <div style="margin-bottom: 0.85rem;">
                 <label class="filter-label">GSV Email *</label>
-                <input type="email" id="reg-email" required class="input-field input-plain" placeholder="student.name@gsv.ac.in" />
+                <input type="email" id="reg-email" required class="input-field input-plain" placeholder="" />
               </div>
 
               <div style="margin-bottom: 1.25rem;">
                 <label class="filter-label">Create Password *</label>
-                <input type="password" id="reg-password" required minlength="6" class="input-field input-plain" placeholder="At least 6 characters" />
+                <input type="password" id="reg-password" required minlength="6" class="input-field input-plain" placeholder="" />
               </div>
 
               <button type="submit" class="btn btn-primary w-full" style="width: 100%;" id="auth-register-btn">
@@ -246,7 +243,7 @@ const AuthModal = {
 
               <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
                 Already have an account? 
-                <a href="#" onclick="event.preventDefault(); AuthModal.switchMode('login');" style="color: var(--accent); font-weight: 700;">Sign in</a>
+                <a href="#" onclick="event.preventDefault(); AuthModal.switchMode('login');" style="color: var(--accent); font-weight: 700;">Student Sign In</a>
               </div>
             </form>
           ` : `
@@ -257,7 +254,7 @@ const AuthModal = {
               </p>
               <div style="margin-bottom: 1.25rem;">
                 <label class="filter-label">GSV Email</label>
-                <input type="email" id="forgot-email" required class="input-field input-plain" placeholder="student.name@gsv.ac.in" />
+                <input type="email" id="forgot-email" required class="input-field input-plain" placeholder="" />
               </div>
               <button type="submit" class="btn btn-primary w-full" style="width: 100%;">
                 Send Reset Link
