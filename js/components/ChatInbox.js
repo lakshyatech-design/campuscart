@@ -12,167 +12,7 @@
  * - "+ Start New Chat" Dialog for Any Campus Listing
  */
 
-const DEFAULT_CAMPUS_CONVERSATIONS = [
-  {
-    id: 'conv-priya-math',
-    type: 'buying', // 'buying' | 'selling' | 'desk'
-    other_user: {
-      id: 'user-priya',
-      name: 'Priya Sharma',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200',
-      college: 'GSV Vadodara',
-      branch: 'B.Tech Mechanical • 2nd Year',
-      phone: '+91 98765 43210',
-      online: true
-    },
-    product_id: 'prod-math-textbook',
-    product_title: 'Engineering Mathematics Vol 2 (Advanced Calculus & ODE)',
-    product_price: 450,
-    product_status: 'active',
-    product_images: ['https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400'],
-    last_message: 'Awesome! Can we meet at Central Canteen today around 5:30 PM for cash pickup?',
-    last_message_at: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-    unread_count: 1,
-    messages: [
-      {
-        id: 'm-p1',
-        sender_id: 'user-student-current',
-        content: 'Hi Priya! Is the Engineering Mathematics Vol 2 textbook still available?',
-        created_at: new Date(Date.now() - 25 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'm-p2',
-        sender_id: 'user-priya',
-        content: 'Yes! It is in mint condition, semester 2 syllabus with solved previous year questions.',
-        created_at: new Date(Date.now() - 15 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'm-p3',
-        sender_id: 'user-student-current',
-        content: 'Sounds great. Would you consider ₹400 for quick cash pickup on campus?',
-        created_at: new Date(Date.now() - 10 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'm-p4',
-        sender_id: 'user-priya',
-        content: 'Awesome! Can we meet at Central Canteen today around 5:30 PM for cash pickup?',
-        created_at: new Date(Date.now() - 5 * 60 * 1000).toISOString()
-      }
-    ]
-  },
-  {
-    id: 'conv-rohan-cycle',
-    type: 'buying',
-    other_user: {
-      id: 'user-rohan',
-      name: 'Rohan Mehta',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200',
-      college: 'GSV Vadodara',
-      branch: 'B.Tech CSE • Senior Year',
-      phone: '+91 98222 33445',
-      online: true
-    },
-    product_id: 'prod-campus-cycle',
-    product_title: 'Hero Sprint Campus Gear Bicycle (With Lock & Bell)',
-    product_price: 2800,
-    product_status: 'active',
-    product_images: ['https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400'],
-    last_message: 'Come by Pratap Nagar Colony Gate B after 6 PM today. Gears and brakes are brand new.',
-    last_message_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
-    unread_count: 0,
-    messages: [
-      {
-        id: 'm-r1',
-        sender_id: 'user-student-current',
-        content: 'Hi Rohan, saw your cycle listing. Is it available for a quick test ride on campus?',
-        created_at: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-      },
-      {
-        id: 'm-r2',
-        sender_id: 'user-rohan',
-        content: 'Come by Pratap Nagar Colony Gate B after 6 PM today. Gears and brakes are brand new.',
-        created_at: new Date(Date.now() - 45 * 60 * 1000).toISOString()
-      }
-    ]
-  },
-  {
-    id: 'conv-aarav-transit',
-    type: 'selling',
-    other_user: {
-      id: 'user-aarav',
-      name: 'Aarav Patel',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200',
-      college: 'GSV Vadodara',
-      branch: 'B.Tech Electrical • Batch 2024',
-      phone: '+91 97111 22334',
-      online: false
-    },
-    product_id: 'prod-brc-ticket',
-    product_title: 'Western Railway Vadodara-Mumbai Central Seat Transfer',
-    product_price: 1200,
-    product_status: 'active',
-    product_images: ['https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=400'],
-    last_message: 'Great, I will take it! Can we meet near Lalbaug Academic Block 1 tomorrow?',
-    last_message_at: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
-    unread_count: 0,
-    messages: [
-      {
-        id: 'm-a1',
-        sender_id: 'user-aarav',
-        content: 'Hello! I saw your Western Railway BRC-MMCT ticket transfer listing. Is the student ID transfer verified?',
-        created_at: new Date(Date.now() - 4 * 3600 * 1000).toISOString()
-      },
-      {
-        id: 'm-a2',
-        sender_id: 'user-student-current',
-        content: 'Yes! Strictly complying with IRCTC student shift guidelines.',
-        created_at: new Date(Date.now() - 3.5 * 3600 * 1000).toISOString()
-      },
-      {
-        id: 'm-a3',
-        sender_id: 'user-aarav',
-        content: 'Great, I will take it! Can we meet near Lalbaug Academic Block 1 tomorrow?',
-        created_at: new Date(Date.now() - 3 * 3600 * 1000).toISOString()
-      }
-    ]
-  },
-  {
-    id: 'conv-gsv-desk',
-    type: 'desk',
-    other_user: {
-      id: 'user-gsv-trust-desk',
-      name: 'GSV Institutional Exchange Desk',
-      avatar: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200',
-      college: 'GSV Institutional Operations',
-      branch: 'Trust & Verification Cell • GSV Vadodara',
-      phone: '+91 265 264 4567',
-      online: true,
-      isOfficial: true
-    },
-    product_id: 'prod-gsv-desk',
-    product_title: 'GSV Official Peer Verification & Security Desk',
-    product_price: 0,
-    product_status: 'verified',
-    product_images: ['https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400'],
-    last_message: 'Welcome to GSV Direct! All peer handovers are locked to verified @gsv.ac.in student credentials.',
-    last_message_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
-    unread_count: 0,
-    messages: [
-      {
-        id: 'm-d1',
-        sender_id: 'user-gsv-trust-desk',
-        content: 'Welcome to GSV Direct! You are connected to the official campus peer exchange network for Gati Shakti Vishwavidyalaya, Vadodara.',
-        created_at: new Date(Date.now() - 25 * 3600 * 1000).toISOString()
-      },
-      {
-        id: 'm-d2',
-        sender_id: 'user-gsv-trust-desk',
-        content: 'Campus Safety Tip: For physical item handovers, we recommend public meetup points — Lalbaug Central Canteen or Pratap Nagar Colony Gate B during daylight hours.',
-        created_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString()
-      }
-    ]
-  }
-];
+const DEFAULT_CAMPUS_CONVERSATIONS = [];
 
 const ChatInbox = {
   conversations: [],
@@ -186,21 +26,26 @@ const ChatInbox = {
     const el = document.getElementById('inbox-mount');
     if (!el) return;
 
-    // Ensure user session exists so the inbox is never blocked
+    // If user is not signed in, show clean sign in prompt instead of injecting dummy account
     if (!state.currentUser) {
-      const defaultUser = {
-        id: 'user-student-current',
-        full_name: 'Devendra Parmar',
-        email: 'devendra@gsv.ac.in',
-        college_id: 'gsv-vadodara',
-        college_short_name: 'GSV Vadodara',
-        roll_number: '2024-BTECH-084',
-        avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200'
-      };
-      state.setCurrentUser(defaultUser);
-      try {
-        localStorage.setItem('campuscart_user', JSON.stringify(defaultUser));
-      } catch (e) {}
+      el.innerHTML = `
+        <div class="container" style="padding: 3rem 1rem; text-align: center;">
+          <div style="max-width: 440px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 1.5rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--surface-raised); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--accent);">
+              ${Icons.messageSquare ? Icons.messageSquare("w-6 h-6") : '💬'}
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--text-primary); margin-bottom: 0.5rem;">Student Sign In Required</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Please sign in with your student credentials to view and send campus messages.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" onclick="AuthModal.open('login')">Student Sign In</button>
+              <button class="btn btn-secondary btn-sm" onclick="state.setActiveView('marketplace')">← Marketplace</button>
+            </div>
+          </div>
+        </div>
+      `;
+      return;
     }
 
     el.innerHTML = `
@@ -292,13 +137,19 @@ const ChatInbox = {
     try {
       const saved = localStorage.getItem('gsv_inbox_conversations');
       if (saved) {
-        this.conversations = JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          // Clean out legacy dummy conversations
+          this.conversations = parsed.filter(c => c && !c.id.startsWith('conv-priya-') && !c.id.startsWith('conv-rohan-') && !c.id.startsWith('conv-aarav-') && !c.id.startsWith('conv-gsv-desk'));
+        } else {
+          this.conversations = [];
+        }
       } else {
-        this.conversations = JSON.parse(JSON.stringify(DEFAULT_CAMPUS_CONVERSATIONS));
-        this.saveConversations();
+        this.conversations = [];
       }
+      this.saveConversations();
     } catch (e) {
-      this.conversations = JSON.parse(JSON.stringify(DEFAULT_CAMPUS_CONVERSATIONS));
+      this.conversations = [];
     }
 
     // Update unread badge in state
@@ -322,10 +173,34 @@ const ChatInbox = {
       this.selectConversation(this.conversations[0]);
     } else if (this.activeConversation) {
       const updated = this.conversations.find(c => c.id === this.activeConversation.id);
-      if (updated) this.selectConversation(updated);
+      if (updated) {
+        this.selectConversation(updated);
+      } else {
+        this.activeConversation = null;
+        this.renderEmptyChatState();
+      }
     } else {
       this.renderEmptyChatState();
     }
+  },
+
+  renderEmptyChatState() {
+    const mainArea = document.getElementById('chat-main-area');
+    if (!mainArea) return;
+    mainArea.innerHTML = `
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 420px; padding: 2rem; text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--surface-raised); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--accent);">
+          ${Icons.messageSquare ? Icons.messageSquare("w-6 h-6") : '💬'}
+        </div>
+        <h3 style="font-family: var(--font-display); font-size: 1.35rem; color: var(--text-primary); margin-bottom: 0.4rem;">No Active Conversations</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 380px; line-height: 1.6; margin-bottom: 1.5rem;">
+          When you click "Chat with Seller" on any marketplace listing or another student contacts you, separate negotiation threads appear here.
+        </p>
+        <button class="btn btn-primary btn-sm" onclick="state.setActiveView('marketplace')">
+          Explore Marketplace Listings →
+        </button>
+      </div>
+    `;
   },
 
   saveConversations() {
