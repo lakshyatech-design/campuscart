@@ -127,27 +127,28 @@ const Navbar = {
                   <span style="font-weight: 700; max-width: 90px;" class="truncate">${firstName}</span>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
-                <div class="dropdown-menu hidden" id="user-dropdown-menu" style="position: absolute; right: 0; top: 120%; width: 220px;">
-                  <div style="padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border); margin-bottom: 0.35rem;">
-                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">${user.full_name || displayName}</div>
-                    <div style="font-size: 0.72rem; color: var(--text-muted);">${user.email}</div>
-                    <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px;">Verified Student</div>
+                <div class="dropdown-menu hidden" id="user-dropdown-menu" style="position: absolute; right: 0; top: 120%; width: 230px;">
+                  <div style="padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border); margin-bottom: 0.35rem;">
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary); text-transform: none;">${user.full_name || displayName}</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: none; word-break: break-all;">${user.email}</div>
+                    <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px; text-transform: none;">Verified Student</div>
                   </div>
-                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="UserProfileModal.open('account'); Navbar.closeUserMenu();">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    My Account / Manage Details
+                  <button class="nav-dropdown-item" onclick="UserProfileModal.open('account'); Navbar.closeUserMenu();">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); flex-shrink: 0;"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>My Account / Manage Details</span>
                   </button>
-                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="state.setActiveView('seller-dashboard'); Navbar.closeUserMenu();">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    My Listings
+                  <button class="nav-dropdown-item" onclick="state.setActiveView('seller-dashboard'); Navbar.closeUserMenu();">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); flex-shrink: 0;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    <span>My Listings</span>
                   </button>
-                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="UserProfileModal.open('wishlist'); Navbar.closeUserMenu();">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    Saved Wishlist
+                  <button class="nav-dropdown-item" onclick="UserProfileModal.open('wishlist'); Navbar.closeUserMenu();">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); flex-shrink: 0;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span>Saved Wishlist</span>
                   </button>
-                  <div style="height: 1px; background: var(--border); margin: 0.25rem 0;"></div>
-                  <button class="btn btn-ghost w-full text-danger" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; color: var(--danger);" onclick="Navbar.handleLogout();">
-                    Sign Out
+                  <div style="height: 1px; background: var(--border); margin: 0.35rem 0;"></div>
+                  <button class="nav-dropdown-item nav-dropdown-item-danger" onclick="Navbar.handleLogout();">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Sign Out</span>
                   </button>
                 </div>
               </div>
