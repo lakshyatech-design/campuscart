@@ -20,7 +20,7 @@ const AuthModal = {
 
   close() {
     const modalEl = document.getElementById('auth-modal');
-    if (modalEl) modalEl.classList.remove('open');
+    if (modalEl) modalEl.classList.remove('open'); modalEl.style.display = 'none';
   },
 
   switchMode(mode) {
