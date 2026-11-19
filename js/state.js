@@ -3,7 +3,12 @@
  */
 class StateManager {
   constructor() {
-    this.currentUser = null;
+    try {
+      const savedUser = localStorage.getItem('campuscart_user');
+      this.currentUser = savedUser ? JSON.parse(savedUser) : null;
+    } catch (e) {
+      this.currentUser = null;
+    }
     this.selectedCollege = null; // Will default to GSV
     this.colleges = [];
     this.exploreAllColleges = false;
@@ -42,6 +47,17 @@ class StateManager {
 
   setCurrentUser(user) {
     this.currentUser = user;
+    try {
+      if (user) {
+        localStorage.setItem('campuscart_user', JSON.stringify(user));
+        if (!localStorage.getItem('campuscart_token')) {
+          localStorage.setItem('campuscart_token', `${user.id || 'usr'}.mock_session`);
+        }
+      } else {
+        localStorage.removeItem('campuscart_user');
+        localStorage.removeItem('campuscart_token');
+      }
+    } catch (e) {}
     if (user && user.college_id && !this.selectedCollege) {
       const match = this.colleges.find(c => c.id === user.college_id);
       if (match) this.setSelectedCollege(match);
