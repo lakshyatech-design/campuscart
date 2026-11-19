@@ -12,9 +12,9 @@ const SellerDashboard = {
     const user = state.currentUser;
     if (!user) {
       el.innerHTML = `
-        <div class="container" style="padding: 4rem 1rem; text-align: center;">
-          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.5rem;">Seller Dashboard</h2>
-          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Please sign in to manage your campus listings and transactions.</p>
+        <div class="container" style="padding: 2rem 1rem 4rem; text-align: center;">
+          <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Seller Dashboard</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Please sign in with your GSV email to manage your campus listings and transactions.</p>
           <button class="btn btn-primary" onclick="AuthModal.open('login')">Sign In</button>
         </div>
       `;
@@ -22,17 +22,17 @@ const SellerDashboard = {
     }
 
     el.innerHTML = `
-      <div class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+      <div class="container" style="padding: 0 1rem 4rem 1rem;">
         <!-- Welcome Banner -->
-        <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-radius: var(--radius-xl); padding: 2rem; color: white; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem;">
+        <div style="background: linear-gradient(135deg, #111111 0%, #181818 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; color: white; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem;">
           <div>
-            <div style="font-size: 0.82rem; font-weight: 700; color: #60A5FA; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35rem;">
               CampusCart Seller Central
             </div>
-            <h1 style="font-size: 1.85rem; font-weight: 800; color: white; margin-bottom: 0.35rem;">
+            <h1 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem;">
               Welcome back, ${user.full_name}! 👋
             </h1>
-            <p style="font-size: 0.9rem; color: #94A3B8;">
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
               Campus: <strong>${user.college_short_name || 'GSV Vadodara'}</strong> • Student ID: ${user.roll_number || 'Verified'}
             </p>
           </div>
