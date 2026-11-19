@@ -16,9 +16,9 @@ const AdminDashboard = {
     const user = state.currentUser;
     if (!user || !user.is_admin) {
       el.innerHTML = `
-        <div class="container" style="padding: 4rem 1rem; text-align: center;">
-          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.5rem;">Admin Access Restricted</h2>
-          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">You need system administrator credentials to access this dashboard.</p>
+        <div class="container" style="padding: 2rem 1rem 4rem; text-align: center;">
+          <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Admin Access Restricted</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">You need system administrator credentials to access this dashboard.</p>
           <button class="btn btn-primary" onclick="AuthModal.loginDemo('user-admin')">Log in as Demo Administrator</button>
         </div>
       `;
@@ -26,12 +26,12 @@ const AdminDashboard = {
     }
 
     el.innerHTML = `
-      <div class="container" style="padding-top: 1.5rem; padding-bottom: 5rem;">
+      <div class="container" style="padding: 0 1rem 5rem 1rem;">
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">CampusCart Headquarters</div>
-            <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-navy);">Admin Control Center</h1>
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.25rem;">CampusCart Headquarters</div>
+            <h1 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--text-primary);">Admin Control Center</h1>
           </div>
           <div class="flex items-center gap-2">
             <button class="btn btn-secondary btn-sm" onclick="state.setActiveView('marketplace')">
