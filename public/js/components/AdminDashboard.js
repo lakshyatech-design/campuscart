@@ -128,7 +128,7 @@ const AdminDashboard = {
         <div style="background: var(--surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">Platform Health & Operations</h3>
           <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6;">
-            CampusCart is running with real-time SSE event bus streaming, multi-campus routing, and verified student ID checks. Gati Shakti Vishwavidyalaya (GSV) is designated as the primary launch university, with support for expansion to hundreds of campuses across India.
+            CampusCart is running with real-time SSE event bus streaming, unified campus routing, and verified student roll number checks. Gati Shakti Vishwavidyalaya (GSV) is designated as the primary launch university, with support for expansion to hundreds of campuses across India.
           </p>
         </div>
       `;
