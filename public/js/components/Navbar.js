@@ -131,7 +131,7 @@ const Navbar = {
                     My Listings
                   </button>
                   <div style="height: 1px; background: var(--border); margin: 0.25rem 0;"></div>
-                  <button class="btn btn-ghost w-full text-danger" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; color: var(--danger);" onclick="state.logout(); Navbar.closeUserMenu();">
+                  <button class="btn btn-ghost w-full text-danger" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; color: var(--danger);" onclick="Navbar.handleLogout();">
                     Sign Out
                   </button>
                 </div>
@@ -140,9 +140,6 @@ const Navbar = {
               <div class="nav-auth-desktop flex items-center gap-2">
                 <button class="btn btn-secondary btn-sm" onclick="AuthModal.open('login')">
                   Sign In
-                </button>
-                <button class="btn btn-ghost btn-sm" onclick="Navbar.quickDemoLogin()" style="color: var(--accent); font-weight: 700;">
-                  Demo
                 </button>
               </div>
             `}
@@ -190,13 +187,12 @@ const Navbar = {
               <a class="mobile-nav-item" onclick="UserProfileModal.open(); Navbar.toggleMobileMenu();">
                 Profile
               </a>
-              <a class="mobile-nav-item" style="color: var(--danger);" onclick="state.logout(); Navbar.toggleMobileMenu();">
+              <a class="mobile-nav-item" style="color: var(--danger);" onclick="Navbar.handleLogout();">
                 Sign Out
               </a>
             ` : `
               <div class="mobile-nav-auth-buttons">
                 <button class="btn btn-primary w-full" onclick="AuthModal.open('login'); Navbar.toggleMobileMenu();">Sign In</button>
-                <button class="btn btn-secondary w-full" onclick="Navbar.quickDemoLogin(); Navbar.toggleMobileMenu();">Student Demo</button>
               </div>
             `}
           </div>
@@ -298,16 +294,14 @@ const Navbar = {
     if (drawer) drawer.classList.toggle('hidden');
   },
 
-  async quickDemoLogin() {
-    try {
-      const res = await API.demoLogin('user-aarav');
-      if (res && res.user) {
-        state.setCurrentUser(res.user);
-        showToast('Logged in as Aarav Sharma (GSV Student)', 'success');
-        Navbar.render();
-      }
-    } catch (e) {
-      showToast('Demo login failed: ' + e.message, 'error');
+  handleLogout() {
+    this.closeUserMenu();
+    const drawer = document.getElementById('mobile-nav-drawer');
+    if (drawer && !drawer.classList.contains('hidden')) {
+      drawer.classList.add('hidden');
+    }
+    if (window.state && typeof window.state.logout === 'function') {
+      window.state.logout();
     }
   }
 };
