@@ -24,7 +24,7 @@ const SellerDashboard = {
     el.innerHTML = `
       <div class="container" style="padding: 0 1rem 4rem 1rem;">
         <!-- Welcome Banner -->
-        <div style="background: linear-gradient(135deg, #111111 0%, #181818 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; color: white; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem;">
+        <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow-sm); padding: 2rem; color: var(--text-primary); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem;">
           <div>
             <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35rem;">
               CampusCart Seller Central
