@@ -22,7 +22,7 @@ const UserProfileModal = {
 
   close() {
     const modalEl = document.getElementById('user-profile-modal');
-    if (modalEl) modalEl.classList.remove('open');
+    if (modalEl) modalEl.classList.remove('open'); modalEl.style.display = 'none';
   },
 
   async loadUserData() {
