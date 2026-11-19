@@ -267,7 +267,8 @@ window.NotificationCenter = (function () {
   }
 
   function toggleDropdown() {
-    if (isOpen) {
+    const dropdown = document.getElementById('gsv-notif-dropdown');
+    if (dropdown && (dropdown.classList.contains('open') || dropdown.classList.contains('is-open') || isOpen)) {
       closeDropdown();
     } else {
       openDropdown();
@@ -277,7 +278,9 @@ window.NotificationCenter = (function () {
   function openDropdown() {
     const dropdown = document.getElementById('gsv-notif-dropdown');
     if (!dropdown) return;
+    dropdown.classList.add('open');
     dropdown.classList.add('is-open');
+    dropdown.style.display = 'block';
     isOpen = true;
     renderDropdownList();
   }
@@ -285,7 +288,9 @@ window.NotificationCenter = (function () {
   function closeDropdown() {
     const dropdown = document.getElementById('gsv-notif-dropdown');
     if (!dropdown) return;
+    dropdown.classList.remove('open');
     dropdown.classList.remove('is-open');
+    dropdown.style.display = 'none';
     isOpen = false;
   }
 
