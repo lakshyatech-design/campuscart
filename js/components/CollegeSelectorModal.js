@@ -155,7 +155,7 @@ const CollegeSelectorModal = {
 
   close() {
     const modalEl = document.getElementById('college-modal');
-    if (modalEl) modalEl.classList.remove('open');
+    if (modalEl) modalEl.classList.remove('open'); modalEl.style.display = 'none';
   },
 
   select(collegeId) {
