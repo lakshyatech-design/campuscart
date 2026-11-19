@@ -15,6 +15,10 @@ const Navbar = {
     const unreadMsgs = state.unreadMessagesCount;
     const isSubPage = state.activeView && state.activeView !== 'marketplace';
 
+    const displayName = user ? ((user.full_name || user.email || 'Student').trim()) : '';
+    const firstName = displayName ? (displayName.split(' ')[0] || 'Student') : 'Student';
+    const userAvatar = (user && user.avatar_url) || 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120';
+
     if (typeof document !== 'undefined' && document.body) {
       document.body.setAttribute('data-view', state.activeView || 'marketplace');
     }
@@ -119,13 +123,13 @@ const Navbar = {
             ${user ? `
               <div class="relative nav-user-menu-desktop" style="position: relative;">
                 <button class="btn btn-secondary btn-sm nav-user-menu-btn" id="nav-user-menu-btn" style="border-radius: var(--radius-full); padding: 0.3rem 0.75rem; align-items: center; gap: 0.4rem;">
-                  <img src="${user.avatar_url}" class="chat-avatar" style="width: 24px; height: 24px; border-radius: 50%;" alt="Avatar" />
-                  <span style="font-weight: 700; max-width: 80px;" class="truncate">${user.full_name.split(' ')[0]}</span>
+                  <img src="${userAvatar}" class="chat-avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;" alt="Avatar" />
+                  <span style="font-weight: 700; max-width: 90px;" class="truncate">${firstName}</span>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
                 <div class="dropdown-menu hidden" id="user-dropdown-menu" style="position: absolute; right: 0; top: 120%; width: 220px;">
                   <div style="padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border); margin-bottom: 0.35rem;">
-                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">${user.full_name}</div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-primary);">${user.full_name || displayName}</div>
                     <div style="font-size: 0.72rem; color: var(--text-muted);">${user.email}</div>
                     <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px;">Verified Student</div>
                   </div>
@@ -155,14 +159,21 @@ const Navbar = {
               </div>
             `}
 
-            <!-- Mobile Hamburger -->
-            <button class="mobile-menu-btn" onclick="Navbar.toggleMobileMenu()" title="Navigate">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
+            <!-- Mobile Controls -->
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              ${user ? `
+                <button class="mobile-user-quick-btn" onclick="UserProfileModal.open('account')" title="My Account" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                  <img src="${userAvatar}" style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--accent); object-fit: cover;" alt="${firstName}" />
+                </button>
+              ` : ''}
+              <button class="mobile-menu-btn" onclick="Navbar.toggleMobileMenu()" title="Navigate">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -192,6 +203,16 @@ const Navbar = {
               Inbox ${unreadMsgs > 0 ? '(' + unreadMsgs + ')' : ''}
             </a>
             ${user ? `
+              <div style="padding: 0.85rem 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <img src="${userAvatar}" style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--accent); object-fit: cover;" alt="${firstName}" />
+                  <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">${user.full_name || displayName}</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">${user.email}</div>
+                    <div style="font-size: 0.7rem; font-weight: 700; color: var(--accent); margin-top: 2px;">Verified Student</div>
+                  </div>
+                </div>
+              </div>
               <a class="mobile-nav-item" onclick="UserProfileModal.open('account'); Navbar.toggleMobileMenu();">
                 👤 My Account / Manage Details
               </a>
