@@ -265,3 +265,5 @@ const ProductDetailModal = {
     }
   }
 };
+
+window.ProductDetailModal = ProductDetailModal;
