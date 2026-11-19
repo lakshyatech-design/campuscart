@@ -6,7 +6,7 @@
   <title>GSV Direct – Gati Shakti Vishwavidyalaya Verified Student & Logistics Exchange</title>
   <meta name="description" content="Official student-to-student marketplace for Gati Shakti Vishwavidyalaya (GSV Vadodara). Buy, sell, and negotiate textbooks, cycles, railway tickets, electronics, and verified hostel essentials.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8a97e'><rect x='4' y='3' width='16' height='15' rx='3'/><path d='m9 18-3 3'/><path d='m15 18 3 3'/></svg>">
-  <link rel="stylesheet" href="./css/app.css?v=forge2026_streamlined_v9">
+  <link rel="stylesheet" href="./css/app.css?v=forge2026_v8_session_hardened">
 </head>
 <body>
 
@@ -135,27 +135,27 @@
   </nav>
 
   <!-- Core Scripts -->
-  <script src="./js/icons.js?v=forge2026_v5"></script>
-  <script src="./js/interactions.js?v=forge2026_v5"></script>
-  <script src="./js/api.js?v=forge2026_v5"></script>
-  <script src="./js/state.js?v=forge2026_v5"></script>
+  <script src="./js/icons.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/interactions.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/api.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/state.js?v=forge2026_v8_session_hardened"></script>
 
   <!-- UI Components -->
-  <script src="./js/components/NotificationCenter.js?v=forge2026_v5"></script>
-  <script src="./js/components/Navbar.js?v=forge2026_v5"></script>
-  <script src="./js/components/CollegeSelectorModal.js?v=forge2026_v5"></script>
-  <script src="./js/components/HeroSection.js?v=forge2026_v5"></script>
-  <script src="./js/components/PopularCategories.js?v=forge2026_v5"></script>
-  <script src="./js/components/Marketplace.js?v=forge2026_v5"></script>
-  <script src="./js/components/ProductDetailModal.js?v=forge2026_v5"></script>
-  <script src="./js/components/SellItemModal.js?v=forge2026_v5"></script>
-  <script src="./js/components/ChatInbox.js?v=forge2026_v5"></script>
-  <script src="./js/components/SellerDashboard.js?v=forge2026_v5"></script>
-  <script src="./js/components/UserProfileModal.js?v=forge2026_v5"></script>
-  <script src="./js/components/AuthModal.js?v=forge2026_v5"></script>
-  <script src="./js/components/AdminDashboard.js?v=forge2026_v5"></script>
-  <script src="./js/components/ReportModal.js?v=forge2026_v5"></script>
-  <script src="./js/router.js?v=forge2026_fit_v5"></script>
+  <script src="./js/components/NotificationCenter.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/Navbar.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/CollegeSelectorModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/HeroSection.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/PopularCategories.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/Marketplace.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/ProductDetailModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/SellItemModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/ChatInbox.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/SellerDashboard.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/UserProfileModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/AuthModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/AdminDashboard.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/components/ReportModal.js?v=forge2026_v8_session_hardened"></script>
+  <script src="./js/router.js?v=forge2026_v8_session_hardened"></script>
 
   <!-- App Bootstrap -->
   <script>
@@ -252,9 +252,12 @@
         const meRes = await API.getMe();
         if (meRes && meRes.user) {
           state.setCurrentUser(meRes.user);
-          Navbar.render();
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Session verification notice:', e);
+      } finally {
+        Navbar.render();
+      }
 
       // 4. Initialize Notification Center
       try {
