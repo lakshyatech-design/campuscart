@@ -180,7 +180,8 @@ function seedInitialData() {
   }
 
   const users = [
-    { id: 'user-admin', full_name: 'GSV Operations Admin', email: 'admin@gsv.ac.in', mobile: '+91 99000 11223', college_id: 'gsv-vadodara', roll_number: 'STAFF-ADM-01', is_roll_private: 0, password_hash: hashPassword('admin123'), avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80', role: 'admin', is_admin: 1 }
+    { id: 'user-admin', full_name: 'GSV Operations Admin', email: 'admin@gsv.ac.in', mobile: '+91 99000 11223', college_id: 'gsv-vadodara', roll_number: 'STAFF-ADM-01', is_roll_private: 0, password_hash: hashPassword('admin123'), avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80', role: 'admin', is_admin: 1 },
+    { id: 'user-d953e9be', full_name: 'Prashant Gupta', email: 'prashant.gupta_btech25@gsv.ac.in', mobile: '+91 9988776655', college_id: 'gsv-vadodara', roll_number: '2025-BTECH-099', is_roll_private: 1, password_hash: hashPassword('student123'), avatar_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120', role: 'student', is_admin: 0 }
   ];
 
   const insertUser = db.prepare('INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, CURRENT_TIMESTAMP)');
