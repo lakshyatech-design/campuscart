@@ -79,6 +79,7 @@ const API = {
     try {
       localStorage.setItem('campuscart_registered_users', JSON.stringify(users));
       localStorage.setItem('campuscart_user', JSON.stringify(user));
+      localStorage.setItem('campuscart_last_active_user', JSON.stringify(user));
     } catch (e) {}
   },
 
@@ -222,24 +223,37 @@ const API = {
   },
 
   async getMe() {
-    const saved = localStorage.getItem('campuscart_user');
     let localUser = null;
-    if (saved) {
-      try { localUser = JSON.parse(saved); } catch (e) {}
-    }
+    try {
+      const saved = localStorage.getItem('campuscart_user') || localStorage.getItem('campuscart_last_active_user');
+      if (saved) localUser = JSON.parse(saved);
+      if (!localUser || !localUser.email) {
+        const registered = this.getRegisteredUsers();
+        if (registered && registered.length > 0) {
+          localUser = registered[registered.length - 1];
+        }
+      }
+    } catch (e) {}
 
     const token = this.getToken();
     if (token) {
       try {
         const res = await this.request('/api/auth/me');
         if (res && res.user) {
+          const isServerGeneric = !res.user.full_name || res.user.full_name === 'Verified Student';
           const merged = {
             ...res.user,
-            roll_number: res.user.roll_number || (localUser && localUser.roll_number) || '',
+            id: res.user.id || (localUser && localUser.id) || 'user-default',
+            full_name: (isServerGeneric && localUser && localUser.full_name) ? localUser.full_name : (res.user.full_name || (localUser && localUser.full_name) || 'GSV Student'),
+            email: (res.user.email && res.user.email !== 'student@gsv.ac.in') ? res.user.email : ((localUser && localUser.email) || res.user.email),
+            roll_number: (res.user.roll_number && res.user.roll_number !== '2024-BTECH-001' && res.user.roll_number !== 'GSV-STUDENT') ? res.user.roll_number : ((localUser && localUser.roll_number) || res.user.roll_number || ''),
             mobile: res.user.mobile || (localUser && localUser.mobile) || '',
-            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'Lalbaug Campus / Hostel'
+            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'Lalbaug Campus / Hostel',
+            avatar_url: res.user.avatar_url || (localUser && localUser.avatar_url) || ''
           };
           this.saveRegisteredUser(merged);
+          localStorage.setItem('campuscart_user', JSON.stringify(merged));
+          localStorage.setItem('campuscart_last_active_user', JSON.stringify(merged));
           return { user: merged };
         }
       } catch (e) {}
@@ -249,6 +263,8 @@ const API = {
       if (!this.getToken()) {
         this.setToken(`${localUser.id || 'usr'}.mock_session`);
       }
+      localStorage.setItem('campuscart_user', JSON.stringify(localUser));
+      localStorage.setItem('campuscart_last_active_user', JSON.stringify(localUser));
       return { user: localUser };
     }
     return { user: null };
@@ -263,6 +279,7 @@ const API = {
     try {
       localStorage.removeItem('campuscart_token');
       localStorage.removeItem('campuscart_user');
+      localStorage.removeItem('campuscart_last_active_user');
       sessionStorage.clear();
     } catch (e) {}
     return { success: true };
