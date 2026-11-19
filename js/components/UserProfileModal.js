@@ -131,7 +131,7 @@ const UserProfileModal = {
             <div style="display: flex; align-items: center; gap: 1.25rem;">
               <div style="position: relative;">
                 <img src="${user.avatar_url || currentAvatar}" style="width: 76px; height: 76px; border-radius: 50%; border: 2px solid var(--accent); box-shadow: var(--shadow-sm); object-fit: cover;" alt="${user.full_name}" />
-                <span style="position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; border-radius: 50%; background: #22c55e; border: 2px solid #000;" title="Verified Student Active"></span>
+                <span style="position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; border-radius: 50%; background: #22c55e; border: 2px solid #ffffff;" title="Verified Student Active"></span>
               </div>
               <div>
                 <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem 0;">
