@@ -57,12 +57,12 @@ const Router = {
 
   _wrapModals() {
     const modalDefinitions = [
-      { name: 'product-detail', getObj: () => window.ProductDetailModal },
-      { name: 'college-selector', getObj: () => window.CollegeSelectorModal },
-      { name: 'sell-item', getObj: () => window.SellItemModal },
-      { name: 'auth', getObj: () => window.AuthModal },
-      { name: 'user-profile', getObj: () => window.UserProfileModal },
-      { name: 'report', getObj: () => window.ReportModal }
+      { name: 'product-detail', getObj: () => (typeof window !== 'undefined' && window.ProductDetailModal) },
+      { name: 'college-selector', getObj: () => (typeof window !== 'undefined' && window.CollegeSelectorModal) },
+      { name: 'sell-item', getObj: () => (typeof window !== 'undefined' && window.SellItemModal) },
+      { name: 'auth', getObj: () => (typeof window !== 'undefined' && window.AuthModal) },
+      { name: 'user-profile', getObj: () => (typeof window !== 'undefined' && window.UserProfileModal) },
+      { name: 'report', getObj: () => (typeof window !== 'undefined' && window.ReportModal) }
     ];
 
     modalDefinitions.forEach(def => {
@@ -91,7 +91,7 @@ const Router = {
     });
 
     // Also wrap mobile drawer menu
-    if (window.Navbar && !window.Navbar._routerWrapped) {
+    if (typeof window !== 'undefined' && window.Navbar && !window.Navbar._routerWrapped) {
       window.Navbar._routerWrapped = true;
       const origToggle = window.Navbar.toggleMobileMenu ? window.Navbar.toggleMobileMenu.bind(window.Navbar) : null;
       if (origToggle) {
