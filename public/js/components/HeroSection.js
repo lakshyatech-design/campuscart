@@ -1,12 +1,14 @@
 /**
- * GSV Direct — Hero Section with Cinematic Drone Flyover of Gati Shakti Vishwavidyalaya
+ * GSV Direct — Hero Section (Apple Visionary 2026 Edition)
+ * Featuring 4K Drone Aerial Telemetry of Gati Shakti Vishwavidyalaya
  * 
- * Features:
- * - 4K Drone Aerial Video Background of Gati Shakti Vishwavidyalaya / NAIR Vadodara Campus
- * - Seamless Ambient 60 FPS Drone Canvas particle & flight telemetry simulation
- * - Interactive Drone Telemetry HUD badge with Pause/Play and Angle switching
- * - Triple-scrim dark luxury lighting for 100% text legibility
- * - Automatic IntersectionObserver optimization (pauses when scrolled out of view)
+ * Design:
+ * - Apple Keynote presentation theater layout
+ * - Precision-machined Apple Pro Display Hardware Frame for Drone Flyover
+ * - Pure obsidian headlines with SF Pro typography
+ * - Floating Frosted Glass Telemetry HUD
+ * - Seamless Ambient 60 FPS Drone Canvas in Apple Blue & Silver
+ * - Automatic IntersectionObserver optimization
  */
 
 const HeroSection = {
@@ -40,65 +42,26 @@ const HeroSection = {
 
     el.innerHTML = `
       <section class="hero-section" id="hero-section">
-        <!-- Cinematic GSV Drone View Background Container -->
-        <div class="hero-drone-bg" id="hero-drone-bg">
-          <!-- Ambient Drone Flight Canvas (telemetry, horizon grid, volumetric sweeps) -->
-          <canvas id="hero-drone-canvas"></canvas>
-
-          <!-- High-Definition Drone Video Stream -->
-          <div class="hero-video-wrap" id="hero-video-wrap">
-            <iframe 
-              id="gsv-drone-video" 
-              src="https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&start=${currentVideo.start}&enablejsapi=1" 
-              allow="autoplay; encrypted-media" 
-              title="Gati Shakti Vishwavidyalaya Campus Drone View"
-              loading="lazy"
-            ></iframe>
-          </div>
-
-          <!-- Luxury Cinematic Scrims -->
-          <div class="hero-scrim-top"></div>
-          <div class="hero-scrim-center"></div>
-          <div class="hero-scrim-bottom"></div>
-        </div>
-
-        <!-- Floating Drone Telemetry Badge -->
-        <div class="hero-drone-hud">
-          <div class="drone-hud-live-tag">
-            <span class="drone-pulse-dot"></span>
-            <span>DRONE CAM</span>
-          </div>
-          <div class="drone-hud-title" id="drone-hud-title">${currentVideo.title}</div>
-          <div class="drone-hud-controls">
-            <button class="drone-btn" id="drone-toggle-btn" onclick="HeroSection.toggleVideoPlay()" title="Toggle Video Playback">
-              <span id="drone-play-icon">${this.isPlaying ? '⏸' : '▶'}</span>
-            </button>
-            <button class="drone-btn" id="drone-cam-btn" onclick="HeroSection.cycleCameraView()" title="Switch Drone Angle">
-              🔄 Switch Cam
-            </button>
-          </div>
-        </div>
-
-        <!-- Foreground Hero Content -->
+        <!-- Foreground Hero Content (Apple Keynote Style) -->
         <div class="hero-content">
           <div class="hero-kicker">
             <span class="kicker-dot"></span>
-            <span>Verified Campus Exchange</span>
+            <span>GSV Direct • Next-Gen Campus Commerce</span>
           </div>
 
           <h1 class="hero-headline">
-            For Those Who<br>
-            <em>Refuse Ordinary</em>
+            Campus Commerce.<br>
+            <em>Engineered Forward.</em>
           </h1>
 
           <p class="hero-sub">
-            The official student-to-student marketplace for Gati Shakti Vishwavidyalaya. 
-            Direct campus handovers, verified credentials, zero commission.
+            The university marketplace engineered with precision. 
+            100% verified student credentials, direct peer-to-peer exchange, and zero commission.
           </p>
 
           <div class="hero-cta-row">
             <button class="btn btn-primary btn-lg" onclick="HeroSection.handleExploreClick()">
-              Explore Listings
+              Explore Marketplace
             </button>
             <button class="btn btn-secondary btn-lg" onclick="HeroSection.handleSellClick()">
               + List an Item
@@ -112,13 +75,54 @@ const HeroSection = {
             </div>
             <div class="hero-metric-divider"></div>
             <div class="hero-metric">
-              <div class="hero-metric-value">In-Chat Meetup</div>
-              <div class="hero-metric-label">Direct Handover</div>
+              <div class="hero-metric-value">Direct Meetup</div>
+              <div class="hero-metric-label">In-Chat Handover</div>
             </div>
             <div class="hero-metric-divider"></div>
             <div class="hero-metric">
               <div class="hero-metric-value">₹0</div>
-              <div class="hero-metric-label">Commission</div>
+              <div class="hero-metric-label">Commission Fee</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apple Pro Theater Hardware Frame (GSV 4K Drone View) -->
+        <div class="hero-theater-container">
+          <div class="hero-theater-hardware-bezel">
+            <!-- Camera / Sensor Notch Dot -->
+            <div class="theater-camera-dot"></div>
+
+            <!-- Drone Video Viewport -->
+            <div class="hero-theater-screen">
+              <canvas id="hero-drone-canvas"></canvas>
+
+              <iframe 
+                id="gsv-drone-video" 
+                src="https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&start=${currentVideo.start}&enablejsapi=1" 
+                allow="autoplay; encrypted-media" 
+                title="Gati Shakti Vishwavidyalaya Campus Drone View"
+                loading="lazy"
+              ></iframe>
+
+              <!-- Fallback Poster when iframe is offline / sandboxed -->
+              <div class="hero-theater-fallback-poster"></div>
+
+              <!-- Floating Apple Frosted Glass Drone HUD Badge -->
+              <div class="hero-drone-hud">
+                <div class="drone-hud-live-tag">
+                  <span class="drone-pulse-dot"></span>
+                  <span>LIVE 4K</span>
+                </div>
+                <div class="drone-hud-title" id="drone-hud-title">${currentVideo.title}</div>
+                <div class="drone-hud-controls">
+                  <button class="drone-btn" id="drone-toggle-btn" onclick="HeroSection.toggleVideoPlay()" title="Toggle Video Playback">
+                    <span id="drone-play-icon">${this.isPlaying ? '⏸' : '▶'}</span>
+                  </button>
+                  <button class="drone-btn" id="drone-cam-btn" onclick="HeroSection.cycleCameraView()" title="Switch Drone Angle">
+                    🔄 Switch Cam
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -128,8 +132,6 @@ const HeroSection = {
     // Initialize Drone Canvas & Video Transition
     setTimeout(() => {
       this.initDroneCanvas();
-      const wrap = document.getElementById('hero-video-wrap');
-      if (wrap) wrap.classList.add('loaded');
       this.setupObserver();
     }, 100);
   },
@@ -161,13 +163,16 @@ const HeroSection = {
           }),
           '*'
         );
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Could not postMessage to drone iframe:', e);
+      }
     }
   },
 
   initDroneCanvas() {
     const canvas = document.getElementById('hero-drone-canvas');
     if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -180,8 +185,8 @@ const HeroSection = {
       height = canvas.height = canvas.offsetHeight;
     });
 
-    // Particle nodes representing aerial campus survey points & transit lines
-    const particles = Array.from({ length: 42 }, () => ({
+    // Particle nodes representing aerial campus survey points
+    const particles = Array.from({ length: 32 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 0.45,
@@ -196,45 +201,45 @@ const HeroSection = {
       telemetryTick++;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Subtle Drone Horizon Scan Line
+      // 1. Subtle Drone Horizon Scan Line (Apple Blue Tint)
       const horizonY = height * 0.55 + Math.sin(telemetryTick * 0.015) * 12;
       ctx.beginPath();
       ctx.moveTo(0, horizonY);
       ctx.lineTo(width, horizonY);
-      ctx.strokeStyle = 'rgba(200, 169, 126, 0.08)';
+      ctx.strokeStyle = 'rgba(0, 113, 227, 0.15)';
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 8]);
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // 2. Drone Targeting Crosshair in Translucent Gold
+      // 2. Drone Targeting Reticle
       const centerX = width * 0.5;
-      const centerY = height * 0.42;
-      ctx.strokeStyle = 'rgba(200, 169, 126, 0.12)';
+      const centerY = height * 0.45;
+      ctx.strokeStyle = 'rgba(0, 113, 227, 0.22)';
       ctx.lineWidth = 1.2;
 
       // Outer Target Reticle
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 38, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, 34, 0, Math.PI * 2);
       ctx.stroke();
 
       // Crosshairs
       ctx.beginPath();
-      ctx.moveTo(centerX - 48, centerY);
-      ctx.lineTo(centerX - 12, centerY);
-      ctx.moveTo(centerX + 12, centerY);
-      ctx.lineTo(centerX + 48, centerY);
-      ctx.moveTo(centerX, centerY - 48);
-      ctx.lineTo(centerX, centerY - 12);
-      ctx.moveTo(centerX, centerY + 12);
-      ctx.lineTo(centerX, centerY + 48);
+      ctx.moveTo(centerX - 44, centerY);
+      ctx.lineTo(centerX - 10, centerY);
+      ctx.moveTo(centerX + 10, centerY);
+      ctx.lineTo(centerX + 44, centerY);
+      ctx.moveTo(centerX, centerY - 44);
+      ctx.lineTo(centerX, centerY - 10);
+      ctx.moveTo(centerX, centerY + 10);
+      ctx.lineTo(centerX, centerY + 44);
       ctx.stroke();
 
       // 3. Drone Telemetry Watermark Coordinates
-      ctx.font = '10px monospace';
-      ctx.fillStyle = 'rgba(200, 169, 126, 0.3)';
-      ctx.fillText(`LAT 22.2882° N • LON 73.1974° E • ALT ${(45 + Math.sin(telemetryTick * 0.02) * 4).toFixed(1)}M`, 24, height - 24);
-      ctx.fillText(`GSV VADODARA HERITAGE SURVEY • 4K DRONE`, width - 260, height - 24);
+      ctx.font = '10px -apple-system, BlinkMacSystemFont, "SF Pro Text", monospace';
+      ctx.fillStyle = 'rgba(0, 113, 227, 0.6)';
+      ctx.fillText(`LAT 22.2882° N • LON 73.1974° E • ALT ${(45 + Math.sin(telemetryTick * 0.02) * 4).toFixed(1)}M`, 16, height - 16);
+      ctx.fillText(`GSV VADODARA HERITAGE SURVEY • 4K DRONE`, Math.max(16, width - 260), height - 16);
 
       // 4. Floating Ambient Particles & Grid Connections
       particles.forEach(p => {
@@ -247,21 +252,21 @@ const HeroSection = {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200, 169, 126, ${p.alpha})`;
+        ctx.fillStyle = `rgba(0, 113, 227, ${p.alpha})`;
         ctx.fill();
       });
 
-      // Connect nearby particles with delicate gold filament lines
+      // Connect nearby particles with delicate filament lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 95) {
+          if (dist < 85) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(200, 169, 126, ${0.1 * (1 - dist / 95)})`;
+            ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 * (1 - dist / 85)})`;
             ctx.lineWidth = 0.75;
             ctx.stroke();
           }
