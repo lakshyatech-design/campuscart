@@ -49,9 +49,9 @@ const ChatInbox = {
     }
 
     el.innerHTML = `
-      <div class="container" style="padding: 0 1rem 3rem 1rem;">
+      <div class="container" style="padding: 0.5rem 1rem 3rem 1rem;">
         <!-- Header -->
-        <div class="inbox-page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div class="inbox-page-header" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
           <div>
             <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35rem;">
               Campus Communications Hub
