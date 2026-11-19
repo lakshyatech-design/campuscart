@@ -100,7 +100,7 @@ const API = {
         college_short_name: 'GSV Vadodara',
         roll_number: (formData.roll_number || '').trim(),
         mobile: (formData.mobile || '').trim(),
-        campus_location: formData.campus_location || 'Lalbaug Campus / Hostel',
+        campus_location: formData.campus_location || 'GSV Campus (Handover via in-app chat)',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
@@ -120,7 +120,7 @@ const API = {
         college_short_name: 'GSV Vadodara',
         roll_number: (formData.roll_number || '').trim(),
         mobile: (formData.mobile || '').trim(),
-        campus_location: formData.campus_location || 'Lalbaug Campus / Hostel',
+        campus_location: formData.campus_location || 'GSV Campus (Handover via in-app chat)',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
@@ -190,7 +190,7 @@ const API = {
         college_short_name: 'GSV Vadodara',
         roll_number: derivedRoll,
         mobile: '',
-        campus_location: 'Lalbaug Campus / Hostel',
+        campus_location: 'GSV Campus (Handover via in-app chat)',
         role: 'student',
         is_admin: 0,
         is_verified: 1,
@@ -248,7 +248,7 @@ const API = {
             email: (res.user.email && res.user.email !== 'student@gsv.ac.in') ? res.user.email : ((localUser && localUser.email) || res.user.email),
             roll_number: (res.user.roll_number && res.user.roll_number !== '2024-BTECH-001' && res.user.roll_number !== 'GSV-STUDENT') ? res.user.roll_number : ((localUser && localUser.roll_number) || res.user.roll_number || ''),
             mobile: res.user.mobile || (localUser && localUser.mobile) || '',
-            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'Lalbaug Campus / Hostel',
+            campus_location: res.user.campus_location || (localUser && localUser.campus_location) || 'GSV Campus (Handover via in-app chat)',
             avatar_url: res.user.avatar_url || (localUser && localUser.avatar_url) || ''
           };
           this.saveRegisteredUser(merged);
