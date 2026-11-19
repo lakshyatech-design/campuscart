@@ -1,71 +1,73 @@
 /* ==========================================================================
-   GSV DIRECT — FORGE AUTOMOTIVE INSPIRED DESIGN SYSTEM
-   Reference: forgeautomotive.co.uk (Awwwards SOTD 2026)
-   Aesthetic: Pure Black, Luxury Serif Headlines, Cinematic Photography
-   Minimal Chrome • Editorial Typography • Mobile-First
+   GSV DIRECT — APPLE VISIONARY 2026 LIGHT MODE DESIGN SYSTEM
+   Reference: apple.com (Liquid Retina, VisionOS Frosted Glass & SF Pro Engineering)
+   Aesthetic: Optic Pure White, Aluminum Titanium Canvas, Obsidian SF Pro, Precision Hairlines
+   Zero Dark Mode Remnants • Multi-Layer Ambient Shadows • Mobile-First Zero-Slide
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* ─── Global Design Tokens ─── */
+/* ─── Global Design Tokens (Apple 2026 Light Mode) ─── */
 :root {
-  /* Forge-Inspired Pure Black Canvas */
-  --bg: #000000;
-  --bg-subtle: #080808;
-  --surface: #111111;
-  --surface-hover: #181818;
-  --surface-raised: #1a1a1a;
-  --surface-glass: rgba(0, 0, 0, 0.85);
+  /* Apple Neutral Titanium Canvas */
+  --bg: #f5f5f7;
+  --bg-subtle: #fafafc;
+  --surface: #ffffff;
+  --surface-hover: #f0f0f4;
+  --surface-raised: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.82);
+  --surface-glass-border: rgba(0, 0, 0, 0.08);
 
-  /* Typography Colors */
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.4);
-  --text-faint: rgba(255, 255, 255, 0.15);
+  /* Typography Colors (Apple Obsidian & Graphite Hierarchy) */
+  --text-primary: #1d1d1f;
+  --text-secondary: #515154;
+  --text-muted: #86868b;
+  --text-faint: #d2d2d7;
 
-  /* Accent: Warm Gold (luxury, refined) */
-  --accent: #c8a97e;
-  --accent-light: #e0c9a6;
-  --accent-dark: #a68b5b;
-  --accent-glow: rgba(200, 169, 126, 0.15);
+  /* Accent: Apple Signature Electric Blue */
+  --accent: #0071e3;
+  --accent-light: #2997ff;
+  --accent-dark: #0062c4;
+  --accent-glow: rgba(0, 113, 227, 0.12);
 
   /* Status Colors */
-  --success: #4ade80;
-  --danger: #ef4444;
-  --info: #60a5fa;
-  --warning: #fbbf24;
+  --success: #34c759;
+  --danger: #ff3b30;
+  --info: #0071e3;
+  --warning: #ff9500;
 
-  /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.15);
-  --border-accent: rgba(200, 169, 126, 0.3);
-  --border-hairline: 1px solid rgba(255, 255, 255, 0.08);
+  /* Hairlines & Borders */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.16);
+  --border-accent: rgba(0, 113, 227, 0.35);
+  --border-hairline: 1px solid rgba(0, 0, 0, 0.08);
 
   /* Legacy & Semantic Compatibility Variables */
-  --ink-display: #ffffff;
-  --ink-primary: #f4f4f5;
-  --ink-secondary: #a1a1aa;
-  --ink-muted: #71717a;
-  --ink-faint: #3f3f46;
-  --surface-inset: #141414;
-  --surface-card: #111111;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-primary: #c8a97e;
-  --color-primary-border: rgba(200, 169, 126, 0.3);
-  --color-text: #ffffff;
-  --color-text-secondary: rgba(255, 255, 255, 0.7);
-  --color-text-muted: rgba(255, 255, 255, 0.4);
-  --color-navy: #ffffff;
-  --color-accent-emerald: #4ade80;
-  --color-accent-rose: #ef4444;
-  --cobalt: #c8a97e;
-  --cobalt-light: rgba(200, 169, 126, 0.15);
+  --ink-display: #1d1d1f;
+  --ink-primary: #1d1d1f;
+  --ink-secondary: #515154;
+  --ink-muted: #86868b;
+  --ink-faint: #d2d2d7;
+  --surface-inset: #f5f5f7;
+  --surface-card: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-primary: #0071e3;
+  --color-primary-border: rgba(0, 113, 227, 0.3);
+  --color-text: #1d1d1f;
+  --color-text-secondary: #515154;
+  --color-text-muted: #86868b;
+  --color-navy: #1d1d1f;
+  --color-accent-emerald: #34c759;
+  --color-accent-rose: #ff3b30;
+  --cobalt: #0071e3;
+  --cobalt-light: rgba(0, 113, 227, 0.12);
+  --rose: #ff3b30;
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --radius-2xl: 16px;
+  --radius-2xl: 20px;
 
-  /* Typography */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography — Apple SF Pro Sans Stack (No Serifs) */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Inter", sans-serif;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -76,18 +78,19 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* Radius */
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-full: 9999px;
+  /* Radius (Apple Precision Radii) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-modal: 24px;
+  --radius-full: 980px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
-  --shadow-elevated: 0 12px 48px rgba(0,0,0,0.7);
+  /* Multi-Layer Diffuse Ambient Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 24px 64px rgba(0, 0, 0, 0.12);
 
   /* Transitions */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -3533,4 +3536,696 @@ input[type="range"]::-webkit-slider-thumb {
   pointer-events: auto !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+
+/* ==========================================================================
+   APPLE VISIONARY 2026 LIGHT MODE MASTER ARCHITECTURE
+   Guarantees 100% Light Mode across all components, modals, feeds & states
+   ========================================================================== */
+
+/* ─── Global Base Enforcements ─── */
+body {
+  background-color: var(--bg) !important;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-body) !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display) !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* ─── Apple Liquid Retina Navbar ─── */
+.navbar,
+.navbar.scrolled,
+.navbar.navbar-solid,
+body[data-view="inbox"] .navbar,
+body[data-view="seller-dashboard"] .navbar,
+body[data-view="admin"] .navbar {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03), 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+.brand-logo {
+  color: var(--text-primary) !important;
+}
+
+.gsv-emblem-badge {
+  color: var(--accent) !important;
+}
+
+.gsv-brand-title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: -0.02em !important;
+  color: #1d1d1f !important;
+}
+
+.gsv-brand-sub {
+  font-size: 0.65rem !important;
+  color: #86868b !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+
+.nav-item-link {
+  color: #515154 !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  padding: 0.45rem 0.85rem !important;
+  border-radius: 980px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.nav-item-link:hover {
+  color: #0071e3 !important;
+  background: rgba(0, 113, 227, 0.06) !important;
+}
+
+.nav-item-link.active {
+  color: #0071e3 !important;
+  background: rgba(0, 113, 227, 0.09) !important;
+  font-weight: 600 !important;
+}
+
+.nav-search-trigger {
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 980px !important;
+  color: #86868b !important;
+  padding: 0.4rem 0.85rem !important;
+  font-size: 0.8rem !important;
+}
+
+.nav-search-trigger:hover {
+  border-color: rgba(0, 113, 227, 0.4) !important;
+  background: #ffffff !important;
+  color: #1d1d1f !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.nav-search-trigger kbd {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 6px !important;
+  color: #86868b !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.gsv-notif-bell-btn {
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 50% !important;
+  color: #515154 !important;
+}
+
+.gsv-notif-bell-btn:hover {
+  background: #ffffff !important;
+  color: #0071e3 !important;
+  border-color: rgba(0, 113, 227, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.nav-user-menu-btn {
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 980px !important;
+  color: #1d1d1f !important;
+}
+
+.nav-user-menu-btn:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 113, 227, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dropdown-menu,
+#user-dropdown-menu,
+.gsv-notif-dropdown {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  color: #1d1d1f !important;
+}
+
+.nav-dropdown-item {
+  color: #1d1d1f !important;
+  border-radius: 10px !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.nav-dropdown-item:hover {
+  background: #f5f5f7 !important;
+  color: #0071e3 !important;
+}
+
+.nav-dropdown-item-danger {
+  color: #ff3b30 !important;
+}
+
+.nav-dropdown-item-danger:hover {
+  background: #fff2f2 !important;
+  color: #ff3b30 !important;
+}
+
+/* ─── Apple Buttons ─── */
+.btn {
+  border-radius: 980px !important;
+  font-family: var(--font-body) !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  font-weight: 500 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  border: 1px solid #0071e3 !important;
+  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25) !important;
+}
+
+.btn-primary:hover {
+  background: #0077ed !important;
+  border-color: #0077ed !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(0, 113, 227, 0.35) !important;
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #1d1d1f !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.09) !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-ghost {
+  color: #0071e3 !important;
+  background: transparent !important;
+}
+
+.btn-ghost:hover {
+  background: rgba(0, 113, 227, 0.08) !important;
+  color: #0077ed !important;
+}
+
+/* ─── Apple Keynote Hero Theater ─── */
+.hero-section {
+  background: #f5f5f7 !important;
+  padding-top: 7rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.hero-section::before {
+  background: radial-gradient(ellipse at center 20%, rgba(0, 113, 227, 0.06) 0%, transparent 70%) !important;
+}
+
+.hero-kicker {
+  background: rgba(0, 113, 227, 0.08) !important;
+  border: 1px solid rgba(0, 113, 227, 0.2) !important;
+  color: #0071e3 !important;
+  border-radius: 980px !important;
+  padding: 0.4rem 1rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.hero-kicker .kicker-dot {
+  background: #0071e3 !important;
+}
+
+.hero-headline {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.5rem, 6.5vw, 4.6rem) !important;
+  font-weight: 700 !important;
+  color: #1d1d1f !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.08 !important;
+}
+
+.hero-headline em {
+  color: #0071e3 !important;
+  font-style: normal !important;
+}
+
+.hero-sub {
+  color: #6e6e73 !important;
+  font-size: clamp(1rem, 2vw, 1.15rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+}
+
+.hero-metrics {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 980px !important;
+  padding: 0.85rem 2.2rem !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  display: inline-flex !important;
+}
+
+.hero-metric-value {
+  color: #1d1d1f !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  font-family: var(--font-body) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.hero-metric-label {
+  color: #86868b !important;
+  font-size: 0.74rem !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.hero-metric-divider {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Light Mode Scrims for GSV Drone Stream */
+.hero-scrim-top {
+  background: linear-gradient(180deg, rgba(245, 245, 247, 0.98) 0%, rgba(245, 245, 247, 0.7) 60%, transparent 100%) !important;
+}
+
+.hero-scrim-center {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(245, 245, 247, 0.75) 90%) !important;
+}
+
+.hero-scrim-bottom {
+  background: linear-gradient(0deg, #f5f5f7 0%, rgba(245, 245, 247, 0.85) 60%, transparent 100%) !important;
+}
+
+.hero-drone-hud {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+}
+
+.hero-drone-hud:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 113, 227, 0.3) !important;
+}
+
+.drone-hud-title {
+  color: #1d1d1f !important;
+}
+
+.drone-btn {
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+  border-radius: 980px !important;
+}
+
+.drone-btn:hover {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  border-color: #0071e3 !important;
+}
+
+/* ─── Apple Bento Category Tiles ─── */
+.category-section-master {
+  padding: 3rem 0 2rem !important;
+}
+
+.editorial-kicker-label {
+  color: #0071e3 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+}
+
+.editorial-title-large {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem) !important;
+  font-weight: 700 !important;
+  color: #1d1d1f !important;
+  letter-spacing: -0.025em !important;
+}
+
+.category-pill {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 18px !important;
+  padding: 1.25rem 0.75rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.category-pill:hover {
+  border-color: rgba(0, 113, 227, 0.3) !important;
+  background: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06) !important;
+}
+
+.category-pill.active {
+  background: #0071e3 !important;
+  border-color: #0071e3 !important;
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.3) !important;
+}
+
+.category-pill .cat-icon-wrap {
+  color: #0071e3 !important;
+}
+
+.category-pill.active .cat-icon-wrap {
+  color: #ffffff !important;
+}
+
+.cat-name {
+  color: #1d1d1f !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+.category-pill.active .cat-name {
+  color: #ffffff !important;
+}
+
+/* ─── Apple Store Product Grid & Cards ─── */
+.marketplace-filter-header-bar {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+.filter-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+.filter-title {
+  color: #1d1d1f !important;
+  font-weight: 700 !important;
+}
+
+.filter-label {
+  color: #515154 !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+.input-field {
+  background: #f5f5f7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  color: #1d1d1f !important;
+  font-size: 0.9rem !important;
+}
+
+.input-field::placeholder {
+  color: #86868b !important;
+}
+
+.input-field:focus {
+  background: #ffffff !important;
+  border-color: #0071e3 !important;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15) !important;
+}
+
+select.input-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23515154' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E") !important;
+}
+
+.product-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.product-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-image-container {
+  background: #f5f5f7 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+
+.product-badge-condition {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(8px) !important;
+  color: #1d1d1f !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 980px !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.product-wishlist-btn {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #86868b !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.product-wishlist-btn:hover {
+  background: #ffffff !important;
+  color: #ff3b30 !important;
+  transform: scale(1.08) !important;
+}
+
+.product-wishlist-btn.active {
+  color: #ff3b30 !important;
+}
+
+.product-price {
+  color: #1d1d1f !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  font-family: var(--font-body) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.product-category-tag {
+  background: #f5f5f7 !important;
+  color: #515154 !important;
+  border-radius: 980px !important;
+  font-size: 0.72rem !important;
+  padding: 0.2rem 0.65rem !important;
+}
+
+.product-title {
+  color: #1d1d1f !important;
+  font-size: 0.98rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.product-college-badge {
+  color: #86868b !important;
+  font-size: 0.76rem !important;
+}
+
+/* ─── Apple Sheet Modals ─── */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.modal-card,
+.modal-content {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+  color: #1d1d1f !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.modal-title {
+  font-family: var(--font-display) !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  color: #1d1d1f !important;
+  letter-spacing: -0.02em !important;
+}
+
+.modal-close-btn {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #86868b !important;
+  border-radius: 50% !important;
+  border: none !important;
+  transition: all 0.2s !important;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #1d1d1f !important;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.form-label {
+  color: #515154 !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* User Profile Tabs & Modal Styling */
+.user-profile-tab-btn,
+.profile-tab-btn {
+  border-radius: 980px !important;
+  padding: 0.5rem 1.25rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.user-profile-tab-btn.active,
+.profile-tab-btn.active {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+}
+
+/* ─── Apple Chat & Inbox ─── */
+.inbox-container,
+.chat-container {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
+}
+
+.chat-sidebar {
+  border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: #fbfbfd !important;
+}
+
+.chat-thread-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+
+.chat-thread-item:hover {
+  background: #f5f5f7 !important;
+}
+
+.chat-thread-item.active {
+  background: rgba(0, 113, 227, 0.08) !important;
+  border-left: 3px solid #0071e3 !important;
+}
+
+.chat-bubble.bubble-sent {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  border-radius: 18px 18px 4px 18px !important;
+}
+
+.chat-bubble.bubble-received {
+  background: #e9e9eb !important;
+  color: #1d1d1f !important;
+  border-radius: 18px 18px 18px 4px !important;
+}
+
+/* ─── Apple Tiered Light Footer ─── */
+.footer {
+  background: #f5f5f7 !important;
+  border-top: 1px solid #d2d2d7 !important;
+  padding: 3.5rem 0 2.5rem !important;
+  margin-top: 4rem !important;
+  color: #86868b !important;
+}
+
+.footer-col h4 {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  color: #1d1d1f !important;
+}
+
+.footer-links a {
+  color: #86868b !important;
+  font-size: 0.82rem !important;
+}
+
+.footer-links a:hover {
+  color: #0071e3 !important;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #86868b !important;
+  font-size: 0.75rem !important;
+}
+
+/* ─── Mobile Bottom Dock ─── */
+.mobile-nav-bar {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.mobile-nav-item {
+  color: #86868b !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
+.mobile-nav-item.active {
+  color: #0071e3 !important;
+}
+
+.mobile-nav-drawer {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+}
+
+.mobile-nav-inner .mobile-nav-item {
+  font-family: var(--font-display) !important;
+  color: #1d1d1f !important;
+  font-weight: 600 !important;
+}
+
+.mobile-nav-inner .mobile-nav-item:hover,
+.mobile-nav-inner .mobile-nav-item.active {
+  color: #0071e3 !important;
 }
