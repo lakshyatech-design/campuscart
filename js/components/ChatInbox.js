@@ -14,13 +14,13 @@ const ChatInbox = {
 
     if (!state.currentUser) {
       el.innerHTML = `
-        <div class="container" style="padding: 4rem 1rem; text-align: center;">
+        <div class="container" style="padding: 2rem 1rem 4rem; text-align: center;">
           <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: var(--accent-glow); border: 1px solid var(--border-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent);">
             ${Icons.messageSquare("w-8 h-8")}
           </div>
-          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.5rem;">Student Inbox & Campus Chat</h2>
-          <p style="color: var(--color-text-muted); max-width: 440px; margin: 0 auto 1.5rem;">
-            Sign in to access your direct, private chats with student buyers and sellers across your campus.
+          <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Student Inbox & Campus Chat</h2>
+          <p style="color: var(--text-muted); max-width: 440px; margin: 0 auto 1.5rem; font-size: 0.9rem;">
+            Sign in with your GSV email to access your direct, private chats with student buyers and sellers across your campus.
           </p>
           <button class="btn btn-primary" onclick="AuthModal.open('login')">
             Sign In to CampusCart
@@ -31,16 +31,21 @@ const ChatInbox = {
     }
 
     el.innerHTML = `
-      <div class="container" style="padding-top: 1.5rem; padding-bottom: 3rem;">
+      <div class="container" style="padding: 0 1rem 3rem 1rem;">
         <!-- Header -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div class="inbox-page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--color-navy);">Campus Messages</h1>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35rem;">
+              Campus Communications Hub
+            </div>
+            <h1 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em;">
+              Campus Messages
+            </h1>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
               Safe in-app negotiation • Verified student identities • Direct meetup agreements
             </p>
           </div>
-          <button class="btn btn-secondary btn-sm" onclick="state.setActiveView('marketplace')">
+          <button class="btn btn-secondary btn-sm" onclick="state.setActiveView('marketplace')" style="display: inline-flex; align-items: center; gap: 0.4rem;">
             ← Back to Marketplace
           </button>
         </div>
@@ -163,6 +168,12 @@ const ChatInbox = {
         </div>
       `;
     }).join('');
+  },
+
+  backToList() {
+    const container = document.getElementById('inbox-container');
+    if (container) container.classList.remove('chat-active');
+    this.activeConversation = null;
   },
 
   selectConversationById(id) {
