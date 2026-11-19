@@ -73,43 +73,32 @@ const CollegeSelectorModal = {
             </div>
           </div>
 
-          <!-- Active Campus Zones -->
+          <!-- Single Unified GSV Campus -->
           <div style="margin-bottom: 1.25rem;">
             <div style="font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">
-              Connected GSV Campus Zones
+              Single Unified Campus • In-Chat Handover
             </div>
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
               <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
                   <span style="color: var(--accent);">🏛️</span>
                   <div>
-                    <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">Lalbaug Central Campus</div>
-                    <div style="font-size: 0.76rem; color: var(--text-muted);">Main Administrative Building, NAIR Campus, & Academic Lecture Halls</div>
+                    <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">GSV Vadodara Unified Campus</div>
+                    <div style="font-size: 0.76rem; color: var(--text-muted);">Academic Blocks, Central Library, Student Hostels, & Food Court</div>
                   </div>
                 </div>
-                <span style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Zone 01</span>
+                <span style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">GSV Official</span>
               </div>
 
               <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <span style="color: var(--accent);">🏢</span>
+                  <span style="color: var(--accent);">💬</span>
                   <div>
-                    <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">Pratap Nagar Railway Colony</div>
-                    <div style="font-size: 0.76rem; color: var(--text-muted);">Student Hostels 1–4, Dining Mess Halls, & Sports Ground</div>
+                    <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">Direct In-Chat Meetup Coordination</div>
+                    <div style="font-size: 0.76rem; color: var(--text-muted);">Buyers & sellers agree on convenient handover points inside the campus chat</div>
                   </div>
                 </div>
-                <span style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Zone 02</span>
-              </div>
-
-              <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                  <span style="color: var(--accent);">🚆</span>
-                  <div>
-                    <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-primary);">Vadodara Jn (BRC) Logistics Ring</div>
-                    <div style="font-size: 0.76rem; color: var(--text-muted);">Railway Ticket Resale & Student Weekend Transit Pass Ring</div>
-                  </div>
-                </div>
-                <span style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Zone 03</span>
+                <span style="font-size: 0.72rem; color: #22c55e; font-weight: 700;">Safe & Direct</span>
               </div>
             </div>
           </div>
