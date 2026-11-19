@@ -183,20 +183,13 @@ const AuthModal = {
               </div>
             </form>
           ` : (this.mode === 'register' ? `
-            <!-- Registration Form -->
+            <!-- Registration Form: Ask only Name, Roll No, Mobile No, Email, Password -->
             <form onsubmit="event.preventDefault(); AuthModal.handleRegister();">
+              <input type="hidden" id="reg-college" value="gsv-vadodara" />
+
               <div style="margin-bottom: 0.85rem;">
                 <label class="filter-label">Full Name *</label>
                 <input type="text" id="reg-name" required class="input-field input-plain" placeholder="" />
-              </div>
-
-              <div style="margin-bottom: 0.85rem;">
-                <label class="filter-label">Enrolled Campus *</label>
-                <input type="hidden" id="reg-college" value="gsv-vadodara" />
-                <div class="input-field input-plain" style="display: flex; align-items: center; justify-content: space-between; background: var(--surface-raised); color: var(--text-primary); cursor: default;">
-                  <span>Gati Shakti Vishwavidyalaya, Vadodara</span>
-                  <span style="font-size: 0.72rem; color: var(--accent); font-weight: 700;">Verified Campus</span>
-                </div>
               </div>
 
               <div style="margin-bottom: 0.85rem;">
@@ -228,13 +221,13 @@ const AuthModal = {
               </div>
 
               <div style="margin-bottom: 0.85rem;">
-                <label class="filter-label">GSV Email *</label>
+                <label class="filter-label">GSV Student Email *</label>
                 <input type="email" id="reg-email" required class="input-field input-plain" placeholder="" />
               </div>
 
               <div style="margin-bottom: 1.25rem;">
-                <label class="filter-label">Create Password *</label>
-                <input type="password" id="reg-password" required minlength="6" class="input-field input-plain" placeholder="" />
+                <label class="filter-label">Password *</label>
+                <input type="password" id="reg-password" required minlength="4" class="input-field input-plain" placeholder="" />
               </div>
 
               <button type="submit" class="btn btn-primary w-full" style="width: 100%;" id="auth-register-btn">
