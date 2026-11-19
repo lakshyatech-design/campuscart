@@ -146,60 +146,65 @@ const SellItemModal = {
       const jDate = dynData.journey_date ? this.toDisplayDate(dynData.journey_date) : '';
       return `
         <div style="background: var(--surface-raised); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
-          <div style="font-weight: 700; font-size: 0.88rem; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">
+          <div style="font-weight: 700; font-size: 0.88rem; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;">
             ${Icons.train ? Icons.train("w-4 h-4") : '🚆'}
             Railway Ticket Specifics
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
-            <div>
-              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem; display: block;">
-                Journey Date * (DD/MM/YYYY)
-              </label>
-              <div style="position: relative; display: flex; align-items: center;">
+
+          <!-- Prominent Dedicated Journey Date Row with DD/MM/YYYY and Calendar Option -->
+          <div style="margin-bottom: 0.85rem; background: rgba(200, 169, 126, 0.05); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 0.85rem;">
+            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-bottom: 0.45rem; display: flex; justify-content: space-between; align-items: center;">
+              <span>Journey Date <strong style="color: var(--accent);">(DD/MM/YYYY)</strong> *</span>
+              <span style="color: var(--accent); font-size: 0.72rem; text-transform: none; font-weight: 600;">📅 Calendar Date Picker</span>
+            </label>
+            <div style="display: flex; gap: 0.5rem; align-items: stretch;">
+              <div style="position: relative; flex: 1;">
                 <input 
                   type="text" 
                   id="dyn-journey-date" 
                   class="input-field input-plain" 
-                  placeholder="DD/MM/YYYY" 
+                  placeholder="DD/MM/YYYY (e.g. 25/11/2026)" 
                   pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" 
                   maxlength="10" 
                   value="${jDate}"
                   required 
-                  style="padding-right: 2.75rem; font-size: 0.9rem;" 
+                  style="width: 100%; box-sizing: border-box; font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; height: 42px; padding: 0.5rem 0.75rem;" 
                   oninput="SellItemModal.formatDateInput(this)" 
-                  title="Enter Journey Date in DD/MM/YYYY format or click calendar icon"
+                  title="Enter Journey Date in DD/MM/YYYY format or click Open Calendar"
                 />
+              </div>
+              <div style="position: relative; display: inline-flex; flex-shrink: 0;">
                 <input 
                   type="date" 
                   id="dyn-journey-date-picker" 
-                  tabindex="-1"
-                  aria-hidden="true"
-                  style="position: absolute; right: 0; top: 0; width: 44px; height: 100%; opacity: 0; cursor: pointer; z-index: 2;" 
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.01; cursor: pointer; z-index: 10;" 
                   onchange="SellItemModal.handleCalendarDatePick(this.value)" 
-                  title="Select from Calendar" 
+                  title="Open Calendar to select journey date" 
                 />
                 <button 
                   type="button" 
-                  class="calendar-trigger-btn" 
-                  onclick="SellItemModal.openCalendarPicker()" 
-                  style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--accent); cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; z-index: 1;" 
-                  title="Select Date from Calendar"
-                  aria-label="Open Calendar"
+                  id="dyn-calendar-trigger-btn"
+                  class="btn btn-primary btn-sm" 
+                  style="display: inline-flex; align-items: center; gap: 0.45rem; padding: 0 1rem; height: 42px; white-space: nowrap; font-weight: 700; font-size: 0.85rem; pointer-events: none;"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
                     <line x1="8" y1="2" x2="8" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                   </svg>
+                  <span>📅 Open Calendar</span>
                 </button>
               </div>
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
-                <span>Format: <strong style="color: var(--accent);">DD/MM/YYYY</strong></span>
-                <span>•</span>
-                <span>Type directly or click 📅 icon</span>
-              </div>
             </div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 0.4rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+              <span>Format: <strong style="color: var(--accent);">DD/MM/YYYY</strong></span>
+              <span>•</span>
+              <span>Type numbers directly or click <strong style="color: var(--accent);">📅 Open Calendar</strong> to select from date picker</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
             <div>
               <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem; display: block;">
                 Ticket Class *
@@ -212,6 +217,10 @@ const SellItemModal = {
                 <option value="CC (AC Chair Car)">CC (AC Chair Car)</option>
                 <option value="2S (Second Sitting)">2S (Second Sitting)</option>
               </select>
+            </div>
+            <div>
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem; display: block;">Train Name / Number *</label>
+              <input type="text" id="dyn-train-name" class="input-field input-plain" value="${dynData.train_name_number || ''}" placeholder="e.g. 12951 Mumbai-Delhi Rajdhani" required />
             </div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
