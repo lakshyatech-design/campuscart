@@ -251,38 +251,54 @@ module.exports = async function handler(req, res) {
     if (pathname === '/api/auth/register' && req.method === 'POST') {
       const data = await parseBody(req);
       const { full_name, email, mobile, college_id, roll_number, password, campus_location } = data;
-      if (!full_name || !email || !college_id || !password) {
-        return sendJSON(res, 400, { error: 'Please provide full name, email, college, and password.' });
+      if (!full_name || !email || !password) {
+        return sendJSON(res, 400, { error: 'Please provide full name, email, and password.' });
       }
 
-      const id = 'user-' + crypto.randomUUID().substring(0, 8);
-      const newUser = {
-        id,
-        full_name: full_name.trim(),
-        email: email.toLowerCase().trim(),
-        mobile: (mobile || '').trim(),
-        college_id,
-        roll_number: (roll_number || '').trim(),
-        campus_location: (campus_location || 'GSV Campus (Handover via in-app chat)').trim(),
-        is_roll_private: 1,
-        password_hash: hashPassword(password),
-        avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(full_name)}&backgroundColor=e2e8f0,b6e3f4`,
-        role: 'student',
-        is_admin: 0,
-        is_suspended: 0
-      };
-      DB.users.push(newUser);
+      const cleanEmail = email.toLowerCase().trim();
+      const cleanRoll = (roll_number || '').trim();
+      const cleanMobile = (mobile || '').trim();
+      const cleanName = full_name.trim();
+
+      // Check if user already exists with this email -> update their details
+      let user = DB.users.find(u => (u.email || '').toLowerCase().trim() === cleanEmail);
+      if (user) {
+        user.full_name = cleanName;
+        user.roll_number = cleanRoll;
+        user.mobile = cleanMobile;
+        user.is_roll_private = 0;
+        user.password_hash = hashPassword(password);
+        if (campus_location) user.campus_location = campus_location.trim();
+      } else {
+        const id = 'user-' + crypto.randomUUID().substring(0, 8);
+        user = {
+          id,
+          full_name: cleanName,
+          email: cleanEmail,
+          mobile: cleanMobile,
+          college_id: college_id || 'gsv-vadodara',
+          roll_number: cleanRoll,
+          campus_location: (campus_location || 'GSV Campus (Handover via in-app chat)').trim(),
+          is_roll_private: 0,
+          password_hash: hashPassword(password),
+          avatar_url: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(cleanName)}&backgroundColor=e2e8f0,b6e3f4`,
+          role: 'student',
+          is_admin: 0,
+          is_suspended: 0
+        };
+        DB.users.push(user);
+      }
       savePersistedUsers(DB.users);
 
-      const college = DB.colleges.find(c => c.id === college_id);
+      const college = DB.colleges.find(c => c.id === (user.college_id || 'gsv-vadodara'));
       const fullUser = {
-        ...newUser,
+        ...user,
         college_name: college ? college.name : 'GSV Vadodara',
         college_short_name: college ? college.short_name : 'GSV Vadodara'
       };
       delete fullUser.password_hash;
 
-      const token = `${newUser.id}.${crypto.randomBytes(16).toString('hex')}`;
+      const token = `${user.id}.${crypto.randomBytes(16).toString('hex')}`;
       return sendJSON(res, 201, { user: fullUser, token, message: 'Registration successful!' });
     }
 
@@ -291,15 +307,19 @@ module.exports = async function handler(req, res) {
       const authUser = getAuthUser(req);
       const data = await parseBody(req);
       const targetId = (authUser && authUser.id) || data.id || data.userId;
-      let user = DB.users.find(u => u.id === targetId);
-      if (!user && (data.email || (authUser && authUser.email))) {
-        const lookupEmail = (data.email || authUser.email).toLowerCase().trim();
+      const lookupEmail = ((data.email || (authUser && authUser.email)) || '').toLowerCase().trim();
+
+      let user = null;
+      if (targetId) {
+        user = DB.users.find(u => u.id === targetId);
+      }
+      if (!user && lookupEmail) {
         user = DB.users.find(u => (u.email || '').toLowerCase().trim() === lookupEmail);
       }
       if (!user) {
         user = {
           id: targetId || ('user-' + crypto.randomUUID().substring(0, 8)),
-          email: ((data.email || (authUser && authUser.email)) || '').toLowerCase().trim(),
+          email: lookupEmail,
           college_id: 'gsv-vadodara',
           role: 'student',
           is_admin: 0,
@@ -309,7 +329,10 @@ module.exports = async function handler(req, res) {
       }
 
       if (data.full_name) user.full_name = data.full_name.trim();
-      if (data.roll_number !== undefined) user.roll_number = data.roll_number.trim();
+      if (data.roll_number !== undefined) {
+        user.roll_number = data.roll_number.trim();
+        user.is_roll_private = 0;
+      }
       if (data.mobile !== undefined) user.mobile = data.mobile.trim();
       if (data.campus_location !== undefined) user.campus_location = data.campus_location.trim();
       if (data.avatar_url) user.avatar_url = data.avatar_url;
