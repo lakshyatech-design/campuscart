@@ -79,7 +79,7 @@ const SellItemModal = {
               ${this.editProductId ? 'Edit Product Listing' : 'List a Product on CampusCart'}
             </h3>
             <p style="font-size: 0.8rem; color: var(--color-text-muted);">
-              Posting to: <strong>${user ? user.college_short_name : (state.selectedCollege ? state.selectedCollege.short_name : 'GSV Vadodara')}</strong> • Zero Commission
+              Posting to: <strong>Campus Marketplace</strong> • Zero Commission
             </p>
           </div>
           <button class="modal-close-btn" onclick="SellItemModal.close()">
@@ -215,7 +215,7 @@ const SellItemModal = {
             <!-- Campus Meetup Location & Contact Preference -->
             <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem; margin-bottom: 1.25rem;">
               <div>
-                <label class="filter-label">GSV Campus Handover Location *</label>
+                <label class="filter-label">Campus Handover Location *</label>
                 <input 
                   type="text" 
                   id="sell-location" 
@@ -226,11 +226,11 @@ const SellItemModal = {
                 />
                 <datalist id="gsv-locations-list">
                   <option value="Hostel Block B, Room 214" />
-                  <option value="Hostel Cycle Parking, GSV Vadodara" />
+                  <option value="Hostel Cycle Parking" />
                   <option value="Pratap Nagar Railway Colony" />
                   <option value="Lalbaug Main Academic Block" />
-                  <option value="Central Library, GSV Main Campus" />
-                  <option value="GSV Student Activity Centre (SAC)" />
+                  <option value="Central Library" />
+                  <option value="Student Activity Centre (SAC)" />
                   <option value="Central Canteen Foyer" />
                 </datalist>
               </div>
