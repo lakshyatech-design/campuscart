@@ -263,19 +263,8 @@ const Navbar = {
 
   handleInboxClick() {
     if (!state.currentUser) {
-      const defaultUser = {
-        id: 'user-student-current',
-        full_name: 'Devendra Parmar',
-        email: 'devendra@gsv.ac.in',
-        college_id: 'gsv-vadodara',
-        college_short_name: 'GSV Vadodara',
-        roll_number: '2024-BTECH-084',
-        avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200'
-      };
-      state.setCurrentUser(defaultUser);
-      try {
-        localStorage.setItem('campuscart_user', JSON.stringify(defaultUser));
-      } catch (e) {}
+      AuthModal.open('login');
+      return;
     }
     state.setActiveView('inbox');
   },
