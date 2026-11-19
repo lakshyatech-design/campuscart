@@ -157,3 +157,5 @@ const UserProfileModal = {
     }
   }
 };
+
+window.UserProfileModal = UserProfileModal;
