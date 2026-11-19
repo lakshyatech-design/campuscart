@@ -129,11 +129,17 @@ const Navbar = {
                     <div style="font-size: 0.72rem; color: var(--text-muted);">${user.email}</div>
                     <div style="font-size: 0.68rem; font-weight: 700; color: var(--accent); margin-top: 3px;">Verified Student</div>
                   </div>
-                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start;" onclick="UserProfileModal.open(); Navbar.closeUserMenu();">
-                    Profile & Settings
+                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="UserProfileModal.open('account'); Navbar.closeUserMenu();">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    My Account / Manage Details
                   </button>
-                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start;" onclick="state.setActiveView('seller-dashboard'); Navbar.closeUserMenu();">
+                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="state.setActiveView('seller-dashboard'); Navbar.closeUserMenu();">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                     My Listings
+                  </button>
+                  <button class="btn btn-ghost w-full" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; gap: 0.5rem;" onclick="UserProfileModal.open('wishlist'); Navbar.closeUserMenu();">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    Saved Wishlist
                   </button>
                   <div style="height: 1px; background: var(--border); margin: 0.25rem 0;"></div>
                   <button class="btn btn-ghost w-full text-danger" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; justify-content: flex-start; color: var(--danger);" onclick="Navbar.handleLogout();">
@@ -186,11 +192,14 @@ const Navbar = {
               Inbox ${unreadMsgs > 0 ? '(' + unreadMsgs + ')' : ''}
             </a>
             ${user ? `
-              <a class="mobile-nav-item" onclick="state.setActiveView('seller-dashboard'); Navbar.toggleMobileMenu();">
-                My Listings
+              <a class="mobile-nav-item" onclick="UserProfileModal.open('account'); Navbar.toggleMobileMenu();">
+                👤 My Account / Manage Details
               </a>
-              <a class="mobile-nav-item" onclick="UserProfileModal.open(); Navbar.toggleMobileMenu();">
-                Profile
+              <a class="mobile-nav-item" onclick="state.setActiveView('seller-dashboard'); Navbar.toggleMobileMenu();">
+                📦 My Listings
+              </a>
+              <a class="mobile-nav-item" onclick="UserProfileModal.open('wishlist'); Navbar.toggleMobileMenu();">
+                ❤️ Saved Wishlist
               </a>
               <a class="mobile-nav-item" style="color: var(--danger);" onclick="Navbar.handleLogout();">
                 Sign Out
