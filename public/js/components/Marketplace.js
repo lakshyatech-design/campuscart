@@ -42,9 +42,6 @@ const Marketplace = {
             <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--ink-display);">
               ${state.activeCategory === 'All' ? 'Campus Marketplace' : state.activeCategory}
             </h2>
-            <span class="product-category-tag" style="font-size: 0.8rem;">
-              ${state.exploreAllColleges ? 'All Campuses (India)' : (currentCollege ? currentCollege.short_name : 'GSV Vadodara')}
-            </span>
           </div>
 
           <!-- Sort dropdown & Quick Count -->
@@ -126,15 +123,6 @@ const Marketplace = {
                   </label>
                 `).join('')}
               </div>
-            </div>
-
-            <!-- Campus Filter Notice -->
-            <div style="margin-top: 1.5rem; padding: 0.85rem; background: var(--surface-inset); border-radius: var(--radius-md); font-size: 0.78rem; color: var(--ink-secondary);">
-              <div style="font-weight: 700; color: var(--ink-display); margin-bottom: 0.2rem;">Showing Campus:</div>
-              <div>${state.exploreAllColleges ? 'All Campuses (India)' : (currentCollege ? currentCollege.name : 'GSV Vadodara')}</div>
-              <a href="#" onclick="event.preventDefault(); CollegeSelectorModal.open();" style="color: var(--cobalt); font-weight: 700; display: inline-block; margin-top: 0.35rem;">
-                Switch Campus →
-              </a>
             </div>
           </aside>
 
@@ -223,9 +211,9 @@ const Marketplace = {
           <div style="width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-accent); color: var(--accent); display: flex; align-items: center; justify-content: center;">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">GSV Campus Exchange</h3>
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Campus Marketplace</h3>
           <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 1.75rem; line-height: 1.5;">
-            Exclusive to Gati Shakti Vishwavidyalaya students. No dummy listings active. List your textbooks, cycles, railway tickets, or hostel essentials now.
+            No matching listings found. List your textbooks, cycles, railway tickets, or hostel essentials now.
           </p>
           <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
             <button class="btn btn-secondary btn-sm" onclick="Marketplace.resetFilters()">
@@ -233,7 +221,7 @@ const Marketplace = {
             </button>
             <button class="btn btn-primary btn-sm" onclick="Navbar.handleSellClick()">
               ${Icons.plusCircle("w-4 h-4")}
-              List an Item on GSV Direct
+              + List an Item
             </button>
           </div>
         </div>
@@ -293,15 +281,12 @@ const Marketplace = {
               </div>
             ` : ''}
 
-            <!-- Seller & Campus Location -->
+            <!-- Campus Location -->
             <div class="product-meta-row">
-              <div class="product-college-badge" title="${p.college_name}">
+              <div class="product-college-badge">
                 ${Icons.mapPin("w-3 h-3 text-muted")}
-                <span>${p.college_short_name}</span>
+                <span>${p.campus_location || 'Campus Handover'}</span>
               </div>
-              <span style="font-size: 0.74rem; color: var(--ink-muted);">
-                ${p.campus_location || 'Campus'}
-              </span>
             </div>
 
             <!-- Action buttons -->
