@@ -213,17 +213,17 @@ const UserProfileModal = {
                       />
                     </div>
 
-                    <!-- Roll Number / Student ID -->
+                    <!-- Roll Number -->
                     <div class="form-group">
                       <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.4rem; display: block;">
-                        Roll Number / Student ID <span style="color: var(--accent);">*</span>
+                        Roll Number <span style="color: var(--accent);">*</span>
                       </label>
                       <input 
                         type="text" 
                         id="profile-edit-roll" 
                         class="input-field" 
-                        value="${user.roll_number && user.roll_number !== 'GSV-STUDENT' ? user.roll_number : (user.roll_number || '')}" 
-                        placeholder="e.g. 2025-BTECH-042" 
+                        value="${user.roll_number || ''}" 
+                        placeholder="" 
                         required 
                         style="width: 100%; box-sizing: border-box;" 
                       />
