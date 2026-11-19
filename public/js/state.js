@@ -140,3 +140,5 @@ const CATEGORIES = [
   { id: 'Accessories', name: 'Accessories', icon: 'shieldCheck', count: 19, desc: 'Backpacks, smartwatches, sunglasses' },
   { id: 'Others', name: 'Others', icon: 'shoppingBag', count: 11, desc: 'Miscellaneous student items' }
 ];
+
+window.state = state;
