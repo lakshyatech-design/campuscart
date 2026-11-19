@@ -7,7 +7,7 @@
 
 ## 🚆 Overview & Core Identity
 
-GSV Direct is engineered exclusively for students across GSV's **Lalbaug Main Campus** and **Pratap Nagar Railway Colony**. Built with university domain authentication (`@gsv.ac.in`), on-campus handover hubs, and transparent student-to-student transit compliance.
+GSV Direct is engineered exclusively for students of **Gati Shakti Vishwavidyalaya (GSV)**. Built with university domain authentication (`@gsv.ac.in`), unified campus coordination, and transparent student-to-student transit compliance.
 
 ### 🌟 Key Features
 
@@ -23,7 +23,7 @@ GSV Direct is engineered exclusively for students across GSV's **Lalbaug Main Ca
 
 3. **Curated GSV Campus Categories:**
    - **Railway Tickets:** Confirmed berths strictly compliant with Indian Railway passenger transfer guidelines.
-   - **Cycles & Mobility:** Campus bicycles and locks for daily commute between Pratap Nagar and Lalbaug.
+   - **Cycles & Mobility:** Campus bicycles and locks for daily student commute across GSV campus.
    - **Books & Railway Engineering Prep:** B.S. Grewal Math, Satish Chandra Railway Engineering, GATE and UPSC IES guides.
    - **Electronics & Lab Gear:** Approved Casio fx-991CW ClassWiz calculators, multimeters, and components.
    - **Perfumes & Grooming:** Designer & decant bottles with batch code and fill-level transparency.
