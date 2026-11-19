@@ -194,11 +194,6 @@ const API = {
     }
     return { products: items, total: items.length };
   },
-      const q = params.q.toLowerCase();
-      items = items.filter(p => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
-    }
-    return { products: items, total: items.length };
-  },
 
   async getProduct(id) {
     try {
