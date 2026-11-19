@@ -29,7 +29,7 @@ const SellItemModal = {
 
   close() {
     const modalEl = document.getElementById('sell-item-modal');
-    if (modalEl) modalEl.classList.remove('open');
+    if (modalEl) modalEl.classList.remove('open'); modalEl.style.display = 'none';
     this.editProductId = null;
   },
 
