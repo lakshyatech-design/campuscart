@@ -63,7 +63,7 @@ const UserProfileModal = {
           </div>
           <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Sign In Required</h3>
           <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5;">
-            Access your verified GSV student dashboard, listings, and saved wishlist items.
+            Access your verified student dashboard, listings, and saved wishlist items.
           </p>
           <div style="display: flex; gap: 0.75rem; justify-content: center;">
             <button class="btn btn-secondary btn-sm" onclick="UserProfileModal.close()">Dismiss</button>
@@ -101,10 +101,10 @@ const UserProfileModal = {
                   </span>
                 </h2>
                 <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">
-                  ${user.college_name || 'Gati Shakti Vishwavidyalaya (GSV)'}
+                  ${user.college_name || 'Gati Shakti Vishwavidyalaya'}
                 </div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
-                  Roll Number: <strong>${user.roll_number || 'GSV-STUDENT'}</strong> • Student Email: ${user.email}
+                  Roll Number: <strong>${user.roll_number || 'Verified'}</strong> • Student Email: ${user.email}
                 </div>
               </div>
             </div>
@@ -154,7 +154,7 @@ const UserProfileModal = {
                           <img src="${(p.images && p.images[0]) || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=100'}" style="width: 50px; height: 50px; border-radius: 6px; object-fit: cover;" alt="${p.title}" />
                           <div>
                             <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary);">${p.title}</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">₹${p.price.toLocaleString('en-IN')} • ${p.college_short_name || 'GSV'}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">₹${p.price.toLocaleString('en-IN')}</div>
                           </div>
                         </div>
                         <div class="flex items-center gap-2">
