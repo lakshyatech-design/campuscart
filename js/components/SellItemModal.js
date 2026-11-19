@@ -419,18 +419,17 @@ const SellItemModal = {
                   id="sell-location" 
                   class="input-field input-plain" 
                   list="gsv-locations-list"
-                  placeholder="e.g. Lalbaug Central Canteen / NAIR Gate" 
+                  placeholder="e.g. GSV Central Canteen, Hostel, Library (or agree in chat)" 
                   required 
                 />
                 <datalist id="gsv-locations-list">
-                  <option value="Lalbaug Main Campus Canteen">
-                  <option value="Pratap Nagar Railway Colony Gate B">
+                  <option value="GSV Central Canteen">
+                  <option value="Campus Central Library">
                   <option value="Academic Block 1 Lobby">
-                  <option value="Academic Block 2 Library Entrance">
-                  <option value="Hostel Block A Badminton Court">
-                  <option value="Hostel Block B Common Room">
-                  <option value="Vadodara Junction (BRC) Platform 1">
-                  <option value="Vadodara Junction West Side Circulation">
+                  <option value="Academic Block 2 Entrance">
+                  <option value="Hostel Block A Courtyard">
+                  <option value="Hostel Block B Common Area">
+                  <option value="Direct In-Chat Handover (Coordinate in chat)">
                 </datalist>
               </div>
               <div>
