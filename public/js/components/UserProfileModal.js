@@ -160,6 +160,10 @@ const UserProfileModal = {
                 ${Icons.plusCircle("w-4 h-4")}
                 Sell Item
               </button>
+              <button class="btn btn-ghost btn-sm" style="color: #ff3b30; border: 1px solid rgba(255, 59, 48, 0.25); background: rgba(255, 59, 48, 0.05); display: inline-flex; align-items: center; gap: 0.4rem;" onclick="UserProfileModal.close(); state.logout();" title="Sign out of GSV Direct">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Sign Out
+              </button>
             </div>
           </div>
 
