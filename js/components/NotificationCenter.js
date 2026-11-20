@@ -312,6 +312,34 @@ window.NotificationCenter = (function () {
     return `${Math.floor(diff / 86400)}d ago`;
   }
 
+  function notify(notif) {
+    if (!notif) return;
+    try {
+      const item = {
+        id: notif.id || 'notif-' + Date.now(),
+        type: notif.type || 'upload',
+        title: notif.title || notif.productTitle || 'Campus Update',
+        message: notif.message || '',
+        productId: notif.productId || notif.link || '',
+        productTitle: notif.productTitle || notif.title || 'Campus Item',
+        productPrice: notif.productPrice || notif.price || 0,
+        seller_name: notif.seller_name || notif.sender || (window.state?.currentUser?.full_name) || 'GSV Student',
+        seller_avatar: notif.seller_avatar || notif.avatar || (window.state?.currentUser?.avatar) || 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100',
+        campus_location: notif.campus_location || (window.state?.currentUser?.campus_location) || 'GSV Campus',
+        created_at: notif.created_at || new Date().toISOString(),
+        is_read: 0
+      };
+      notifications.unshift(item);
+      unreadCount++;
+      updateBadgeUI();
+      renderDropdownList();
+      playNotificationChime();
+      showToastPopup(item);
+    } catch (e) {
+      console.warn('NotificationCenter.notify error:', e);
+    }
+  }
+
   // Setup outside click dismissal
   document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('gsv-notif-dropdown');
@@ -337,6 +365,8 @@ window.NotificationCenter = (function () {
     openDropdown: openDropdown,
     closeDropdown: closeDropdown,
     markAllAsRead: markAllAsRead,
-    showToast: showToastPopup
+    showToast: showToastPopup,
+    playNotificationChime: playNotificationChime,
+    notify: notify
   };
 })();
