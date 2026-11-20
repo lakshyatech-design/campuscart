@@ -4492,6 +4492,168 @@ html, body {
 .apple-user-caret {
   font-size: 9px;
   color: #86868b;
+  transition: transform 0.2s ease;
+}
+
+.apple-user-pill[aria-expanded="true"] .apple-user-caret {
+  transform: rotate(180deg);
+}
+
+/* Apple User Dropdown Menu */
+.apple-user-menu-wrapper {
+  position: relative;
+}
+
+.apple-user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 260px;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 6px;
+  z-index: 99999;
+  transform-origin: top right;
+  animation: appleDropdownPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes appleDropdownPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.apple-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+
+.apple-dropdown-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0071e3 0%, #42a5f5 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.apple-dropdown-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.apple-dropdown-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1d1d1f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.apple-dropdown-email {
+  font-size: 11px;
+  color: #86868b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.apple-dropdown-meta {
+  font-size: 11px;
+  font-weight: 600;
+  color: #0071e3;
+  margin-top: 1px;
+}
+
+.apple-dropdown-verified {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #10b981;
+  margin-top: 2px;
+}
+
+.apple-dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 4px 6px;
+}
+
+.apple-dropdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.apple-dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d1d1f;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.apple-dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0071e3;
+}
+
+.apple-dropdown-item svg {
+  color: #86868b;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.apple-dropdown-item:hover svg {
+  color: #0071e3;
+}
+
+.apple-dropdown-item.apple-dropdown-logout {
+  color: #e03131;
+  font-weight: 600;
+}
+
+.apple-dropdown-item.apple-dropdown-logout:hover {
+  background: rgba(224, 49, 49, 0.08);
+  color: #c92a2a;
+}
+
+.apple-dropdown-item.apple-dropdown-logout svg {
+  color: #e03131;
+}
+
+.apple-dropdown-item.apple-dropdown-logout:hover svg {
+  color: #c92a2a;
 }
 
 .apple-signin-pill {
