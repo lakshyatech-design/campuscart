@@ -27,10 +27,6 @@ const HeroSection = {
 
         <!-- Apple Keynote Centerpiece Header -->
         <div class="apple-hero-header">
-          <div class="apple-eyebrow-pill">
-            <span class="apple-eyebrow-dot"></span>
-            <span>GSV Direct • Apple Visionary 2026 Experience</span>
-          </div>
 
           <h1 class="apple-hero-title">
             Campus Commerce.<br>
