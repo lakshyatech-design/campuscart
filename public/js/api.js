@@ -36,6 +36,12 @@ const API = {
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
+    try {
+      const savedUserStr = localStorage.getItem('campuscart_user');
+      if (savedUserStr) {
+        headers['X-User-Data'] = encodeURIComponent(savedUserStr);
+      }
+    } catch (e) {}
 
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
@@ -312,6 +318,19 @@ const API = {
 
   // Products (Resilient Fallback)
   async getProducts(params = {}) {
+    // Merge any locally saved custom products
+    let custom = [];
+    try {
+      custom = JSON.parse(localStorage.getItem('campuscart_custom_products') || '[]');
+    } catch (e) {}
+    if (Array.isArray(custom)) {
+      custom.forEach(cp => {
+        if (!this.MOCK_PRODUCTS.some(p => p.id === cp.id)) {
+          this.MOCK_PRODUCTS.unshift(cp);
+        }
+      });
+    }
+
     try {
       const query = new URLSearchParams();
       Object.keys(params).forEach(k => {
@@ -320,7 +339,16 @@ const API = {
         }
       });
       const data = await this.request(`/api/products?${query.toString()}`);
-      if (data && Array.isArray(data.products)) return data;
+      if (data && Array.isArray(data.products)) {
+        if (Array.isArray(custom) && custom.length > 0) {
+          custom.forEach(cp => {
+            if (!data.products.some(p => p.id === cp.id)) {
+              data.products.unshift(cp);
+            }
+          });
+        }
+        return data;
+      }
     } catch (e) {
       console.info('Using built-in products catalog.');
     }
@@ -348,36 +376,67 @@ const API = {
   },
 
   async createProduct(data) {
+    let result = null;
+    let savedProd = null;
+
     try {
       const res = await this.request('/api/products', {
         method: 'POST',
         body: JSON.stringify(data)
       });
-      return res;
+      result = res;
+      savedProd = res.product || data;
     } catch (e) {
       console.info('Saved product to local catalog (Static Mode).');
+      const currentUser = (window.state?.currentUser) || {};
       const newProd = {
         id: 'prod-' + Date.now(),
         ...data,
-        images: Array.isArray(data.images) ? JSON.stringify(data.images) : data.images,
+        seller_id: currentUser.id || 'user-curr',
+        seller_name: currentUser.full_name || 'GSV Student',
+        seller_avatar: currentUser.avatar_url || '',
+        campus_location: data.campus_location || currentUser.campus_location || 'GSV Campus',
+        images: Array.isArray(data.images) ? data.images : [data.images],
         created_at: new Date().toISOString(),
-        views_count: 1
+        views_count: 1,
+        status: 'active'
       };
       this.MOCK_PRODUCTS.unshift(newProd);
+      savedProd = newProd;
+      result = { product: newProd, message: 'Item listed successfully!' };
+    }
 
-      // Trigger real-time notification
-      if (window.NotificationCenter) {
-        const sellerName = (window.state?.currentUser?.full_name) || 'GSV Student';
+    // Persist custom product locally so it survives refreshes
+    if (savedProd) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('campuscart_custom_products') || '[]');
+        if (!saved.some(p => p.id === savedProd.id)) {
+          saved.unshift(savedProd);
+          localStorage.setItem('campuscart_custom_products', JSON.stringify(saved));
+        }
+      } catch (err) {}
+    }
+
+    // Trigger real-time notification safely (never throw)
+    try {
+      if (window.NotificationCenter && typeof window.NotificationCenter.notify === 'function') {
+        const sellerName = (window.state?.currentUser?.full_name) || (savedProd?.seller_name) || 'GSV Student';
         window.NotificationCenter.notify({
           title: 'New Upload Received',
           message: `${sellerName} uploaded "${data.title}" (₹${data.price})`,
+          productTitle: data.title,
+          productPrice: data.price,
+          productId: savedProd ? savedProd.id : '',
+          seller_name: sellerName,
           type: 'upload',
           link: '#'
         });
       }
-
-      return { product: newProd, message: 'Item listed successfully!' };
+    } catch (notifErr) {
+      console.warn('NotificationCenter safe notice:', notifErr);
     }
+
+    return result || { product: savedProd, message: 'Item listed successfully!' };
   },
 
   async updateProduct(id, data) {
