@@ -155,7 +155,7 @@ const ProductDetailModal = {
                     <div><strong>Class:</strong> ${dyn.ticket_type || '3AC'}</div>
                     <div><strong>From:</strong> ${dyn.from_station || 'Vadodara (BRC)'}</div>
                     <div><strong>To:</strong> ${dyn.to_station || 'Destination'}</div>
-                    <div style="grid-column: 1 / -1;"><strong>Train:</strong> ${dyn.train_name_number || 'Express'}</div>
+                    <div style="grid-column: 1 / -1;"><strong>Train:</strong> ${dyn.train_name ? (dyn.train_number ? `${dyn.train_name} (${dyn.train_number})` : dyn.train_name) : (dyn.train_name_number || 'Express')}</div>
                   </div>
                   <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border); font-size: 0.7rem; color: var(--text-muted); line-height: 1.35;">
                     ⚠️ Compliance: Student transfers must follow Indian Railway rules. Commercial reselling is prohibited.
